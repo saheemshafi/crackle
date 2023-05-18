@@ -1,5 +1,8 @@
+import Header from "@/components/Header";
 import "./globals.css";
 import { Inter, Work_Sans } from "next/font/google";
+import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -18,7 +21,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-inter font-bold">{children}</body>
+      <body className="font-inter font-bold flex items-start">
+        <Sidebar />
+        <div className="main-container flex-1">
+          <Header />
+          <main className="min-h-screen">{children}</main>
+
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }
