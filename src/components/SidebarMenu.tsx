@@ -1,22 +1,52 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
+import { RxCaretRight } from "react-icons/rx";
 
 interface SidebarMenuProps {
   children: React.ReactNode;
   title?: string;
+  collapsible?: boolean;
 }
 
-const SidebarMenu: FC<SidebarMenuProps> = ({ children, title }) => {
-  const [open, setIsOpen] = useState(false);
+const SidebarMenu: FC<SidebarMenuProps> = ({
+  children,
+  title,
+  collapsible = false,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = useCallback(() => {
+    if (!collapsible) return;
+    setIsOpen((prev) => !prev);
+  }, [isOpen]);
+
   return (
     <div className="p-2 [&:hover>div]:h-auto">
       <button
-        className="font-work-sans font-normal text-gray-light uppercase text-sm"
-        onClick={() => setIsOpen((prev) => !prev)}
+        tabIndex={!collapsible ? -1 : 0}
+        className="font-work-sans font-normal text-gray-light uppercase text-sm flex justify-between w-full hover:text-zinc-400 focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50 outline-none focus-visible:rounded-sm"
+        onClick={toggle}
       >
-        {title || "Menu"}
+        <span>{title || "Menu"}</span>
+        {collapsible && (
+          <span className="bg-zinc-800 rounded-sm">
+            <RxCaretRight
+              className={`w-5 h-5 transition-transform ${
+                isOpen && "rotate-90"
+              }`}
+            />
+          </span>
+        )}
       </button>
-      <div className="mt-2 h-0 overflow-hidden">{children}</div>
+      <div
+        className={`[&>ul]:py-1 ${
+          collapsible
+            ? "grid grid-rows-[0] [&>ul]:overflow-y-clip"
+            : "block mt-2"
+        } ${isOpen && "grid-rows-1 mt-2"}`}
+      >
+        {children}
+      </div>
     </div>
   );
 };

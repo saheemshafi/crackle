@@ -35,7 +35,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
           </li>
         </ul>
       </SidebarMenu>
-      <SidebarMenu title="Movies">
+      <SidebarMenu title="Movies" collapsible>
         <ul>
           <li>
             <NavLink icon={<RxFrame />} href="/movies/popular" text="Popular" />
@@ -52,24 +52,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
           </li>
         </ul>
       </SidebarMenu>
-      <SidebarMenu title="Tv Shows">
-        <ul>
-          <li>
-            <NavLink icon={<RxFrame />} href="/tv/popular" text="Popular" />
-          </li>
-          <li>
-            <NavLink icon={<RxPlay />} href="/tv/now-playing" text="Now Playing" />
-          </li>
-          <li>
-            <NavLink
-              icon={<RxCalendar />}
-              href="/tv/upcoming"
-              text="Upcoming"
-            />
-          </li>
-        </ul>
-      </SidebarMenu>
-      <SidebarMenu title="Tv Shows">
+      <SidebarMenu title="Tv Shows" collapsible>
         <ul>
           <li>
             <NavLink icon={<RxFrame />} href="/tv/popular" text="Popular" />
