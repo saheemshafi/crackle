@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import { RxBell, RxMagnifyingGlass } from "react-icons/rx";
+import NavLink from "./ui/NavLink";
 
 interface HeaderProps {}
 
@@ -11,27 +12,27 @@ const Header: FC<HeaderProps> = ({}) => {
       <nav>
         <ul className="flex text-sm gap-5 items-center font-normal">
           <li>
-            <Link href="/">All</Link>
+            <NavLink href="/" type="link" text="All" />
           </li>
           <li>
-            <Link href="/">Movies</Link>
+            <NavLink href="/movies" type="link" text="Movies" />
           </li>
           <li>
-            <Link href="/">Tv Shows</Link>
+            <NavLink href="/tv" type="link" text="Tv Shows" />
           </li>
           <li>
-            <Link href="/">Cartoons</Link>
+            <NavLink href="/cartoons" type="link" text="Cartoons" />
           </li>
         </ul>
       </nav>
       <div className="flex items-center gap-2">
-        <button className="w-8 h-8 hover:bg-gray-dark grid place-items-center rounded-sm">
+        <button className="w-8 h-8 hover:bg-gray-dark grid place-items-center rounded-sm focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:bg-gray-dark outline-none">
           <RxMagnifyingGlass />
         </button>
-        <button className="w-8 h-8 hover:bg-gray-dark grid place-content-center rounded-sm">
+        <button className="w-8 h-8 hover:bg-gray-dark grid place-content-center rounded-sm focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:bg-gray-dark outline-none">
           <RxBell />
         </button>
-        <button className="flex gap-2 items-center hover:bg-gray-dark py-1 px-3 rounded-md">
+        <button className="flex gap-2 items-center hover:bg-gray-dark py-1 px-3 rounded-md focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:bg-gray-dark outline-none">
           <Image
             src="/images/avatar.png"
             alt="user avatar"

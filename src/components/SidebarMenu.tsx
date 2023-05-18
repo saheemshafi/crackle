@@ -30,7 +30,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
       >
         <span>{title || "Menu"}</span>
         {collapsible && (
-          <span className="bg-zinc-800 rounded-sm">
+          <span className="hover:bg-zinc-800 rounded-sm">
             <RxCaretRight
               className={`w-5 h-5 transition-transform ${
                 isOpen ? "rotate-90" : ""
