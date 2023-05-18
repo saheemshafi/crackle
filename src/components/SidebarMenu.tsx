@@ -25,14 +25,14 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
       <button
         type="button"
         tabIndex={!collapsible ? -1 : 0}
-        className="font-work-sans font-normal text-gray-light uppercase text-sm flex justify-between w-full hover:text-zinc-400 focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50 outline-none focus-visible:rounded-sm"
+        className="flex w-full justify-between font-work-sans text-sm font-normal uppercase text-gray-light outline-none hover:text-zinc-400 focus-visible:rounded-sm focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50"
         onClick={toggle}
       >
         <span>{title || "Menu"}</span>
         {collapsible && (
-          <span className="hover:bg-zinc-800 rounded-sm">
+          <span className="rounded-sm hover:bg-zinc-800">
             <RxCaretRight
-              className={`w-5 h-5 transition-transform ${
+              className={`h-5 w-5 transition-transform ${
                 isOpen ? "rotate-90" : ""
               }`}
             />
@@ -41,7 +41,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
       </button>
       <div
         className={`[&>ul]:py-1 ${
-          collapsible ? "grid overflow-y-clip" : "block mt-2"
+          collapsible ? "grid overflow-y-clip" : "mt-2 block"
         } ${isOpen ? "grid-rows-1" : "grid-rows-[0]"}`}
       >
         {children}

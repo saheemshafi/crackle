@@ -21,7 +21,7 @@ const NavLink: FC<NavLinkProps> = ({
     return (
       <Link
         href={href}
-        className={`py-2 px-3  hover:text-white transition-colors flex gap-2 items-center focus-visible:ring-2 focus-visible:ring-brand/50 outline-none  font-normal font-work-sans rounded-sm capitalize ${
+        className={`flex items-center  gap-2 rounded-sm px-3 py-2 font-work-sans font-normal capitalize outline-none  transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-brand/50 ${
           pathname === href
             ? "text-white [&>svg]:text-brand"
             : "text-gray-light"
@@ -35,7 +35,7 @@ const NavLink: FC<NavLinkProps> = ({
     return (
       <Link
         href={href}
-        className={`hover:text-white transition-colors p-1 focus-visible:ring-2 focus-visible:ring-brand/50 outline-none font-normal font-work-sans rounded-sm capitalize ${
+        className={`rounded-sm p-1 font-work-sans font-normal capitalize outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-brand/50 ${
           pathname === href ? "text-white" : "text-gray-light"
         }`}
       >

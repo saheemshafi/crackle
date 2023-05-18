@@ -18,15 +18,15 @@ interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = ({}) => {
   return (
-    <aside className="w-48 bg-gray-dark h-screen max-h-screen sticky top-0 overflow-y-auto scroll-design">
-      <div className="sticky top-0 bg-gray-dark h-14 flex items-center mb-3">
+    <aside className="scroll-design sticky top-0 h-screen max-h-screen w-48 overflow-y-auto bg-gray-dark">
+      <div className="sticky top-0 mb-3 flex h-14 items-center bg-gray-dark">
         <Link href="/">
           <Image
             src="/images/brand/crackle-brand.png"
             alt="crackle"
             width={100}
             height={30}
-            className="w-24 h-auto ml-4"
+            className="ml-4 h-auto w-24"
           />
         </Link>
       </div>

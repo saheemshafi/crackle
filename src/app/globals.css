@@ -9,5 +9,5 @@
   @apply bg-transparent;
 }
 .scroll-design::-webkit-scrollbar-thumb {
-  @apply bg-gray-md/60 hover:bg-gray-md rounded-sm;
+  @apply rounded-sm bg-gray-md/60 hover:bg-gray-md;
 }

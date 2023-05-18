@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-inter font-bold flex items-start bg-dark">
+      <body className="flex items-start bg-dark font-inter">
         <Sidebar />
         <div className="main-container flex-1">
           <Header />

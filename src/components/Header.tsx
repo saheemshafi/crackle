@@ -8,9 +8,9 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   return (
-    <header className="h-14 text-white w-full sticky top-0 flex justify-between font-normal items-center px-4 md:px-5 bg-dark shadow-lg font-work-sans">
+    <header className="sticky top-0 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
       <nav>
-        <ul className="flex text-sm gap-5 items-center font-normal">
+        <ul className="flex items-center gap-5 text-sm font-normal">
           <li>
             <NavLink href="/" type="link" text="All" />
           </li>
@@ -26,23 +26,23 @@ const Header: FC<HeaderProps> = ({}) => {
         </ul>
       </nav>
       <div className="flex items-center gap-2">
-        <button className="w-8 h-8 hover:bg-gray-dark grid place-items-center rounded-sm focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:bg-gray-dark outline-none">
+        <button className="grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50">
           <RxMagnifyingGlass />
         </button>
-        <button className="w-8 h-8 hover:bg-gray-dark grid place-content-center rounded-sm focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:bg-gray-dark outline-none">
+        <button className="grid h-8 w-8 place-content-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50">
           <RxBell />
         </button>
-        <button className="flex gap-2 items-center hover:bg-gray-dark py-1 px-3 rounded-md focus-visible:ring-2 focus-visible:ring-brand/50 focus-visible:bg-gray-dark outline-none">
+        <button className="flex items-center gap-2 rounded-md px-3 py-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50">
           <Image
             src="/images/avatar.png"
             alt="user avatar"
             width={30}
             height={30}
-            className="rounded-full object-cover aspect-square"
+            className="aspect-square rounded-full object-cover"
           />
-          <div className="font-normal text-start text-xs">
+          <div className="text-start text-xs font-normal">
             <p>Mir Saheem Shafi</p>
-            <p className="text-gray-light text-xs">User Options</p>
+            <p className="text-xs text-gray-light">User Options</p>
           </div>
         </button>
       </div>

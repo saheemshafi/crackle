@@ -8,7 +8,7 @@ interface ContainerProps {
 
 const Container: FC<ContainerProps> = ({ children, classes = "", id = "" }) => {
   return (
-    <section className={`p-4 md:p-5 text-white ${classes}`} id={id}>
+    <section className={`p-4 text-white md:p-5 ${classes}`} id={id}>
       {children}
     </section>
   );
