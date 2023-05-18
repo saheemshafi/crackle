@@ -40,10 +40,8 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
       </button>
       <div
         className={`[&>ul]:py-1 ${
-          collapsible
-            ? "grid grid-rows-[0] [&>ul]:overflow-y-clip"
-            : "block mt-2"
-        } ${isOpen && "grid-rows-1 mt-2"}`}
+          collapsible ? "grid overflow-y-hidden" : "block mt-2"
+        } ${isOpen ? "grid-rows-1" : "grid-rows-[0]"}`}
       >
         {children}
       </div>

@@ -2,13 +2,22 @@ import Image from "next/image";
 import { FC } from "react";
 import SidebarMenu from "./SidebarMenu";
 import NavLink from "./ui/NavLink";
-import { RxHome, RxHeart, RxClock, RxFrame, RxPlay, RxCalendar } from "react-icons/rx";
+import {
+  RxHome,
+  RxHeart,
+  RxClock,
+  RxFrame,
+  RxPlay,
+  RxCalendar,
+  RxStar,
+  RxDesktop,
+} from "react-icons/rx";
 
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = ({}) => {
   return (
-    <aside className="w-48 bg-gray-dark h-screen max-h-screen sticky top-0 overflow-y-auto">
+    <aside className="w-48 bg-gray-dark h-screen max-h-screen sticky top-0 overflow-y-auto scroll-design">
       <div className="sticky top-0 bg-gray-dark shadow-md rounded-b-2xl h-14 flex items-center mb-3">
         <Image
           src="/images/brand/crackle-brand.png"
@@ -41,13 +50,24 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             <NavLink icon={<RxFrame />} href="/movies/popular" text="Popular" />
           </li>
           <li>
-            <NavLink icon={<RxPlay />} href="/movies/now-playing" text="Now Playing" />
+            <NavLink
+              icon={<RxPlay />}
+              href="/movies/now-playing"
+              text="Now Playing"
+            />
           </li>
           <li>
             <NavLink
               icon={<RxCalendar />}
               href="/movies/upcoming"
               text="Upcoming"
+            />
+          </li>
+          <li>
+            <NavLink
+              icon={<RxStar />}
+              href="/movies/top-rated"
+              text="Top Rated"
             />
           </li>
         </ul>
@@ -58,14 +78,17 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             <NavLink icon={<RxFrame />} href="/tv/popular" text="Popular" />
           </li>
           <li>
-            <NavLink icon={<RxPlay />} href="/tv/now-playing" text="Now Playing" />
+            <NavLink
+              icon={<RxPlay />}
+              href="/tv/airing-today"
+              text="Airing Today"
+            />
           </li>
           <li>
-            <NavLink
-              icon={<RxCalendar />}
-              href="/tv/upcoming"
-              text="Upcoming"
-            />
+            <NavLink icon={<RxDesktop />} href="/tv/on-tv" text="On Tv" />
+          </li>
+          <li>
+            <NavLink icon={<RxStar />} href="/tv/top-rated" text="Top Rated" />
           </li>
         </ul>
       </SidebarMenu>

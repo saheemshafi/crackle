@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { FC } from "react";
-import { IconType } from "react-icons";
 import { usePathname } from "next/navigation";
 
 interface NavLinkProps {
@@ -15,7 +14,7 @@ const NavLink: FC<NavLinkProps> = ({ href, icon: Icon, text }) => {
   return (
     <Link
       href={href}
-      className={`py-2 px-3  hover:text-white transition-colors flex gap-2 items-center focus-visible:ring-2 focus-visible:ring-brand/50 outline-none  font-normal font-work-sans rounded-sm ${
+      className={`py-2 px-3  hover:text-white transition-colors flex gap-2 items-center focus-visible:ring-2 focus-visible:ring-brand/50 outline-none  font-normal font-work-sans rounded-sm capitalize ${
         pathname === href ? "text-white [&>svg]:text-brand" : "text-gray-light"
       }`}
     >

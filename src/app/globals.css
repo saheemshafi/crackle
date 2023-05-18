@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.scroll-design::-webkit-scrollbar {
+  @apply w-1.5;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
+.scroll-design::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.scroll-design::-webkit-scrollbar-thumb {
+  @apply bg-gray-md/60 hover:bg-gray-md rounded-sm;
 }
