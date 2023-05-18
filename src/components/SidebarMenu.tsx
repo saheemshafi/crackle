@@ -23,6 +23,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
   return (
     <div className="p-2">
       <button
+        type="button"
         tabIndex={!collapsible ? -1 : 0}
         className="font-work-sans font-normal text-gray-light uppercase text-sm flex justify-between w-full hover:text-zinc-400 focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50 outline-none focus-visible:rounded-sm"
         onClick={toggle}
@@ -32,7 +33,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
           <span className="bg-zinc-800 rounded-sm">
             <RxCaretRight
               className={`w-5 h-5 transition-transform ${
-                isOpen && "rotate-90"
+                isOpen ? "rotate-90" : ""
               }`}
             />
           </span>
