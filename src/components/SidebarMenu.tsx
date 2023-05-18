@@ -21,7 +21,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
   }, [isOpen]);
 
   return (
-    <div className="p-2 [&:hover>div]:h-auto">
+    <div className="p-2">
       <button
         tabIndex={!collapsible ? -1 : 0}
         className="font-work-sans font-normal text-gray-light uppercase text-sm flex justify-between w-full hover:text-zinc-400 focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50 outline-none focus-visible:rounded-sm"
@@ -40,7 +40,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
       </button>
       <div
         className={`[&>ul]:py-1 ${
-          collapsible ? "grid overflow-y-hidden" : "block mt-2"
+          collapsible ? "grid overflow-y-clip" : "block mt-2"
         } ${isOpen ? "grid-rows-1" : "grid-rows-[0]"}`}
       >
         {children}
