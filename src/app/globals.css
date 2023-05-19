@@ -12,6 +12,6 @@
   @apply rounded-sm bg-gray-md/60 hover:bg-gray-md;
 }
 
-.menu-link{
-  @apply block px-2 py-2 transition-colors hover:bg-zinc-900 rounded-md hover:text-white leading-tight;
+.menu-link {
+  @apply block rounded-md px-2 py-2 leading-tight transition-colors hover:bg-zinc-900 hover:text-white;
 }

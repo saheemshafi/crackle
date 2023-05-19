@@ -1,16 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { RxBell, RxMagnifyingGlass, RxPerson } from "react-icons/rx";
+import { RxMagnifyingGlass } from "react-icons/rx";
 import NavLink from "./ui/NavLink";
 import MenuList from "./ui/MenuList";
-import SidebarMenu from "./SidebarMenu";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   return (
-    <header className="sticky top-0 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
+    <header className="sticky top-0 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5 z-10">
       <nav>
         <ul className="flex items-center gap-5 text-sm font-normal">
           <li>

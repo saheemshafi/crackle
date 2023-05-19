@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex items-start bg-dark font-inter">
         <Sidebar />
-        <div className="main-container flex-1">
+        <div className="main-container basis-[calc(100%-12rem)] max-w-[calc(100%-12rem)]">
           <Header />
           <main className="min-h-screen">{children}</main>
 

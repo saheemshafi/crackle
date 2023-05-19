@@ -18,7 +18,7 @@ import Link from "next/link";
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = ({}) => (
-  <aside className="scroll-design min-w-48 sticky top-0 h-screen max-h-screen w-48 overflow-y-auto bg-gray-dark">
+  <aside className="scroll-design min-w-48 sticky z-10 top-0 h-screen max-h-screen basis-48 shrink-0 grow-0 overflow-y-auto bg-gray-dark">
     <div className="sticky top-0 mb-3 flex h-14 items-center bg-gray-dark">
       <Link href="/">
         <Image

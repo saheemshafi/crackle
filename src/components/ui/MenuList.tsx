@@ -20,7 +20,9 @@ const MenuList: FC<MenuListProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpening, setIsOpening] = useState<boolean>(false);
   const toggle = useCallback(() => {
-    setIsOpening((prev) => !prev);
+    if (isOpen || !isOpening) {
+      setIsOpening((prev) => !prev);
+    }
     setTimeout(() => {
       setIsOpen((prev) => !prev);
     }, 200);
@@ -41,8 +43,10 @@ const MenuList: FC<MenuListProps> = ({
       <div
         className={`absolute right-0 top-[calc(100%+0.5rem)] z-10 transition-all ${
           isOpening
-            ? " translate-y-0 opacity-100"
+            ? "translate-y-0 opacity-100"
             : "translate-y-2 transform opacity-0"
+        } ${
+          isOpen ? "block" : "hidden"
         } w-40 overflow-hidden rounded-md bg-gray-dark`}
       >
         <div className="flex items-center justify-between bg-zinc-800 p-2">
