@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { RxBell, RxMagnifyingGlass } from "react-icons/rx";
+import { RxBell, RxMagnifyingGlass, RxPerson } from "react-icons/rx";
 import NavLink from "./ui/NavLink";
+import MenuList from "./ui/MenuList";
+import SidebarMenu from "./SidebarMenu";
 
 interface HeaderProps {}
 
@@ -26,25 +28,54 @@ const Header: FC<HeaderProps> = ({}) => {
         </ul>
       </nav>
       <div className="flex items-center gap-2">
-        <button className="grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50">
+        <Link
+          href="/search"
+          className="grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
+        >
           <RxMagnifyingGlass />
-        </button>
-        <button className="grid h-8 w-8 place-content-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50">
-          <RxBell />
-        </button>
-        <button className="flex items-center gap-2 rounded-md px-3 py-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50">
-          <Image
-            src="/images/avatar.png"
-            alt="user avatar"
-            width={30}
-            height={30}
-            className="aspect-square rounded-full object-cover"
-          />
-          <div className="text-start text-xs font-normal">
-            <p>Mir Saheem Shafi</p>
-            <p className="text-xs text-gray-light">User Options</p>
-          </div>
-        </button>
+        </Link>
+        <MenuList
+          title="User Options"
+          buttonClasses="flex items-center gap-2 rounded-md px-3 py-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
+          buttonHTML={
+            <>
+              <Image
+                src="/images/avatar.png"
+                alt="user avatar"
+                width={30}
+                height={30}
+                className="aspect-square rounded-full object-cover"
+              />
+              <div className="text-start text-xs font-normal">
+                <p>Mir Saheem Shafi</p>
+                <p className="text-xs text-gray-light">User Options</p>
+              </div>
+            </>
+          }
+        >
+          <ul>
+            <li>
+              <Link className="menu-link" href={"/user/profile"}>
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-link" href={"/user/profile"}>
+                Watch List
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-link" href={"/user/profile/edit"}>
+                Ratings
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-link" href={"/user/profile/edit"}>
+                Edit Profile
+              </Link>
+            </li>
+          </ul>
+        </MenuList>
       </div>
     </header>
   );
