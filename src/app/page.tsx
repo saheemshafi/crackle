@@ -9,7 +9,7 @@ const Home: FC<HomeProps> = () => {
   return (
     <Container id="action">
       <Slider title="Action">
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -29,7 +29,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -49,7 +49,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -69,7 +69,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -89,7 +89,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -111,7 +111,7 @@ const Home: FC<HomeProps> = () => {
         </div>
       </Slider>
       <Slider title="Trending">
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -131,7 +131,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -151,7 +151,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -171,7 +171,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -191,7 +191,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -213,7 +213,7 @@ const Home: FC<HomeProps> = () => {
         </div>
       </Slider>
       <Slider title="Popular">
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -233,7 +233,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -253,7 +253,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -273,7 +273,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden
@@ -293,7 +293,7 @@ const Home: FC<HomeProps> = () => {
             <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
           </div>
         </div>
-        <div className="card relative overflow-hidden rounded-lg shadow-md">
+        <div data-slider-item className="card relative overflow-hidden rounded-lg shadow-md">
           <div
             className="transparent absolute inset-0 bg-gradient-to-t from-dark"
             aria-hidden

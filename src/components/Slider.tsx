@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import styles from "@/styles/slider.module.css";
+import { IoCaretForwardOutline, IoCaretBackOutline } from "react-icons/io5";
 
 interface SliderProps {
   title: string;
@@ -16,7 +17,9 @@ interface SliderProps {
 }
 
 const Slider: FC<SliderProps> = ({ children, title }) => {
-  window.addEventListener("resize", handleItemsOnScreen);
+  if(typeof globalThis.window !== "undefined"){
+    window.addEventListener("resize", handleItemsOnScreen);
+  }
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [totalSlides, setTotalSlides] = useState<number>(0);
   const trackRef = useRef<HTMLDivElement>();
@@ -24,6 +27,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
   // Handling items on screen
   useEffect(() => {
     handleItemsOnScreen();
+    console.log(totalSlides)
   }, [totalSlides]);
   useEffect(() => {
     trackRef.current?.style.setProperty(
@@ -68,7 +72,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
     }
     trackRef.current?.style.setProperty(
       "--items-on-screen",
-      itemsOnScreen?.toString()
+      itemsOnScreen.toString()
     );
     trackRef.current?.setAttribute("data-items-showing", itemsOnScreen);
     if (trackRef.current) {
@@ -92,20 +96,20 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
     <div className="py-4">
       <div className="mb-3 flex justify-between">
         <h2 className="text-xl font-medium capitalize">{title}</h2>
-        <div className="space-x-2">
+        <div className={`space-x-1 ${totalSlides <= 1 ? "hidden" : "block"}`}>
           <button
             onClick={handleSlide}
             data-role="previous"
-            className="rounded-md bg-gray-700 p-2"
+            className="rounded-md bg-gray-dark p-2 text-gray-light shadow-lg outline-none transition-colors hover:text-white focus-visible:ring-1 focus-visible:ring-brand/40"
           >
-            Back
+            <IoCaretBackOutline />
           </button>
           <button
             onClick={handleSlide}
             data-role="next"
-            className="rounded-md bg-gray-700 p-2"
+            className="rounded-md bg-gray-dark p-2 text-gray-light shadow-lg outline-none transition-colors hover:text-white focus-visible:ring-1 focus-visible:ring-brand/40"
           >
-            Forward
+            <IoCaretForwardOutline />
           </button>
         </div>
       </div>
