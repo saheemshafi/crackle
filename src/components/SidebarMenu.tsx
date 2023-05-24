@@ -13,12 +13,12 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
   title,
   collapsible = false,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggle = useCallback(() => {
     if (!collapsible) return;
     setIsOpen((prev) => !prev);
-  }, [isOpen]);
+  }, [collapsible]);
 
   return (
     <div className="p-2">

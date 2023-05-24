@@ -17,7 +17,7 @@ interface SliderProps {
 }
 
 const Slider: FC<SliderProps> = ({ children, title }) => {
-  if(typeof globalThis.window !== "undefined"){
+  if (typeof globalThis.window !== "undefined") {
     window.addEventListener("resize", handleItemsOnScreen);
   }
   const [currentSlide, setCurrentSlide] = useState<number>(0);
@@ -27,7 +27,6 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
   // Handling items on screen
   useEffect(() => {
     handleItemsOnScreen();
-    console.log(totalSlides)
   }, [totalSlides]);
   useEffect(() => {
     trackRef.current?.style.setProperty(
@@ -113,7 +112,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
           </button>
         </div>
       </div>
-      <div className="slider w-full overflow-hidden">
+      <div className={`${styles.slider} w-full overflow-hidden`}>
         <div
           data-slider-track
           data-items-showing="5"

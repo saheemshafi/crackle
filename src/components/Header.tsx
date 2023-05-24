@@ -9,7 +9,7 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   return (
-    <header className="sticky top-0 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5 z-10">
+    <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5">
       <nav>
         <ul className="flex items-center gap-5 text-sm font-normal">
           <li>

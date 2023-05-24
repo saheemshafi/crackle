@@ -18,7 +18,7 @@ import Link from "next/link";
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = ({}) => (
-  <aside className="scroll-design min-w-48 sticky z-10 top-0 h-screen max-h-screen basis-48 shrink-0 grow-0 overflow-y-auto bg-gray-dark">
+  <aside className="scroll-design min-w-48 sticky top-0 z-10 h-screen max-h-screen shrink-0 grow-0 basis-48 overflow-y-auto bg-gray-dark">
     <div className="sticky top-0 mb-3 flex h-14 items-center bg-gray-dark">
       <Link href="/">
         <Image
@@ -36,10 +36,7 @@ const Sidebar: FC<SidebarProps> = ({}) => (
           <NavLink icon={<RxHome />} href="/" text="Home" />
         </li>
         <li>
-          <NavLink icon={<RxHeart />} href="/watch-list" text="Watch List" />
-        </li>
-        <li>
-          <NavLink icon={<RxClock />} href="/coming-soon" text="Coming Soon" />
+          <NavLink icon={<RxHeart />} href="/user/watch-list" text="Watch List" />
         </li>
       </ul>
     </SidebarMenu>
