@@ -7,7 +7,7 @@
   transition: transform 1s ease-in-out;
 }
 
-.slider-track div[data-slider-item] {
+.slider-track div[data-slider-item="true"] {
   flex-basis: calc(100% / var(--items-on-screen) - var(--gap));
   flex-shrink: 0;
   flex-grow: 0;

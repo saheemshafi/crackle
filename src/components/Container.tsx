@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, HtmlHTMLAttributes } from "react";
 
 interface ContainerProps {
   children: React.ReactNode;
