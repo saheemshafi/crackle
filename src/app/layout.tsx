@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter, Work_Sans } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
+import AuthSessionProvider from "@/providers/AuthSessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -22,13 +23,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex items-start bg-dark font-inter">
-        <Sidebar />
-        <div className="main-container basis-[calc(100%-12rem)] max-w-[calc(100%-12rem)]">
-          <Header />
-          <main className="min-h-screen">{children}</main>
-
-          <Footer />
-        </div>
+        <AuthSessionProvider>
+          {
+            <>
+              <Sidebar />
+              <div className="main-container max-w-[calc(100%-12rem)] basis-[calc(100%-12rem)]">
+                <Header />
+                <main className="min-h-screen">{children}</main>
+                <Footer />
+              </div>
+            </>
+          }
+        </AuthSessionProvider>
       </body>
     </html>
   );

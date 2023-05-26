@@ -4,7 +4,7 @@ import { FC } from "react";
 interface pageProps {}
 
 const PopularFacesPage: FC<pageProps> = ({}) => {
-  return <Container>page</Container>;
+  return <Container>Popular People</Container>;
 };
 
 export default PopularFacesPage;

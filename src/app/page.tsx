@@ -1,15 +1,18 @@
 import Container from "@/components/Container";
 import MovieCard from "@/components/MovieCard";
 import Slider from "@/components/Slider";
-import Image from "next/image";
-import { FC } from "react";
+import { Session, getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 interface HomeProps {}
 
-const Home: FC<HomeProps> = () => {
+const Home = async ({}: HomeProps) => {
+  const session:Session | null = await getServerSession(authOptions);
+  console.log(session)
   return (
     <>
       <Container id="action">
+        {JSON.stringify(session)}
         <Slider title="Action">
           <MovieCard movie={{}} sliderItem />
           <MovieCard movie={{}} sliderItem />
@@ -27,7 +30,42 @@ const Home: FC<HomeProps> = () => {
           <MovieCard movie={{}} sliderItem />
         </Slider>
       </Container>
-
+      <Container id="trending">
+        <Slider title="Trending">
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+        </Slider>
+      </Container>
+      <Container id="airing-today">
+        <Slider title="Airing Today">
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+          <MovieCard movie={{}} sliderItem />
+        </Slider>
+      </Container>
     </>
   );
 };

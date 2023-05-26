@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
   scroll-padding-top: 3rem;
 }
 
@@ -19,4 +19,8 @@ html {
 
 .menu-link {
   @apply block rounded-md px-2 py-2 leading-tight transition-colors hover:bg-zinc-900 hover:text-white;
+}
+
+button[tabIndex="-1"]{
+  @apply cursor-default;
 }

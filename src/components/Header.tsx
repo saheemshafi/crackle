@@ -1,9 +1,11 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import { RxMagnifyingGlass } from "react-icons/rx";
+import { RxMagnifyingGlass, RxPerson } from "react-icons/rx";
 import NavLink from "./ui/NavLink";
 import MenuList from "./ui/MenuList";
+import { signIn } from "next-auth/react";
 
 interface HeaderProps {}
 
@@ -33,6 +35,12 @@ const Header: FC<HeaderProps> = ({}) => {
         >
           <RxMagnifyingGlass />
         </Link>
+        <button
+          onClick={() => signIn()}
+          className="grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
+        >
+          <RxPerson />
+        </button>
         <MenuList
           title="User Options"
           buttonClasses="flex items-center gap-2 rounded-md px-3 py-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"

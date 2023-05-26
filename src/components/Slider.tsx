@@ -10,7 +10,6 @@ import {
 } from "react";
 import styles from "@/styles/slider.module.css";
 import { IoCaretForwardOutline, IoCaretBackOutline } from "react-icons/io5";
-
 interface SliderProps {
   title: string;
   children: React.ReactNode;
@@ -40,8 +39,10 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
     (e: MouseEvent<HTMLButtonElement>) => {
       if (!trackRef.current) return;
       const sliderTrack: HTMLDivElement | undefined = trackRef.current;
-
-      if ((e.target as HTMLButtonElement).dataset.role === "previous") {
+      if (
+        ((e.target as HTMLElement).closest("button") as HTMLButtonElement)
+          .dataset.role === "previous"
+      ) {
         const previousSlide =
           currentSlide <= 0 ? totalSlides - 1 : currentSlide - 1;
         setCurrentSlide(previousSlide);
@@ -49,7 +50,10 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
           "--current-slide",
           previousSlide.toString()
         );
-      } else {
+      } else if (
+        ((e.target as HTMLElement).closest("button") as HTMLButtonElement)
+          .dataset.role === "next"
+      ) {
         const nextSlide =
           currentSlide + 1 == totalSlides ? 0 : currentSlide + 1;
         setCurrentSlide(nextSlide);
@@ -97,16 +101,20 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
         <h2 className="text-xl font-medium capitalize">{title}</h2>
         <div className={`space-x-1 ${totalSlides <= 1 ? "hidden" : "block"}`}>
           <button
+            type="button"
             onClick={handleSlide}
             data-role="previous"
             className="rounded-md bg-gray-dark p-2 text-gray-light shadow-lg outline-none transition-colors hover:text-white focus-visible:ring-1 focus-visible:ring-brand/40"
+            aria-label="Previous Slide"
           >
             <IoCaretBackOutline />
           </button>
           <button
+            type="button"
             onClick={handleSlide}
             data-role="next"
             className="rounded-md bg-gray-dark p-2 text-gray-light shadow-lg outline-none transition-colors hover:text-white focus-visible:ring-1 focus-visible:ring-brand/40"
+            aria-label="Next Slide"
           >
             <IoCaretForwardOutline />
           </button>
