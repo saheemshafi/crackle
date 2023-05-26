@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "createRequestToken": "https://api.themoviedb.org/3/authentication/token/new",
+    "login": "https://api.themoviedb.org/3/authentication/token/validate_with_login",
+    "createSession": "https://api.themoviedb.org/3/authentication/session/new",
+    "deleteSession": "https://api.themoviedb.org/3/authentication/session"
+  },
+  "user":{
+    "account":"https://api.themoviedb.org/3/account/null"
+  }
+}

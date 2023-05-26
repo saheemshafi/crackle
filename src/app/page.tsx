@@ -2,13 +2,13 @@ import Container from "@/components/Container";
 import MovieCard from "@/components/MovieCard";
 import Slider from "@/components/Slider";
 import { Session, getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authentication/auth-options";
 
 interface HomeProps {}
 
 const Home = async ({}: HomeProps) => {
-  const session:Session | null = await getServerSession(authOptions);
-  console.log(session)
+  const session: Session | null = await getServerSession(authOptions);
+  // console.log(session);
   return (
     <>
       <Container id="action">
