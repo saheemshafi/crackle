@@ -1,12 +1,11 @@
-"use client"
 import Container from "@/components/Container";
-import { useSession } from "next-auth/react";
-import { FC } from "react";
+import { authOptions } from "@/lib/authentication/auth-options";
+import { Session, getServerSession } from "next-auth";
 
-interface pageProps {}
+interface WatchlistPageProps {}
 
-const WatchlistPage: FC<pageProps> = ({}) => {
-  const session = useSession()
+const WatchlistPage =async ({}:WatchlistPageProps) => {
+  const session:Session | null = await getServerSession(authOptions);
   return <Container>{JSON.stringify(session)}</Container>;
 };
 

@@ -25,17 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex items-start bg-dark font-inter">
         <AuthSessionProvider>
-          {
-            <>
-              <Sidebar />
-              <div className="main-container max-w-[calc(100%-12rem)] basis-[calc(100%-12rem)]">
-                {/* @ts-ignore line */}
-                <Header />
-                <main className="min-h-screen">{children}</main>
-                <Footer />
-              </div>
-            </>
-          }
+          <Sidebar />
+          <div className="main-container max-w-[calc(100%-12rem)] basis-[calc(100%-12rem)]">
+            {/* @ts-ignore line */}
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+          </div>
         </AuthSessionProvider>
       </body>
     </html>

@@ -1,19 +1,17 @@
 import Container from "@/components/Container";
 import MovieCard from "@/components/MovieCard";
 import Slider from "@/components/Slider";
-import { getServerSession } from "next-auth";
 import endpoints from "@/lib/constants/endpoints.json";
-import { authOptions } from "@/lib/authentication/auth-options";
-import { UserProfile } from "@/types/user";
 import { options } from "@/lib/api/options";
 import { MovieResponse, GenreResponse } from "@/types/api-response";
 import { sortMoviesByGenre } from "@/lib/utlities/sorting";
 import { Movie } from "@/types/movie";
 
-export const dynamic = 'force-static';
+const DAYS_TO_REVALIDATE = 30 * (24 * Math.pow(60, 2));
+
+export const revalidate = DAYS_TO_REVALIDATE;
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
-  const user = (await getServerSession(authOptions))?.user as UserProfile;
   const genres: GenreResponse = await (
     await fetch(endpoints.genres.movie, {
       ...options,
@@ -28,9 +26,6 @@ const Home = async ({}: HomeProps) => {
   const sortedMovies = sortMoviesByGenre(movies, genres);
   return (
     <>
-      {/* <pre className="whitespace-pre-wrap break-words text-white">
-        {JSON.stringify(user)}
-      </pre> */}
       {genres.genres.map((genre) =>
         sortedMovies[genre.name]?.length > 0 ? (
           <Container key={genre.id} id={genre.name} classes="py-2">
