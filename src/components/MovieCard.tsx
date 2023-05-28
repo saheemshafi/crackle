@@ -34,7 +34,7 @@ const MovieCard: FC<MovieCardProps> = ({ sliderItem, movie }) => {
           {movie.title}
         </p>
         <small className="-mt-1 text-sm text-gray-light">
-          {dateFormatter.format(new Date(movie.release_date))}
+          {movie.release_date && dateFormatter.format(new Date(movie.release_date))}
         </small>
       </div>
     </div>
