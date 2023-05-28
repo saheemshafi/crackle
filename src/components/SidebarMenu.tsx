@@ -25,7 +25,7 @@ const SidebarMenu: FC<SidebarMenuProps> = ({
       <button
         type="button"
         tabIndex={!collapsible ? -1 : 0}
-        className="flex w-full justify-between font-work-sans text-sm font-normal uppercase text-gray-light outline-none hover:text-zinc-400 focus-visible:rounded-sm focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50"
+        className="flex w-full justify-between font-work-sans text-sm font-medium capitalize text-gray-light outline-none hover:text-zinc-400 focus-visible:rounded-sm focus-visible:text-zinc-400 focus-visible:ring-2 focus-visible:ring-brand/50"
         onClick={toggle}
       >
         <span>{title || "Menu"}</span>

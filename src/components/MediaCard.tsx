@@ -1,15 +1,20 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Movie } from "@/types/movie";
+import { Tv } from "@/types/tv";
 
-interface MovieCardProps {
+interface MediaCardProps {
   sliderItem?: boolean;
-  movie: Movie;
+  media: Movie | Tv;
 }
 export const revalidate = 86400;
+function isMovie(item: Movie | Tv): item is Movie {
+  if ("first_air_date" in item) return false;
+  return true;
+}
 
-const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "medium" });
-const MovieCard: FC<MovieCardProps> = ({ sliderItem, movie }) => {
+const { format } = Intl.DateTimeFormat("en-us", { dateStyle: "medium" });
+const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
   return (
     <div
       data-slider-item={sliderItem}
@@ -23,7 +28,7 @@ const MovieCard: FC<MovieCardProps> = ({ sliderItem, movie }) => {
 ></div> */}
       <div>
         <Image
-          src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w342/${media.poster_path}`}
           width={300}
           height={300}
           alt="Poster"
@@ -31,14 +36,16 @@ const MovieCard: FC<MovieCardProps> = ({ sliderItem, movie }) => {
       </div>
       <div className="mt-1 w-full px-1 py-2">
         <p className="font-work-sans text-sm font-semibold leading-snug">
-          {movie.title}
+          {isMovie(media) ? media.title : media.name}
         </p>
         <small className="-mt-1 text-sm text-gray-light">
-          {movie.release_date && dateFormatter.format(new Date(movie.release_date))}
+          {isMovie(media)
+            ? media.release_date && format(new Date(media.release_date))
+            : media.first_air_date && format(new Date(media.first_air_date))}
         </small>
       </div>
     </div>
   );
 };
 
-export default MovieCard;
+export default MediaCard;

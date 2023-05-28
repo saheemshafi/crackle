@@ -1,26 +1,27 @@
-import { MovieResponse, GenreResponse } from "@/types/api-response";
+import { GenreResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
+import { Tv } from "@/types/tv";
 
-export function sortMoviesByGenre(
-  movies: Movie[],
+export function sortByGenre<T extends Movie | Tv>(
+  items: T[],
   { genres }: Pick<GenreResponse, "genres">
-): { [genre: string]: Movie[] } {
-  const moviesByGenres: { [genre: string]: Movie[] } = {};
-  const addedMovies = new Set();
-  movies.forEach((movie) => {
-    movie.genre_ids.forEach((genre) => {
+): { [genre: string]: T[] } {
+  const itemsByGenre: { [genre: string]: T[] } = {};
+  const addedItems = new Set();
+  items.forEach((item) => {
+    item?.genre_ids.forEach((genreId) => {
       const matchingGenre = genres.find(
-        (matchingGenre) => matchingGenre.id === genre
+        (matchingGenre) => matchingGenre.id === genreId
       )?.name;
       if (!matchingGenre) return;
-      if (!moviesByGenres[matchingGenre]) {
-        moviesByGenres[matchingGenre] = [];
+      if (!itemsByGenre[matchingGenre]) {
+        itemsByGenre[matchingGenre] = [];
       }
-      if (!addedMovies.has(movie.id)) {
-        moviesByGenres[matchingGenre].push(movie);
-        addedMovies.add(movie.id);
+      if (!addedItems.has(item.id)) {
+        itemsByGenre[matchingGenre].push(item);
+        addedItems.add(item.id);
       }
     });
   });
-  return moviesByGenres;
+  return itemsByGenre;
 }

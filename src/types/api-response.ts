@@ -1,9 +1,8 @@
 import { Genre } from "./genre";
-import { Movie } from "./movie";
 
-export interface MovieResponse {
+export interface DiscoverResponse<T> {
   page: number;
-  results: Movie[];
+  results: T[];
   total_pages: number;
   total_results: number;
 }

@@ -3,9 +3,6 @@ import { FC } from "react";
 import SidebarMenu from "./SidebarMenu";
 import NavLink from "./ui/NavLink";
 import {
-  RxHome,
-  RxHeart,
-  RxClock,
   RxFrame,
   RxPlay,
   RxCalendar,
@@ -14,6 +11,7 @@ import {
 } from "react-icons/rx";
 import { RiVipCrown2Line } from "react-icons/ri";
 import Link from "next/link";
+import { IoTvOutline, IoVideocamOutline } from "react-icons/io5";
 
 interface SidebarProps {}
 
@@ -30,13 +28,13 @@ const Sidebar: FC<SidebarProps> = ({}) => (
         />
       </Link>
     </div>
-    <SidebarMenu>
+    <SidebarMenu title="Discover">
       <ul>
         <li>
-          <NavLink icon={<RxHome />} href="/" text="Home" />
+          <NavLink icon={<IoVideocamOutline />} href="/" text="Movies" />
         </li>
         <li>
-          <NavLink icon={<RxHeart />} href="/user/watch-list" text="Watch List" />
+          <NavLink icon={<IoTvOutline />} href="/tv" text="Tv Shows" />
         </li>
       </ul>
     </SidebarMenu>
