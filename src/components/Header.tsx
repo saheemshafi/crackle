@@ -14,24 +14,8 @@ interface HeaderProps {}
 const Header = async ({}: HeaderProps) => {
   const user = (await getServerSession(authOptions))?.user as UserProfile;
   return (
-    <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5">
-      <nav>
-        <ul className="flex items-center gap-5 text-sm font-normal">
-          <li>
-            <NavLink href="/" type="link" text="All" />
-          </li>
-          <li>
-            <NavLink href="/movies" type="link" text="Movies" />
-          </li>
-          <li>
-            <NavLink href="/tv" type="link" text="Tv Shows" />
-          </li>
-          <li>
-            <NavLink href="/cartoons" type="link" text="Cartoons" />
-          </li>
-        </ul>
-      </nav>
-      <div className="flex items-center gap-2">
+    <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
+      <div className="flex items-center gap-2 ml-auto">
         <Link
           href="/search"
           className="grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
