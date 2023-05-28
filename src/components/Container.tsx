@@ -6,7 +6,7 @@ interface ContainerProps {
   id?: string;
 }
 
-const Container: FC<ContainerProps> = ({ children, classes = "", id = "" }) => {
+const Container: FC<ContainerProps> = ({ children, classes = "", id }) => {
   return (
     <section className={`p-4 text-white md:p-5 ${classes}`} id={id}>
       {children}

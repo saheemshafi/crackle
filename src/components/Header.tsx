@@ -1,16 +1,19 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
-import { RxMagnifyingGlass, RxPerson } from "react-icons/rx";
+import { RxMagnifyingGlass } from "react-icons/rx";
 import NavLink from "./ui/NavLink";
 import MenuList from "./ui/MenuList";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authentication/auth-options";
+import { UserProfile } from "@/types/user";
+import SignInBtn from "./ui/SignInBtn";
+import SignOutBtn from "./ui/SignOutBtn";
 
 interface HeaderProps {}
 
-const Header: FC<HeaderProps> = ({}) => {
-  const session = useSession();
+const Header = async ({}: HeaderProps) => {
+  const user = (await getServerSession(authOptions))
+    ?.user as Partial<UserProfile>;
   return (
     <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5">
       <nav>
@@ -37,22 +40,26 @@ const Header: FC<HeaderProps> = ({}) => {
           <RxMagnifyingGlass />
         </Link>
 
-        {session.status === "authenticated" ? (
+        {user ? (
           <MenuList
             title="User Options"
             buttonClasses="flex items-center gap-2 rounded-md px-3 py-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
             buttonHTML={
               <>
                 <Image
-                  src="/images/avatar.png"
+                  src={
+                    user.avatar?.tmdb.avatar_path
+                      ? `https://image.tmdb.org/t/p/original/${user.avatar?.tmdb.avatar_path}`
+                      : "/images/avatar.png"
+                  }
                   alt="user avatar"
                   width={30}
                   height={30}
                   className="aspect-square rounded-full object-cover"
                 />
                 <div className="text-start text-xs font-normal">
-                  <p>Mir Saheem Shafi</p>
-                  <p className="text-xs text-gray-light">User Options</p>
+                  <p>{user?.name}</p>
+                  <p className="text-xs text-gray-light">@{user.username}</p>
                 </div>
               </>
             }
@@ -64,34 +71,22 @@ const Header: FC<HeaderProps> = ({}) => {
                 </Link>
               </li>
               <li>
-                <Link className="menu-link" href={"/user/profile"}>
+                <Link className="menu-link" href={"/user/watch-list"}>
                   Watch List
                 </Link>
               </li>
               <li>
-                <Link className="menu-link" href={"/user/profile/edit"}>
+                <Link className="menu-link" href={`/user/ratings`}>
                   Ratings
                 </Link>
               </li>
               <li>
-                <Link className="menu-link" href={"/user/profile/edit"}>
-                  Edit Profile
-                </Link>
-              </li>
-              <li>
-                <button onClick={()=>signOut()} className="menu-link">
-                  Logout
-                </button>
+                <SignOutBtn attrs={{ className: "menu-link" }} />
               </li>
             </ul>
           </MenuList>
         ) : (
-          <button
-            onClick={() => signIn()}
-            className="flex h-8 place-items-center gap-2 rounded-sm border border-gray-dark px-2 text-xs outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
-          >
-            <RxPerson /> Sign In
-          </button>
+          <SignInBtn />
         )}
       </div>
     </header>

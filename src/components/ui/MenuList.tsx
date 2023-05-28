@@ -1,6 +1,5 @@
 "use client";
 import { FC, useCallback, useState } from "react";
-import { IconType } from "react-icons/lib";
 
 interface MenuListProps {
   title?: string;
@@ -32,11 +31,13 @@ const MenuList: FC<MenuListProps> = ({
     <div className="relative">
       <button
         onClick={toggle}
+        type="button"
+        aria-label="Open Menu"
         className={`${
           buttonClasses
             ? buttonClasses
             : "grid h-8 w-8 place-content-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
-        }`}
+        } ${isOpen ? "bg-gray-dark" : ""}`}
       >
         {Icon ? <span>{Icon}</span> : buttonHTML}
       </button>

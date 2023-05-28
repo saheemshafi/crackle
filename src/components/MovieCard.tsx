@@ -1,12 +1,15 @@
 import { FC } from "react";
 import Image from "next/image";
+import { Movie } from "@/types/movie";
 
 interface MovieCardProps {
   sliderItem?: boolean;
-  movie: any;
+  movie: Movie;
 }
+export const revalidate = 86400;
 
-const MovieCard: FC<MovieCardProps> = ({ sliderItem }) => {
+const dateFormatter = Intl.DateTimeFormat("en-us", { dateStyle: "medium" });
+const MovieCard: FC<MovieCardProps> = ({ sliderItem, movie }) => {
   return (
     <div
       data-slider-item={sliderItem}
@@ -20,7 +23,7 @@ const MovieCard: FC<MovieCardProps> = ({ sliderItem }) => {
 ></div> */}
       <div>
         <Image
-          src="/images/dummy-poster.jpg"
+          src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
           width={300}
           height={300}
           alt="Poster"
@@ -28,9 +31,11 @@ const MovieCard: FC<MovieCardProps> = ({ sliderItem }) => {
       </div>
       <div className="mt-1 w-full px-1 py-2">
         <p className="font-work-sans text-sm font-semibold leading-snug">
-          The Super Mario Bros Movie
+          {movie.title}
         </p>
-        <small className="-mt-1 text-xs text-gray-light">June 6,2020</small>
+        <small className="-mt-1 text-sm text-gray-light">
+          {dateFormatter.format(new Date(movie.release_date))}
+        </small>
       </div>
     </div>
   );

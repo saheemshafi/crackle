@@ -1,10 +1,9 @@
-import { randomUUID } from "crypto";
-import { AuthOptions, User } from "next-auth";
+import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { getSessionId, options } from "./auth";
+import { getSessionId } from "./auth";
 import endpoints from "@/lib/constants/endpoints.json";
-import { TMDBUser, UserProfile } from "@/types/user";
-import { DefaultJWT, JWT } from "next-auth/jwt";
+import { TMDBUser } from "@/types/user";
+import { options } from "../api/options";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -59,4 +58,7 @@ export const authOptions: AuthOptions = {
     },
   },
   secret: process.env.NEXTAUTH_SECRET as string,
+  pages: {
+    signIn: "/auth",
+  },
 };

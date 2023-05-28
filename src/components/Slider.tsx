@@ -96,7 +96,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
   }
 
   return (
-    <div className="py-4">
+    <div>
       <div className="mb-3 flex justify-between">
         <h2 className="text-xl font-medium capitalize">{title}</h2>
         <div className={`space-x-1 ${totalSlides <= 1 ? "hidden" : "block"}`}>
@@ -120,7 +120,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
           </button>
         </div>
       </div>
-      <div className={`${styles.slider} w-full overflow-hidden`}>
+      <div className={`w-full overflow-hidden`}>
         <div
           data-slider-track
           data-items-showing="5"

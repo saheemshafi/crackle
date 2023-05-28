@@ -7,5 +7,13 @@
   },
   "user":{
     "account":"https://api.themoviedb.org/3/account/null"
+  },
+  "genres":{
+    "movie":"https://api.themoviedb.org/3/genre/movie/list",
+    "tv":"https://api.themoviedb.org/3/genre/tv/list"
+  },
+  "discover":{
+    "movies":"https://api.themoviedb.org/3/discover/movie?include_adult=false",
+    "tv":"https://api.themoviedb.org/3/discover/tv"
   }
 }

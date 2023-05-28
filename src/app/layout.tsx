@@ -4,11 +4,12 @@ import { Inter, Work_Sans } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import AuthSessionProvider from "@/providers/AuthSessionProvider";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title:
     "Crackle : Your Gateway to Movie Marvels - Explore, Discover, and Immerse in the World of Films",
   description:
@@ -28,6 +29,7 @@ export default function RootLayout({
             <>
               <Sidebar />
               <div className="main-container max-w-[calc(100%-12rem)] basis-[calc(100%-12rem)]">
+                {/* @ts-ignore line */}
                 <Header />
                 <main className="min-h-screen">{children}</main>
                 <Footer />
