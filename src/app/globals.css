@@ -2,26 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+html {
+  scroll-behavior: smooth !important;
+  scroll-padding-top: 3rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.scroll-design::-webkit-scrollbar {
+  @apply w-1.5;
+}
+.scroll-design::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.scroll-design::-webkit-scrollbar-thumb {
+  @apply rounded-sm bg-gray-md/60 hover:bg-gray-md;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.menu-link {
+  @apply block rounded-md px-2 py-2 leading-tight transition-colors hover:bg-zinc-900 hover:text-white;
+}
+
+button[tabIndex="-1"]{
+  @apply cursor-default;
 }
