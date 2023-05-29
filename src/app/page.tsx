@@ -8,14 +8,13 @@ import { sortByGenre } from "@/lib/utlities/sorting";
 import { Movie } from "@/types/movie";
 import { fetchEndpoints } from "@/lib/utlities/fetching";
 
-const DAYS_TO_REVALIDATE = 30 * (24 * Math.pow(60, 2));
-export const revalidate = DAYS_TO_REVALIDATE;
+export const revalidate = 2592000;
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
   const genres: GenreResponse = await (
     await fetch(endpoints.genres.movie, {
       ...options,
-      next: { revalidate: false },
+      next: { revalidate: 2592000 },
     })
   ).json();
   const movies: Movie[] = await fetchEndpoints<Movie>("movie", 100);

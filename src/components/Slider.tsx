@@ -11,7 +11,7 @@ import {
 import styles from "@/styles/slider.module.css";
 import { IoCaretForwardOutline, IoCaretBackOutline } from "react-icons/io5";
 interface SliderProps {
-  title: string;
+  title?: string | JSX.Element;
   children: React.ReactNode;
 }
 
