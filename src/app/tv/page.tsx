@@ -7,11 +7,9 @@ import { sortByGenre } from "@/lib/utlities/sorting";
 import MovieCard from "@/components/MediaCard";
 import Slider from "@/components/Slider";
 import Container from "@/components/Container";
-import { DAYS_TO_REVALIDATE } from "@/lib/constants/page-generation";
+import { Suspense } from "react";
 
-
-export const revalidate = DAYS_TO_REVALIDATE;
-
+export const revalidate = 2592000;
 interface TvPageProps {}
 
 const TvPage = async ({}: TvPageProps) => {
@@ -28,6 +26,9 @@ const TvPage = async ({}: TvPageProps) => {
       {genres.genres.map((genre) =>
         sortedSeries[genre.name]?.length > 0 ? (
           <Container key={genre.id} id={genre.name} classes="py-2">
+            <Suspense
+              fallback={<div className="text-3xl">Hi i am under the water</div>}
+            ></Suspense>
             <Slider title={genre.name}>
               {sortedSeries[genre.name]?.map((series) => (
                 <MovieCard key={series.id} sliderItem media={series} />

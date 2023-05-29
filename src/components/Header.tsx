@@ -15,7 +15,7 @@ const Header = async ({}: HeaderProps) => {
   const user = (await getServerSession(authOptions))?.user as UserProfile;
   return (
     <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
-      <div className="flex items-center gap-2 ml-auto">
+      <div className="ml-auto flex items-center gap-2">
         <Link
           href="/search"
           className="grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
