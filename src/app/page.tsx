@@ -3,23 +3,24 @@ import MovieCard from "@/components/MediaCard";
 import Slider from "@/components/Slider";
 import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
-import { GenreResponse } from "@/types/api-response";
+import { DiscoverResponse, GenreResponse } from "@/types/api-response";
 import { sortByGenre } from "@/lib/utlities/sorting";
 import { Movie } from "@/types/movie";
 import { fetchEndpoints } from "@/lib/utlities/fetching";
 
-export const revalidate = 2592000;
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
-  const genres: GenreResponse = await (
-    await fetch(endpoints.genres.movie, {
-      ...options,
-      next: { revalidate: 2592000 },
-    })
-  ).json();
-  const movies: Movie[] = await fetchEndpoints<Movie>("movie", 100);
-
-  const sortedMovies = sortByGenre<Movie>(movies, genres);
+  const genreResponse: Response = await fetch(endpoints.genres.movie, {
+    ...options,
+    next: { revalidate: 2592000 },
+  });
+  const genres: GenreResponse = await genreResponse.json();
+  const moviesResponse: Response = await fetch(endpoints.discover.movies, {
+    ...options,
+    next: { revalidate: 2592000 },
+  });
+  const movies: DiscoverResponse<Movie> = await moviesResponse.json();
+  const sortedMovies = sortByGenre<Movie>(movies.results, genres);
   return (
     <>
       {genres.genres.map((genre) =>
@@ -38,4 +39,3 @@ const Home = async ({}: HomeProps) => {
 };
 
 export default Home;
-

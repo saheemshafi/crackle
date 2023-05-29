@@ -18,6 +18,8 @@ module.exports = {
         "gray-dark": "#181a1d",
         "gray-md": "#4f4f4f",
         "gray-light": "#828282",
+        "tmdb-blue":"#01b4e4",
+        "tmdb-teal":"#90cea1"
       },
     },
   },

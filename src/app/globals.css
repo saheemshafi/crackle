@@ -21,6 +21,17 @@ html {
   @apply block rounded-md px-2 py-2 leading-tight transition-colors hover:bg-zinc-900 hover:text-white;
 }
 
-button[tabIndex="-1"]{
+button[tabIndex="-1"] {
   @apply cursor-default;
+}
+
+button.button {
+  @apply flex w-full place-items-center justify-center gap-2 rounded-sm border-transparent bg-transparent px-3 py-2 text-sm font-medium text-white outline-none focus-visible:ring-2 focus-visible:ring-brand/50 placeholder:font-work-sans autofill:font-work-sans;
+}
+
+button.primary {
+  @apply bg-brand/95 tracking-wide hover:bg-brand transition-colors focus-visible:bg-brand
+}
+button.tmdb {
+  @apply bg-tmdb-teal uppercase text-gray-dark tracking-wide font-semibold hover:bg-tmdb-blue shadow-sm hover:shadow-tmdb-blue/20 transition-all 
 }
