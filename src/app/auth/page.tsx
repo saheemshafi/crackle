@@ -1,6 +1,7 @@
 "use client";
 import Container from "@/components/Container";
 import { signIn } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { FC, FormEvent } from "react";
 
 interface pageProps {}
@@ -12,6 +13,7 @@ const page: FC<pageProps> = ({}) => {
     await signIn("credentials", {
       username: data.get("username"),
       password: data.get("password"),
+      callbackUrl:'/'
     });
   }
   return (

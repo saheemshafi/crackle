@@ -1,7 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { AllHTMLAttributes, ButtonHTMLAttributes, FC } from "react";
-import { IconType } from "react-icons/lib";
+import { ButtonHTMLAttributes, FC } from "react";
 import { RxPerson } from "react-icons/rx";
 
 interface SignInBtnProps {
