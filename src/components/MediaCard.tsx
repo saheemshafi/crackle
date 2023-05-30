@@ -28,7 +28,7 @@ const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
 ></div> */}
       <div>
         <Image
-          src={`https://image.tmdb.org/t/p/original/${media.poster_path}`}
+          src={`https://image.tmdb.org/t/p/w342/${media.poster_path}`}
           width={300}
           height={300}
           alt={isMovie(media) ? media.title : media.original_name}

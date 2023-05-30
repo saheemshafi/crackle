@@ -20,7 +20,7 @@ const AuthPage = async ({ searchParams }: AuthPageProps) => {
     redirect("/");
   }
   return (
-    <Container classes="min-h-screen grid place-items-center relative isolate overflow-x-hidden">
+    <Container classes="md:min-h-screen grid place-items-center relative isolate overflow-x-hidden p-0 pt-5">
       <div className="max-w-xl">
         <h1 className="px-3 text-xl font-medium">Login to your account</h1>
         <LoginForm callbackUrl={searchParams["callbackUrl"] as string} />

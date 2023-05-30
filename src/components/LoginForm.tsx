@@ -54,7 +54,7 @@ const LoginForm: FC<LoginFormProps> = ({ callbackUrl = "/" }) => {
             Username
           </label>
           <input
-            className="block w-full rounded border border-gray-md/50 bg-transparent px-3 py-2 font-work-sans outline-none transition-colors hover:border-tmdb-teal/50 focus:border-tmdb-blue/50"
+            className="block w-full rounded border border-gray-md/50 bg-transparent px-3 py-2 font-work-sans text-white caret-white outline-none transition-colors hover:border-tmdb-teal/50 focus:border-tmdb-blue/50"
             type="text"
             name="username"
             id="username"
@@ -68,7 +68,7 @@ const LoginForm: FC<LoginFormProps> = ({ callbackUrl = "/" }) => {
             Password
           </label>
           <input
-            className="block w-full rounded border border-gray-md/50 bg-transparent px-3 py-2 font-work-sans outline-none transition-colors hover:border-tmdb-teal/50 focus:border-tmdb-blue/50"
+            className="block w-full rounded border border-gray-md/50 bg-transparent px-3 py-2 font-work-sans caret-white outline-none transition-colors hover:border-tmdb-teal/50 focus:border-tmdb-blue/50"
             type="password"
             name="password"
             id="password"

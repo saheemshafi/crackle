@@ -25,7 +25,7 @@ const Home = async ({}: HomeProps) => {
     <>
       {genres.genres.map((genre) =>
         sortedMovies[genre.name]?.length > 0 ? (
-          <Container key={genre.id} id={genre.name} classes="py-2">
+          <Container key={genre.id} id={genre.name}>
             <Slider title={genre.name}>
               {sortedMovies[genre.name]?.map((movie) => (
                 <MovieCard key={movie.id} sliderItem media={movie} />

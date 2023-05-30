@@ -28,8 +28,7 @@ export default function RootLayout({
         <AuthSessionProvider>
           <SidebarProvider>
             <Sidebar />
-            <div className="main-container md:max-w-[calc(100%-12rem)] md:basis-[calc(100%-12rem)]">
-              {/* @ts-ignore line */}
+            <div className="main-container w-full md:max-w-[calc(100%-12rem)] md:basis-[calc(100%-12rem)]">
               <Header />
               <main className="min-h-screen">{children}</main>
               <Footer />
