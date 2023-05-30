@@ -7,13 +7,13 @@
   transition: transform 1s ease-in-out;
 }
 
-@media screen and (min-width: 750px) and (max-width: 969px) {
+@media screen and (min-width: 600px) and (max-width: 969px) {
   .slider-track {
     --items-on-screen: 4 !important;
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 599px) {
   .slider-track {
     --items-on-screen: 2 !important;
   }
