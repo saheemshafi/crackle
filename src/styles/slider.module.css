@@ -1,5 +1,5 @@
 .slider-track {
-  --items-on-screen: 5;
+  /* --items-on-screen: 5; */
   --gap: 0.5rem;
   --current-slide: 0;
   gap: var(--gap);
@@ -7,6 +7,23 @@
   transition: transform 1s ease-in-out;
 }
 
+@media screen and (min-width: 750px) and (max-width: 969px) {
+  .slider-track {
+    --items-on-screen: 4 !important;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .slider-track {
+    --items-on-screen: 2 !important;
+  }
+}
+
+@media screen and (min-width: 970px) {
+  .slider-track {
+    --items-on-screen: 5 !important;
+  }
+}
 .slider-track div[data-slider-item="true"] {
   flex-basis: calc(100% / var(--items-on-screen) - var(--gap));
   flex-shrink: 0;

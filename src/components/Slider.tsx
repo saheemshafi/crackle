@@ -2,7 +2,6 @@
 import {
   FC,
   MouseEvent,
-  MutableRefObject,
   useCallback,
   useEffect,
   useRef,
@@ -10,23 +9,45 @@ import {
 } from "react";
 import styles from "@/styles/slider.module.css";
 import { IoCaretForwardOutline, IoCaretBackOutline } from "react-icons/io5";
+import React from "react";
+
 interface SliderProps {
   title?: string | JSX.Element;
   children: React.ReactNode;
 }
 
 const Slider: FC<SliderProps> = ({ children, title }) => {
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [totalSlides, setTotalSlides] = useState<number>(0);
+  const trackRef = useRef<any>();
+
+  const handleItemsOnScreen = useCallback(() => {
+    if (!trackRef.current) return;
+    let track = trackRef.current as HTMLDivElement;
+
+    let itemsOnScreen: string =
+      getComputedStyle(track).getPropertyValue("--items-on-screen");
+    track.style.setProperty("--items-on-screen", itemsOnScreen.toString());
+
+    if (currentSlide > 0 && currentSlide >= totalSlides) {
+      setCurrentSlide(totalSlides - 1);
+      setTotalSlides(track.children.length / parseInt(itemsOnScreen));
+    }
+    setTotalSlides(Math.ceil(track.children.length / parseInt(itemsOnScreen)));
+  }, []);
+
   if (typeof globalThis.window !== "undefined") {
     window.addEventListener("resize", handleItemsOnScreen);
   }
-  const [currentSlide, setCurrentSlide] = useState<number>(0);
-  const [totalSlides, setTotalSlides] = useState<number>(0);
-  const trackRef = useRef<HTMLDivElement>();
 
   // Handling items on screen
   useEffect(() => {
     handleItemsOnScreen();
-  }, [totalSlides]);
+    return () => {
+      window.removeEventListener("resize", handleItemsOnScreen);
+    };
+  }, []);
+
   useEffect(() => {
     trackRef.current?.style.setProperty(
       "--current-slide",
@@ -63,38 +84,6 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
     [currentSlide, totalSlides]
   );
 
-  function handleItemsOnScreen() {
-    let itemsOnScreen: string = trackRef.current?.dataset.itemsShowing || "5";
-    if (window.innerWidth > 950) {
-      itemsOnScreen = "5";
-    }
-    if (window.innerWidth < 950 && window.innerWidth > 750) {
-      itemsOnScreen = "4";
-    } else if (window.innerWidth < 750) {
-      itemsOnScreen = "2";
-    }
-    trackRef.current?.style.setProperty(
-      "--items-on-screen",
-      itemsOnScreen.toString()
-    );
-    trackRef.current?.setAttribute("data-items-showing", itemsOnScreen);
-    if (trackRef.current) {
-      if (currentSlide > 0 && currentSlide >= totalSlides) {
-        setCurrentSlide(totalSlides - 1);
-        setTotalSlides(
-          trackRef.current.children.length /
-            parseInt(trackRef.current.getAttribute("data-items-showing") || "5")
-        );
-      }
-      setTotalSlides(
-        Math.ceil(
-          trackRef.current.children.length /
-            parseInt(trackRef.current.getAttribute("data-items-showing") || "5")
-        )
-      );
-    }
-  }
-
   return (
     <div>
       <div className="mb-3 flex justify-between">
@@ -123,8 +112,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
       <div className={`w-full overflow-hidden`}>
         <div
           data-slider-track
-          data-items-showing="5"
-          ref={trackRef as MutableRefObject<HTMLDivElement>}
+          ref={trackRef}
           className={`${styles["slider-track"]} flex w-full`}
         >
           {children}

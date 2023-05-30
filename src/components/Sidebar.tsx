@@ -19,7 +19,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
         state.isOpen ? "translate-x-0" : "-translate-x-full"
       } md:translate-x-0`}
     >
-      <div className="sticky top-0 mb-3 flex h-14 items-center bg-gray-dark">
+      <div className="stick hidden md:flex y top-0 mb-3 h-14 items-center bg-gray-dark overflow-hidden">
         <Link href="/">
           <Image
             src="/images/brand/crackle-brand.png"
