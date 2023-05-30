@@ -1,7 +1,6 @@
 "use client";
 import Button from "@/components/ui/Button";
 import { signIn } from "next-auth/react";
-import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Image from "next/image";
 import { FC, FormEvent } from "react";
 

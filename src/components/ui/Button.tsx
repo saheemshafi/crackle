@@ -1,10 +1,9 @@
 "use client";
-import { ButtonHTMLAttributes, FC, FormEvent, MouseEvent } from "react";
-import { IconType } from "react-icons/lib";
+import { ButtonHTMLAttributes, FC } from "react";
 
 interface ButtonProps {
   type?: "primary" | "secondary" | "default" | "tmdb";
-  text?: string;
+  text?: string | JSX.Element;
   handler?: (e: unknown | any) => unknown;
   attrs?: ButtonHTMLAttributes<HTMLButtonElement>;
   icon?: JSX.Element;
