@@ -4,10 +4,10 @@ import { IconType } from "react-icons/lib";
 
 interface ButtonProps {
   type?: "primary" | "secondary" | "default" | "tmdb";
-  text: string;
-  handler?: (e:unknown | any) => unknown;
+  text?: string;
+  handler?: (e: unknown | any) => unknown;
   attrs?: ButtonHTMLAttributes<HTMLButtonElement>;
-  icon?: IconType;
+  icon?: JSX.Element;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -23,7 +23,7 @@ const Button: FC<ButtonProps> = ({
       className={`button ${type}`}
       {...attrs}
     >
-      {Icon && <Icon />} {text}
+      {Icon && Icon } {text && text}
     </button>
   );
 };
