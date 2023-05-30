@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import AuthSessionProvider from "@/providers/AuthSessionProvider";
 import { Metadata } from "next";
+import { SidebarProvider } from "@/providers/SidebarProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -25,13 +26,15 @@ export default function RootLayout({
     <html lang="en">
       <body className="flex items-start bg-dark font-inter">
         <AuthSessionProvider>
-          <Sidebar />
-          <div className="main-container max-w-[calc(100%-12rem)] basis-[calc(100%-12rem)]">
-            {/* @ts-ignore line */}
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </div>
+          <SidebarProvider>
+            <Sidebar />
+            <div className="main-container md:max-w-[calc(100%-12rem)] md:basis-[calc(100%-12rem)]">
+              {/* @ts-ignore line */}
+              <Header />
+              <main className="min-h-screen">{children}</main>
+              <Footer />
+            </div>
+          </SidebarProvider>
         </AuthSessionProvider>
       </body>
     </html>

@@ -1,20 +1,33 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { RxMagnifyingGlass } from "react-icons/rx";
-import NavLink from "./ui/NavLink";
 import MenuList from "./ui/MenuList";
 import { UserProfile } from "@/types/user";
+import { CgMenu } from "react-icons/cg";
 import SignInBtn from "./ui/SignInBtn";
 import SignOutBtn from "./ui/SignOutBtn";
-import { getSession } from "next-auth/react";
-import { Session, getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authentication/auth-options";
+import Button from "./ui/Button";
+import { useContext } from "react";
+import { SidebarContext } from "@/providers/SidebarProvider";
+import { useSession } from "next-auth/react";
 interface HeaderProps {}
 
-const Header = async ({}: HeaderProps) => {
-  const user = (await getServerSession(authOptions))?.user as UserProfile;
+const Header = ({}: HeaderProps) => {
+  const { dispatch } = useContext(SidebarContext);
+  const user = useSession().data?.user as UserProfile;
   return (
     <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
+      <div>
+        <Button
+          icon={<CgMenu />}
+          attrs={{
+            className:
+              "grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50 md:hidden",
+          }}
+          handler={() => dispatch({type:'toggle'})}
+        />
+      </div>
       <div className="ml-auto flex items-center gap-2">
         <Link
           href="/search"
