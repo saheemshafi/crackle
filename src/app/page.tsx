@@ -6,7 +6,7 @@ import { options } from "@/lib/api/options";
 import { DiscoverResponse, GenreResponse } from "@/types/api-response";
 import { sortByGenre } from "@/lib/utlities/sorting";
 import { Movie } from "@/types/movie";
-import { fetchEndpoints } from "@/lib/utlities/fetching";
+import movieList from "@/lib/constants/movies.json";
 
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
@@ -15,12 +15,11 @@ const Home = async ({}: HomeProps) => {
     next: { revalidate: 2592000 },
   });
   const genres: GenreResponse = await genreResponse.json();
-  const moviesResponse: Response = await fetch(endpoints.discover.movies, {
-    ...options,
-    next: { revalidate: 2592000 },
-  });
-  const movies: DiscoverResponse<Movie> = await moviesResponse.json();
-  const sortedMovies = sortByGenre<Movie>(movies.results, genres);
+  // const moviesResponse: Response = await fetch(endpoints.discover.movies, {
+  //   ...options,
+  //   next: { revalidate: 2592000 },
+  // });
+  const sortedMovies = sortByGenre<Movie>(movieList as any, genres);
   return (
     <>
       {genres.genres.map((genre) =>
