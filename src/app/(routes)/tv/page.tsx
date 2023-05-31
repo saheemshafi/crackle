@@ -10,11 +10,6 @@ import Container from "@/components/Container";
 interface TvPageProps {}
 
 const TvPage = async ({}: TvPageProps) => {
-  await new Promise(res=>{
-    setTimeout(() => {
-      res("hello")
-    }, 4000);
-  })
   const genrePromise: Promise<GenreResponse> = fetch(endpoints.genres.movie, {
     ...options,
     next: { revalidate: 2592000 },
