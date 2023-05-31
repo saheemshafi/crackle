@@ -1,5 +1,4 @@
 import { options } from "@/lib/api/options";
-import { fetchEndpoints } from "@/lib/utlities/fetching";
 import { DiscoverResponse, GenreResponse } from "@/types/api-response";
 import endpoints from "@/lib/constants/endpoints.json";
 import { Tv } from "@/types/tv";
@@ -7,6 +6,7 @@ import { sortByGenre } from "@/lib/utlities/sorting";
 import MovieCard from "@/components/MediaCard";
 import Slider from "@/components/Slider";
 import Container from "@/components/Container";
+import series from "@/lib/constants/tvSeries.json";
 
 interface TvPageProps {}
 
@@ -20,8 +20,8 @@ const TvPage = async ({}: TvPageProps) => {
     ...options,
     next: { revalidate: 2592000 },
   });
-  const tvSeries: DiscoverResponse<Tv> = await tvSeriesResponse.json();
-  const sortedSeries = sortByGenre<Tv>(tvSeries.results, genres);
+  // const tvSeries: DiscoverResponse<Tv> = await tvSeriesResponse.json();
+  const sortedSeries = sortByGenre<Tv>(series as any, genres);
   return (
     <>
       {genres.genres.map((genre) =>
