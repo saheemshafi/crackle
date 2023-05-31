@@ -2,7 +2,6 @@
 import { FC, useCallback, useState } from "react";
 
 interface MenuListProps {
-  title?: string;
   icon?: JSX.Element;
   buttonHTML?: JSX.Element;
   buttonClasses?: string;
@@ -10,7 +9,6 @@ interface MenuListProps {
 }
 
 const MenuList: FC<MenuListProps> = ({
-  title,
   icon: Icon,
   buttonHTML,
   buttonClasses,
@@ -24,8 +22,7 @@ const MenuList: FC<MenuListProps> = ({
       setTimeout(() => {
         setIsOpening((prev) => !prev);
       }, 200);
-    }
-    else if (isOpen || !isOpening) {
+    } else if (isOpen || !isOpening) {
       setIsOpening((prev) => !prev);
       setTimeout(() => {
         setIsOpen((prev) => !prev);
@@ -54,12 +51,6 @@ const MenuList: FC<MenuListProps> = ({
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         } w-40 overflow-hidden rounded-md bg-gray-dark`}
       >
-        <div className="flex items-center justify-between bg-zinc-800 p-2">
-          <h4 className="font-work-sans text-sm font-medium">
-            {title || "Menu"}
-          </h4>
-          <span>{Icon && Icon}</span>
-        </div>
         <div className="p-1 font-work-sans text-sm text-zinc-400">
           {children}
         </div>

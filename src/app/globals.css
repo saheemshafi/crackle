@@ -18,9 +18,9 @@ html {
 }
 
 .menu-link {
-  @apply block rounded-md px-2 py-2 leading-tight transition-colors hover:bg-zinc-900 hover:text-white;
+  @apply rounded px-2 py-2 leading-tight transition-colors hover:bg-zinc-800 my-1 w-full hover:text-white text-start flex items-center gap-2 last-of-type:mb-0 first-of-type:mt-0;
 }
-
+ 
 button[tabIndex="-1"] {
   @apply cursor-default;
 }
