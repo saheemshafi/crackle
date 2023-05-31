@@ -22,7 +22,7 @@ const Button: FC<ButtonProps> = ({
       className={`button ${type}`}
       {...attrs}
     >
-      {Icon && Icon } {text && text}
+      {Icon && Icon} {text && text}
     </button>
   );
 };

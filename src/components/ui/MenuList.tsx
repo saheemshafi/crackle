@@ -1,5 +1,6 @@
 "use client";
 import { FC, useCallback, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface MenuListProps {
   icon?: JSX.Element;
@@ -36,20 +37,21 @@ const MenuList: FC<MenuListProps> = ({
         onClick={toggle}
         type="button"
         aria-label="Open Menu"
-        className={`${
+        className={twMerge(
           buttonClasses
             ? buttonClasses
-            : "grid h-8 w-8 place-content-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
-        } ${isOpen ? "bg-gray-dark" : ""}`}
+            : "grid h-8 w-8 place-content-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50",
+          isOpen ? "bg-gray-dark" : ""
+        )}
       >
         {Icon ? <span>{Icon}</span> : buttonHTML}
       </button>
       <div
-        className={`absolute right-0 top-[calc(100%+0.5rem)] z-10 transform transition-all
-        ${isOpen ? "block opacity-0" : "hidden"}
-        ${
+        className={twMerge(
+          "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md bg-gray-dark transition-all",
+          isOpen ? "block opacity-0" : "hidden",
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-        } w-40 overflow-hidden rounded-md bg-gray-dark`}
+        )}
       >
         <div className="p-1 font-work-sans text-sm text-zinc-400">
           {children}

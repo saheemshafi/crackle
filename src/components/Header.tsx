@@ -108,8 +108,8 @@ const Header = ({}: HeaderProps) => {
               <Skeleton className="aspect-square h-[30px] w-[30px] rounded-full" />
             </div>
             <div className="hidden w-24 flex-1 sm:block">
-              <Skeleton className="h-2 rounded" />
-              <Skeleton className="mt-1 h-1 rounded" />
+              <Skeleton className="h-3 rounded" />
+              <Skeleton className="mt-1 h-2 rounded" />
             </div>
           </div>
         )}

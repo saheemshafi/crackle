@@ -6,22 +6,29 @@ import { sortByGenre } from "@/lib/utlities/sorting";
 import MovieCard from "@/components/MediaCard";
 import Slider from "@/components/Slider";
 import Container from "@/components/Container";
-import series from "@/lib/constants/tvSeries.json";
 
 interface TvPageProps {}
 
 const TvPage = async ({}: TvPageProps) => {
-  const genreResponse: Response = await fetch(endpoints.genres.tv, {
-    ...options,
-    next: { revalidate: false },
-  });
-  const genres: GenreResponse = await genreResponse.json();
-  const tvSeriesResponse: Response = await fetch(endpoints.discover.tv, {
+  await new Promise(res=>{
+    setTimeout(() => {
+      res("hello")
+    }, 4000);
+  })
+  const genrePromise: Promise<GenreResponse> = fetch(endpoints.genres.movie, {
     ...options,
     next: { revalidate: 2592000 },
-  });
-  // const tvSeries: DiscoverResponse<Tv> = await tvSeriesResponse.json();
-  const sortedSeries = sortByGenre<Tv>(series as any, genres);
+  }).then((res: Response) => res.json());
+  const tvSeriesPromise: Promise<DiscoverResponse<Tv>> = fetch(
+    endpoints.discover.tv,
+    {
+      ...options,
+      next: { revalidate: 2592000 },
+    }
+  ).then((res: Response) => res.json());
+
+  const [tvSeries, genres] = await Promise.all([tvSeriesPromise, genrePromise]);
+  const sortedSeries = sortByGenre<Tv>(tvSeries.results, genres);
   return (
     <>
       {genres.genres.map((genre) =>
