@@ -14,13 +14,14 @@ import { useSession } from "next-auth/react";
 import { TbListDetails } from "react-icons/tb";
 import { IoMdStopwatch } from "react-icons/io";
 import { AiOutlineStar } from "react-icons/ai";
-import { RiLogoutCircleRLine } from "react-icons/ri";
+import Skeleton from "./ui/Skeleton";
 
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
   const { dispatch } = useContext(SidebarContext);
-  const user = useSession().data?.user as UserProfile;
+  const { data, status } = useSession();
+  const user = data?.user as UserProfile;
   return (
     <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
       <div>
@@ -55,7 +56,7 @@ const Header = ({}: HeaderProps) => {
           <RxMagnifyingGlass />
         </Link>
 
-        {user ? (
+        {status == "authenticated" && user && (
           <MenuList
             buttonClasses="flex items-center gap-2 rounded-full sm:rounded-md sm:px-3 sm:py-1 p-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
             buttonHTML={
@@ -91,7 +92,7 @@ const Header = ({}: HeaderProps) => {
               </li>
               <li>
                 <Link className="menu-link" href={`/user/ratings`}>
-                <AiOutlineStar size={20} />  Ratings
+                  <AiOutlineStar size={20} /> Ratings
                 </Link>
               </li>
               <li>
@@ -99,9 +100,21 @@ const Header = ({}: HeaderProps) => {
               </li>
             </ul>
           </MenuList>
-        ) : (
-          <SignInBtn />
         )}
+
+        {status == "loading" && (
+          <div className="flex items-center gap-2 rounded-full bg-gray-dark/50 p-1 sm:rounded-md sm:px-2 sm:py-1">
+            <div className="shrink-0">
+              <Skeleton className="aspect-square h-[30px] w-[30px] rounded-full" />
+            </div>
+            <div className="hidden w-24 flex-1 sm:block">
+              <Skeleton className="h-3 rounded" />
+              <Skeleton className="mt-1 h-2 rounded" />
+            </div>
+          </div>
+        )}
+
+        {status == "unauthenticated" && <SignInBtn />}
       </div>
     </header>
   );
