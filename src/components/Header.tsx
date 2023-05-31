@@ -11,6 +11,11 @@ import Button from "./ui/Button";
 import { useContext } from "react";
 import { SidebarContext } from "@/providers/SidebarProvider";
 import { useSession } from "next-auth/react";
+import { TbListDetails } from "react-icons/tb";
+import { IoMdStopwatch } from "react-icons/io";
+import { AiOutlineStar } from "react-icons/ai";
+import { RiLogoutCircleRLine } from "react-icons/ri";
+
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
@@ -52,7 +57,6 @@ const Header = ({}: HeaderProps) => {
 
         {user ? (
           <MenuList
-            title={user.name}
             buttonClasses="flex items-center gap-2 rounded-full sm:rounded-md sm:px-3 sm:py-1 p-1 outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
             buttonHTML={
               <>
@@ -77,21 +81,21 @@ const Header = ({}: HeaderProps) => {
             <ul>
               <li>
                 <Link className="menu-link" href={"/user/profile"}>
-                  Profile
+                  <TbListDetails size={20} /> Profile
                 </Link>
               </li>
               <li>
                 <Link className="menu-link" href={"/user/watch-list"}>
-                  Watch List
+                  <IoMdStopwatch size={20} /> Watch List
                 </Link>
               </li>
               <li>
                 <Link className="menu-link" href={`/user/ratings`}>
-                  Ratings
+                <AiOutlineStar size={20} />  Ratings
                 </Link>
               </li>
               <li>
-                <SignOutBtn attrs={{ className: "menu-link" }} />
+                <SignOutBtn icon attrs={{ className: "menu-link" }} />
               </li>
             </ul>
           </MenuList>
