@@ -23,7 +23,7 @@ const PersonCard: FC<PersonCardProps> = ({ person, classes }) => {
       </div>
       <div className="mt-3">
         <p className="font-work-sans font-medium leading-5">{person.name}</p>
-        <div className="truncate text-sm text-gray-light">
+        <div className="truncate text-xs sm:text-sm text-gray-light">
           <span className="hidden font-medium lg:inline">Known For:</span>{" "}
           {person.known_for.map((known_for) => (
             <span
