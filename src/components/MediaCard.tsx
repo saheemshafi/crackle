@@ -2,16 +2,13 @@ import { FC } from "react";
 import Image from "next/image";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
+import { isMovie } from "@/lib/helpers/type-narrowing";
 
 interface MediaCardProps {
   sliderItem?: boolean;
   media: Movie | Tv;
 }
 export const revalidate = 86400;
-function isMovie(item: Movie | Tv): item is Movie {
-  if ("first_air_date" in item) return false;
-  return true;
-}
 
 const { format } = Intl.DateTimeFormat("en-us", { dateStyle: "medium" });
 const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
@@ -22,10 +19,6 @@ const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
         sliderItem ? "" : "card"
       } relative overflow-hidden rounded-lg shadow-md`}
     >
-      {/* <div
-  className="transparent absolute inset-0 bg-gradient-to-t from-dark"
-  aria-hidden
-></div> */}
       <div>
         <Image
           src={`https://image.tmdb.org/t/p/w342/${media.poster_path}`}
