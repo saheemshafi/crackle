@@ -1,5 +1,5 @@
 import { options } from "@/lib/api/options";
-import { DiscoverResponse, GenreResponse } from "@/types/api-response";
+import { ApiResponse, GenreResponse } from "@/types/api-response";
 import endpoints from "@/lib/constants/endpoints.json";
 import { Tv } from "@/types/tv";
 import { sortByGenre } from "@/lib/utlities/sorting";
@@ -14,7 +14,7 @@ const TvPage = async ({}: TvPageProps) => {
     ...options,
     next: { revalidate: 2592000 },
   }).then((res: Response) => res.json());
-  const tvSeriesPromise: Promise<DiscoverResponse<Tv>> = fetch(
+  const tvSeriesPromise: Promise<ApiResponse<Tv>> = fetch(
     endpoints.discover.tv,
     {
       ...options,

@@ -15,5 +15,6 @@
   "discover":{
     "movies":"https://api.themoviedb.org/3/discover/movie?include_adult=false",
     "tv":"https://api.themoviedb.org/3/discover/tv?include_adult=false"
-  }
+  },
+  "people":"https://api.themoviedb.org/3/person/popular"
 }

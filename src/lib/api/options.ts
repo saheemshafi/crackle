@@ -6,7 +6,4 @@ export const options = {
     accept: "application/json",
   },
   body: undefined,
-  createOptions(method: "GET" | "POST" | "PUT" | "DELETE", body: string) {
-    return { ...this, body, method };
-  },
 };
