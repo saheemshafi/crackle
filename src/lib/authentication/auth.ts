@@ -14,26 +14,22 @@ export const getSessionId = async (
     if (typeof tokenData.request_token == "undefined") {
       return null;
     }
-    const loginRequest = await fetch(
-      endpoints.auth.login,
-      options.createOptions(
-        "POST",
-        JSON.stringify({
-          username: user.username,
-          password: user.password,
-          request_token: tokenData.request_token,
-        })
-      )
-    );
+    const loginRequest = await fetch(endpoints.auth.login, {
+      ...options,
+      method: "POST",
+      body: JSON.stringify({
+        username: user.username,
+        password: user.password,
+        request_token: tokenData.request_token,
+      }),
+    });
     const loginSession: TMDBAuthResponse = await loginRequest.json();
     if (typeof loginSession.request_token == "undefined") return null;
-    const sessionIdRequest = await fetch(
-      endpoints.auth.createSession,
-      options.createOptions(
-        "POST",
-        JSON.stringify({ request_token: loginSession.request_token })
-      )
-    );
+    const sessionIdRequest = await fetch(endpoints.auth.createSession, {
+      ...options,
+      method: "POST",
+      body: JSON.stringify({ request_token: loginSession.request_token }),
+    });
     const sessionData: TMDBAuthResponse = await sessionIdRequest.json();
     if (typeof sessionData.session_id == "undefined") return null;
     return sessionData.session_id;
