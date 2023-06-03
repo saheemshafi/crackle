@@ -3,7 +3,7 @@ import MovieCard from "@/components/MediaCard";
 import Slider from "@/components/Slider";
 import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
-import { DiscoverResponse, GenreResponse } from "@/types/api-response";
+import { ApiResponse, GenreResponse } from "@/types/api-response";
 import { sortByGenre } from "@/lib/utlities/sorting";
 import { Movie } from "@/types/movie";
 
@@ -13,7 +13,7 @@ const Home = async ({}: HomeProps) => {
     ...options,
     next: { revalidate: 2592000 },
   }).then((res: Response) => res.json());
-  const moviesPromise: Promise<DiscoverResponse<Movie>> = fetch(
+  const moviesPromise: Promise<ApiResponse<Movie>> = fetch(
     endpoints.discover.movies,
     {
       ...options,
