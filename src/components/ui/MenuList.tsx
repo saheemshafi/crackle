@@ -48,7 +48,7 @@ const MenuList: FC<MenuListProps> = ({
       </button>
       <div
         className={twMerge(
-          "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md bg-gray-dark transition-all",
+          "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md bg-gray-dark transition-all shadow-md border border-gray-md/20",
           isOpen ? "block opacity-0" : "hidden",
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         )}

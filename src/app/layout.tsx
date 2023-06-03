@@ -30,7 +30,7 @@ export default function RootLayout({
             <Sidebar />
             <div className="main-container w-full md:max-w-[calc(100%-12rem)] md:basis-[calc(100%-12rem)]">
               <Header />
-              <main className="py-3">{children}</main>
+              <main className="py-3 min-h-[calc(100vh_-_60px_-_56px)]">{children}</main>
               <Footer />
             </div>
           </SidebarProvider>
