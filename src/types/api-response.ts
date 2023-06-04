@@ -7,10 +7,7 @@ export interface ApiResponse<T> {
   total_results: number;
 }
 
-export type ResultsOnly<T> = Omit<
-  ApiResponse<T>,
-  "page" | "total_pages" | "total_results"
->;
+export type ResultsOnly<T> = Pick<ApiResponse<T>, "results">;
 
 export type GenreResponse = {
   [Property in keyof ResultsOnly<Genre> as "genres"]: Genre[];

@@ -18,7 +18,7 @@ const PopularFacesPage = async ({}: PopularFacesPage) => {
   return (
     <Container>
       <h1 className="text-2xl mb-6 font-medium pb-3 after:bg-brand after:rounded-md after:bottom-0 after:left-0 after:w-12 after:h-1 after:absolute relative">Popular Faces</h1>
-      <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-4">
+      <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-4">
         {people.results.map((person) => (
           <PersonCard person={person} key={person.id} />
         ))}
