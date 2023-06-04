@@ -5,16 +5,28 @@
     "createSession": "https://api.themoviedb.org/3/authentication/session/new",
     "deleteSession": "https://api.themoviedb.org/3/authentication/session"
   },
-  "user":{
-    "account":"https://api.themoviedb.org/3/account/null"
+  "user": {
+    "account": "https://api.themoviedb.org/3/account/null"
   },
-  "genres":{
-    "movie":"https://api.themoviedb.org/3/genre/movie/list",
-    "tv":"https://api.themoviedb.org/3/genre/tv/list"
+  "genres": {
+    "movie": "https://api.themoviedb.org/3/genre/movie/list",
+    "tv": "https://api.themoviedb.org/3/genre/tv/list"
   },
-  "discover":{
-    "movies":"https://api.themoviedb.org/3/discover/movie?include_adult=false",
-    "tv":"https://api.themoviedb.org/3/discover/tv?include_adult=false"
+  "discover": {
+    "movies": "https://api.themoviedb.org/3/discover/movie?include_adult=false",
+    "tv": "https://api.themoviedb.org/3/discover/tv?include_adult=false"
   },
-  "people":"https://api.themoviedb.org/3/person/popular"
+  "people": "https://api.themoviedb.org/3/person/popular",
+  "movies": {
+    "popular": "https://api.themoviedb.org/3/movie/popular?",
+    "upcoming": "https://api.themoviedb.org/3/movie/upcoming",
+    "nowPlaying": "https://api.themoviedb.org/3/movie/now_playing",
+    "topRated": "https://api.themoviedb.org/3/movie/top_rated"
+  },
+  "tv": {
+    "airingToday": "https://api.themoviedb.org/3/tv/airing_today?",
+    "onTheAir": "https://api.themoviedb.org/3/tv/on_the_air?",
+    "popular": "https://api.themoviedb.org/3/tv/popular?",
+    "topRated": "https://api.themoviedb.org/3/tv/top_rated?"
+  }
 }

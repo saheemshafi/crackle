@@ -1,9 +1,5 @@
 "use client";
-import React, {
-  FC,
-  useState,
-  AllHTMLAttributes,
-} from "react";
+import React, { FC, useState, AllHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface MenuListProps {
@@ -34,6 +30,7 @@ const MenuList: FC<MenuListProps> = ({
     }
     handleClose();
   }
+
   function handleClose() {
     setIsOpening(false);
     setTimeout(() => {
@@ -42,10 +39,12 @@ const MenuList: FC<MenuListProps> = ({
   }
 
   return (
-    <div data-menu-container className="relative" onBlur={(e) => handleClose()}>
+    <div
+      data-menu-container
+      className="relative"
+    >
       <button
-        onClick={(e) => toggle()}
-        onBlur={(e) => e.stopPropagation()}
+        onClick={() => toggle()}
         type="button"
         aria-label="Open Menu"
         className={twMerge(
@@ -58,7 +57,6 @@ const MenuList: FC<MenuListProps> = ({
         {Icon ? <span>{Icon}</span> : buttonHTML}
       </button>
       <div
-        onBlur={(e) => e.stopPropagation()}
         onClick={() => toggle()}
         className={twMerge(
           "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all",
