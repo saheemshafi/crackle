@@ -1,5 +1,9 @@
 "use client";
-import { FC, useCallback, useState } from "react";
+import React, {
+  FC,
+  useState,
+  AllHTMLAttributes,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
 interface MenuListProps {
@@ -7,6 +11,7 @@ interface MenuListProps {
   buttonHTML?: JSX.Element;
   buttonClasses?: string;
   children: React.ReactNode;
+  classes?: AllHTMLAttributes<HTMLDivElement>["className"];
 }
 
 const MenuList: FC<MenuListProps> = ({
@@ -14,27 +19,33 @@ const MenuList: FC<MenuListProps> = ({
   buttonHTML,
   buttonClasses,
   children,
+  classes = "",
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpening, setIsOpening] = useState<boolean>(false);
-  const toggle = useCallback(() => {
-    if (!isOpen || isOpening) {
-      setIsOpen((prev) => !prev);
+
+  function toggle() {
+    if (!isOpen) {
+      setIsOpen(true);
       setTimeout(() => {
-        setIsOpening((prev) => !prev);
+        setIsOpening(true);
       }, 200);
-    } else if (isOpen || !isOpening) {
-      setIsOpening((prev) => !prev);
-      setTimeout(() => {
-        setIsOpen((prev) => !prev);
-      }, 200);
+      return;
     }
-  }, [isOpen]);
+    handleClose();
+  }
+  function handleClose() {
+    setIsOpening(false);
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 300);
+  }
 
   return (
-    <div className="relative">
+    <div data-menu-container className="relative" onBlur={(e) => handleClose()}>
       <button
-        onClick={toggle}
+        onClick={(e) => toggle()}
+        onBlur={(e) => e.stopPropagation()}
         type="button"
         aria-label="Open Menu"
         className={twMerge(
@@ -47,8 +58,11 @@ const MenuList: FC<MenuListProps> = ({
         {Icon ? <span>{Icon}</span> : buttonHTML}
       </button>
       <div
+        onBlur={(e) => e.stopPropagation()}
+        onClick={() => toggle()}
         className={twMerge(
-          "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md bg-gray-dark transition-all shadow-md border border-gray-md/20",
+          "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all",
+          classes,
           isOpen ? "block opacity-0" : "hidden",
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         )}

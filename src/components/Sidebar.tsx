@@ -19,8 +19,11 @@ const Sidebar: FC<SidebarProps> = ({}) => {
         state.isOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="stick y top-0 mb-3 hidden h-14 items-center overflow-hidden bg-gray-dark md:flex">
-        <Link href="/">
+      <div className="sticky top-0 mb-3 hidden h-14 items-center overflow-hidden bg-gray-dark md:flex">
+        <Link
+          href="/"
+          className="flex h-[100px] w-full items-center outline-none focus-visible:ring-2 focus-visible:ring-brand/30"
+        >
           <Image
             src="/images/brand/crackle-brand.png"
             alt="crackle"

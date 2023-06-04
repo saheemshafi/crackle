@@ -18,7 +18,7 @@ html {
 }
 
 .menu-link {
-  @apply rounded px-2 py-2 leading-tight transition-colors hover:bg-zinc-800 my-1 w-full hover:text-white text-start flex items-center gap-2 last-of-type:mb-0 first-of-type:mt-0;
+  @apply rounded px-2 py-2 leading-tight outline-none focus-visible:ring-2 focus-visible:text-white focus-visible:ring-brand/30 focus-visible:bg-zinc-800 transition-colors hover:bg-zinc-800 my-1 w-full hover:text-white text-start flex items-center gap-2 last-of-type:mb-0 first-of-type:mt-0;
 }
  
 button[tabIndex="-1"] {
