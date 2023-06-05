@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState, AllHTMLAttributes } from "react";
+import React, { FC, useState, AllHTMLAttributes, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface MenuListProps {
@@ -19,6 +19,7 @@ const MenuList: FC<MenuListProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isOpening, setIsOpening] = useState<boolean>(false);
+  const dropdownMenu = useRef<HTMLDivElement>(null);
 
   function toggle() {
     if (!isOpen) {
@@ -38,10 +39,22 @@ const MenuList: FC<MenuListProps> = ({
     }, 300);
   }
 
+  useEffect(() => {
+    function close(e: any) {
+      if (dropdownMenu.current?.contains(e.target)) return;
+      handleClose();
+    }
+    document.addEventListener('mousedown', close);
+    return () => {
+      document.removeEventListener('mousedown', close);
+    }
+  }, [])
+
   return (
     <div
       data-menu-container
       className="relative"
+      ref={dropdownMenu}
     >
       <button
         onClick={() => toggle()}
