@@ -1,11 +1,12 @@
 import { GenreResponse } from "@/types/api-response";
+import { Genre } from "@/types/genre";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
 
 export function sortByGenre<T extends Movie | Tv>(
   items: T[],
   { genres }: Pick<GenreResponse, "genres">
-): { [genre: string]: T[] } {
+): Record<Genre["name"], T[]> {
   const itemsByGenre: { [genre: string]: T[] } = {};
   const addedItems = new Set();
   items.forEach((item) => {
