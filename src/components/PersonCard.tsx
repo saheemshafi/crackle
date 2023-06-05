@@ -12,7 +12,7 @@ interface PersonCardProps {
 
 const PersonCard: FC<PersonCardProps> = ({ person, classes }) => {
   return (
-    <div className="rounded-md border border-gray-dark p-2 transition-colors hover:bg-gray-dark md:p-3">
+    <div className="rounded-md border border-gray-dark p-2 transition-colors bg-gradient-to-t hover:from-zinc-900 hover:to-transparent md:p-3">
       <Link title={person.name} href={`/people/${person.id}`} className="-m-2 mb-1 overflow-hidden rounded-sm md:m-0 md:mb-0 block">
         <Image
           src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
