@@ -5,32 +5,21 @@ import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
 import Container from "@/components/Container";
 import Filterer from "@/components/Filterer";
+import { SearchParams, generateQueryUrl } from "@/lib/helpers/query-url";
 
 interface MoviesPageProps {
-  searchParams: {
-    genres: string | undefined;
-    sort: string | undefined;
-    providers: string | undefined;
-    region: string | undefined;
-  };
+  searchParams: SearchParams;
 }
 
 const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
+  
   const moviesPromise = (
     await fetch(
-      `${endpoints.discover.movies}&with_genres=${
-        searchParams["genres"]
-      }&sort_by=${
-        searchParams["sort"] || "popularity.desc"
-      }&with_watch_providers=${searchParams["providers"]}&watch_region=${
-        searchParams["region"]
-      }`,
-      {
-        ...options,
-        next: { revalidate: 2592000 },
-      }
+      generateQueryUrl(endpoints.discover.movies, searchParams),
+      options
     )
   ).json();
+
   const movies: ApiResponse<Movie> = await moviesPromise;
   return (
     <Container>

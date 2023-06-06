@@ -5,7 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import AuthSessionProvider from "@/providers/AuthSessionProvider";
 import { Metadata } from "next";
-import { SidebarProvider } from "@/providers/SidebarProvider";
+import { GlobalProvider } from "@/providers/GlobalProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authentication/auth-options";
 
@@ -29,14 +29,16 @@ export default async function RootLayout({
     <html lang="en">
       <body className="flex items-start bg-dark font-inter">
         <AuthSessionProvider session={session}>
-          <SidebarProvider>
+          <GlobalProvider>
             <Sidebar />
             <div className="main-container w-full md:max-w-[calc(100%-12rem)] md:basis-[calc(100%-12rem)]">
               <Header />
-              <main className="py-3 min-h-[calc(100vh_-_60px_-_56px)]">{children}</main>
+              <main className="min-h-[calc(100vh_-_60px_-_56px)] py-3">
+                {children}
+              </main>
               <Footer />
             </div>
-          </SidebarProvider>
+          </GlobalProvider>
         </AuthSessionProvider>
       </body>
     </html>

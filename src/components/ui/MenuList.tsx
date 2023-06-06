@@ -53,7 +53,7 @@ const MenuList: FC<MenuListProps> = ({
   return (
     <div
       data-menu-container
-      className="relative"
+      className="isolate relative"
       ref={dropdownMenu}
     >
       <button
@@ -72,7 +72,7 @@ const MenuList: FC<MenuListProps> = ({
       <div
         onClick={() => toggle()}
         className={twMerge(
-          "absolute right-0 top-[calc(100%+0.5rem)] z-10 w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all",
+          "absolute right-0 top-[calc(100%+0.5rem)] w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all",
           classes,
           isOpen ? "block opacity-0" : "hidden",
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"

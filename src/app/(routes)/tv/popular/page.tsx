@@ -7,13 +7,12 @@ import MediaCard from "@/components/MediaCard";
 interface PopularSeriesProps {}
 
 const PopularSeriesPage = async ({}: PopularSeriesProps) => {
-  const seriesPromise = (
-    await fetch(endpoints.tv.popular, {
-      ...options,
-      next: { revalidate: 2592000 },
-    })
+
+  const seriesPromise: Promise<ApiResponse<Tv>> = (
+    await fetch(endpoints.tv.popular, options)
   ).json();
-  const series: ApiResponse<Tv> = await seriesPromise;
+  const series = await seriesPromise;
+  
   return (
     <Container>
       <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">

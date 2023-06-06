@@ -1,16 +1,18 @@
 "use client";
 import { Genre } from "@/types/genre";
-import { FC, useEffect, useState, MouseEvent, Suspense } from "react";
+import { FC, useEffect, useState, MouseEvent } from "react";
 import endpoints from "@/lib/constants/endpoints.json";
-import { options } from "@/lib/api/options";
-import { CountryResponse, GenreResponse } from "@/types/api-response";
+import { clientOptions } from "@/lib/api/options";
+import { CountryResponse } from "@/types/api-response";
 import Button from "./ui/Button";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { Country } from "@/types/country";
-import ChipButton from "./ui/ChipButton";
 import WatchProviders from "./WatchProviders";
 import { RxCaretDown } from "react-icons/rx";
+import GenreBox from "./GenreBox";
+import Skeleton from "./ui/Skeleton";
+
 type SortParams =
   | "popularity.asc"
   | "popularity.desc"
@@ -36,43 +38,31 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
+
   useEffect(() => {
-    const genrePromise: Promise<GenreResponse> = fetch(
-      `${type == "movie" ? endpoints.genres.movie : endpoints.genres.tv} `,
-      {
-        ...options,
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_BEARER}`,
-        },
-        next: { revalidate: 2592000 },
-      }
-    ).then((res: Response) => res.json());
     const countriesPromise: Promise<CountryResponse> = fetch(
       endpoints.providers.regions,
-      {
-        ...options,
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_BEARER}`,
-        },
-        next: { revalidate: 2592000 },
-      }
+      clientOptions
     ).then((res: Response) => res.json());
-    Promise.all([countriesPromise, genrePromise]).then(
-      ([countries, genres]) => {
-        setGenres(genres.genres);
-        setCountries(countries.results);
-      }
-    );
+
+    Promise.all([countriesPromise]).then(([countries]) => {
+      setCountries(countries.results);
+    });
   }, [type]);
 
   useEffect(() => {
-    const genreParams = params.get("genres")?.trim()?.split(",");
+    const genreParams = params
+      .get("genres")
+      ?.trim()
+      ?.split(",")
+      .filter((genre) => genre.length > 0);
     const sort = params.get("sort");
     const region = params.get("region");
     const providersParams: string[] | undefined = params
       .get("providers")
       ?.trim()
-      ?.split(",");
+      ?.split(",")
+      .filter((providers) => providers.length > 0);
 
     if (sort) {
       setSort(sort as SortParams);
@@ -80,11 +70,8 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     if (genreParams && genreParams?.length > 0) {
       setActiveGenres(genreParams);
     }
-    if (region) {
-      setRegion(region);
-    }
+    setRegion(region || "US");
     if (providersParams && providersParams.length > 0) {
-      console.log(providersParams);
       setActiveProviders(providersParams);
     }
   }, [params]);
@@ -96,6 +83,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     params.set("providers", activeProviders.join(","));
     params.set("region", region);
     router.push(`${pathname}?${params}`);
+    setIsProvidersOpen(false);
   }
 
   function removeFilters() {
@@ -153,27 +141,13 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
           <p className="mb-3 block font-work-sans text-sm text-gray-light">
             Genres
           </p>
-          <div className="flex flex-wrap gap-1">
-            {genres.map((genre) => (
-              <ChipButton
-                text={genre.name}
-                key={genre.id}
-                active={activeGenres.includes(genre.id.toString())}
-                handler={() => {
-                  if (!activeGenres.includes(genre.id.toString())) {
-                    setActiveGenres((prev) => [...prev, genre.id.toString()]);
-                    return;
-                  }
-                  setActiveGenres(
-                    activeGenres.filter(
-                      (activeGenre) =>
-                        genre.id.toString() !== activeGenre.toString()
-                    )
-                  );
-                }}
-              />
-            ))}
-          </div>
+          <GenreBox
+            type={type}
+            genres={genres}
+            setGenres={setGenres}
+            setActiveGenres={setActiveGenres}
+            activeGenres={activeGenres}
+          />
         </div>
       </div>
       <div className="mb-3 rounded border border-gray-dark px-3 py-4 shadow">
@@ -185,26 +159,30 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
             >
               Countries
             </label>
-            <select
-              name="countries"
-              id="countries"
-              value={region}
-              className="w-full rounded border border-gray-dark bg-gray-dark px-2 py-2 font-work-sans text-sm outline-none hover:border-gray-md/40 focus:ring-2 focus:ring-brand/30"
-              onChange={(e) => {
-                setRegion(e.target.value as Country["iso_3166_1"]);
-                setActiveProviders([]);
-              }}
-            >
-              {countries.map((country) => (
-                <option
-                  key={country.iso_3166_1}
-                  value={country.iso_3166_1}
-                  className="bg-gray-dark"
-                >
-                  {country.english_name}
-                </option>
-              ))}
-            </select>
+            {countries.length > 0 ? (
+              <select
+                name="countries"
+                id="countries"
+                value={region}
+                className="w-full rounded border border-gray-dark bg-gray-dark px-2 py-2 font-work-sans text-sm outline-none hover:border-gray-md/40 focus:ring-2 focus:ring-brand/30"
+                onChange={(e) => {
+                  setRegion(e.target.value as Country["iso_3166_1"]);
+                  setActiveProviders([]);
+                }}
+              >
+                {countries.map((country) => (
+                  <option
+                    key={country.iso_3166_1}
+                    value={country.iso_3166_1}
+                    className="bg-gray-dark"
+                  >
+                    {country.english_name}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <Skeleton className="h-10 rounded bg-gray-dark w-full" />
+            )}
           </div>
         </div>
         <div>
@@ -212,7 +190,13 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
             <Button
               text={
                 <>
-                  Providers <RxCaretDown />
+                  Providers{" "}
+                  <RxCaretDown
+                    size={18}
+                    className={`transition-transform ${
+                      !isProvidersOpen ? "-rotate-90" : ""
+                    }`}
+                  />
                 </>
               }
               handler={() => setIsProvidersOpen(!isProvidersOpen)}

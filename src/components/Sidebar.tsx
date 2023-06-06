@@ -7,17 +7,17 @@ import { RxFrame, RxPlay, RxCalendar, RxStar, RxDesktop } from "react-icons/rx";
 import { RiVipCrown2Line } from "react-icons/ri";
 import Link from "next/link";
 import { IoTvOutline, IoVideocamOutline } from "react-icons/io5";
-import { SidebarContext } from "@/providers/SidebarProvider";
+import { GlobalContext } from "@/providers/GlobalProvider";
 import { BiHomeAlt } from "react-icons/bi";
 
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = ({}) => {
-  const { state } = useContext(SidebarContext);
+  const { sidebarOpen, setSidebarOpen } = useContext(GlobalContext);
   return (
     <aside
       className={`scroll-design min-w-48 fixed left-0 top-[56px] z-10 h-[calc(100vh-56px)] w-48 shrink-0 grow-0 basis-48 transform overflow-y-auto bg-gray-dark transition-transform duration-200 ease-in-out md:sticky md:left-auto md:top-0 md:h-screen md:min-h-screen md:w-auto md:translate-x-0  md:transform-none ${
-        state.isOpen ? "translate-x-0" : "-translate-x-full"
+        sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
       <div className="sticky top-0 mb-3 hidden h-14 items-center overflow-hidden bg-gray-dark md:flex">
