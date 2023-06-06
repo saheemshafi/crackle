@@ -1,12 +1,12 @@
+import MediaCard from "@/components/MediaCard";
 import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
+import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
-import { Tv } from "@/types/tv";
 import Container from "@/components/Container";
-import MediaCard from "@/components/MediaCard";
 import Filterer from "@/components/Filterer";
 
-interface TvPageProps {
+interface MoviesPageProps {
   searchParams: {
     genres: string | undefined;
     sort: string | undefined;
@@ -15,13 +15,15 @@ interface TvPageProps {
   };
 }
 
-const TvPage = async ({ searchParams }: TvPageProps) => {
-  const seriesPromise = (
+const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
+  const moviesPromise = (
     await fetch(
-      `${endpoints.discover.tv}&with_genres=${searchParams["genres"]}&sort_by=${
+      `${endpoints.discover.movies}&with_genres=${
+        searchParams["genres"]
+      }&sort_by=${
         searchParams["sort"] || "popularity.desc"
-      }&watch_region=${searchParams["region"]}&with_watch_providers=${
-        searchParams["providers"]
+      }&with_watch_providers=${searchParams["providers"]}&watch_region=${
+        searchParams["region"]
       }`,
       {
         ...options,
@@ -29,25 +31,24 @@ const TvPage = async ({ searchParams }: TvPageProps) => {
       }
     )
   ).json();
-  const series: ApiResponse<Tv> = await seriesPromise;
+  const movies: ApiResponse<Movie> = await moviesPromise;
   return (
     <Container>
       <div className="flex gap-4">
         <div className="flex-1">
           <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
-            Tv Series
+            Movies
           </h1>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4">
-            {series.results?.length > 0 &&
-              series.results.map((series) => (
-                <MediaCard key={series.id} media={series} />
-              ))}
+            {movies.results.map((movie) => (
+              <MediaCard key={movie.id} media={movie} />
+            ))}
           </div>
         </div>
-        <Filterer type="tv" />
+        <Filterer type="movie" />
       </div>
     </Container>
   );
 };
 
-export default TvPage;
+export default MoviesPage;

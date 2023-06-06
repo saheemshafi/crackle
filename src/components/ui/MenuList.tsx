@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 interface MenuListProps {
   icon?: JSX.Element;
-  buttonHTML?: JSX.Element;
+  buttonHTML?: JSX.Element | string;
   buttonClasses?: string;
   children: React.ReactNode;
   classes?: AllHTMLAttributes<HTMLDivElement>["className"];

@@ -8,6 +8,7 @@ import { RiVipCrown2Line } from "react-icons/ri";
 import Link from "next/link";
 import { IoTvOutline, IoVideocamOutline } from "react-icons/io5";
 import { SidebarContext } from "@/providers/SidebarProvider";
+import { BiHomeAlt } from "react-icons/bi";
 
 interface SidebarProps {}
 
@@ -33,10 +34,21 @@ const Sidebar: FC<SidebarProps> = ({}) => {
           />
         </Link>
       </div>
+      <SidebarMenu title="Home">
+        <ul>
+          <li>
+            <NavLink icon={<BiHomeAlt />} href="/" text="Home" />
+          </li>
+        </ul>
+      </SidebarMenu>
       <SidebarMenu title="Discover">
         <ul>
           <li>
-            <NavLink icon={<IoVideocamOutline />} href="/" text="Movies" />
+            <NavLink
+              icon={<IoVideocamOutline />}
+              href="/movies"
+              text="Movies"
+            />
           </li>
           <li>
             <NavLink icon={<IoTvOutline />} href="/tv" text="Tv Shows" />
