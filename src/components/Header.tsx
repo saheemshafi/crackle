@@ -9,7 +9,7 @@ import SignInBtn from "./ui/SignInBtn";
 import SignOutBtn from "./ui/SignOutBtn";
 import Button from "./ui/Button";
 import { useContext } from "react";
-import { SidebarContext } from "@/providers/SidebarProvider";
+import { GlobalContext } from "@/providers/GlobalProvider";
 import { useSession } from "next-auth/react";
 import { TbListDetails } from "react-icons/tb";
 import { IoMdStopwatch } from "react-icons/io";
@@ -19,11 +19,11 @@ import Skeleton from "./ui/Skeleton";
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
-  const { dispatch } = useContext(SidebarContext);
+  const { sidebarOpen, setSidebarOpen } = useContext(GlobalContext);
   const { data, status } = useSession();
   const user = data?.user as UserProfile;
   return (
-    <header className="sticky top-0 z-10 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
+    <header className="sticky top-0 z-50 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
       <div>
         <Button
           icon={<RxHamburgerMenu size={22} />}
@@ -33,7 +33,7 @@ const Header = ({}: HeaderProps) => {
               "grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50 md:hidden",
             type: "button",
           }}
-          handler={() => dispatch({ type: "toggle" })}
+          handler={() => setSidebarOpen(!sidebarOpen)}
         />
       </div>
       <div className="flex h-14 items-center overflow-hidden md:hidden">

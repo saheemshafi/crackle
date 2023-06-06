@@ -22,9 +22,9 @@ const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
       data-slider-item={sliderItem}
       className={`${
         sliderItem ? "" : "card"
-      } group relative overflow-hidden rounded-lg shadow-md`}
+      } group relative isolate overflow-hidden rounded-lg shadow-md`}
     >
-      <div className="absolute right-1 top-1 z-10 sm:right-2 sm:top-2">
+      <div className="absolute right-1 top-1 z-[1] sm:right-2 sm:top-2">
         <MenuList
           classes="w-[110px] sm:w-[130px]"
           buttonClasses="grid place-items-center outline-none focus-visible:ring-2 focus-visible:ring-brand/50 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity p-0.5 rounded-full group-hover:shadow-sm shadow-black/30 bg-black/80"
@@ -55,6 +55,8 @@ const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
           height={300}
           alt={isMovie(media) ? media.title : media.original_name}
           className="aspect-[2/3] w-full"
+          placeholder="blur"
+          blurDataURL="/images/image-placeholder.jpeg"
         />
       </Link>
       <div className="mt-1 w-full px-1 py-2">

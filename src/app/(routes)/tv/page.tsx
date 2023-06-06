@@ -5,31 +5,19 @@ import { Tv } from "@/types/tv";
 import Container from "@/components/Container";
 import MediaCard from "@/components/MediaCard";
 import Filterer from "@/components/Filterer";
+import { SearchParams, generateQueryUrl } from "@/lib/helpers/query-url";
 
 interface TvPageProps {
-  searchParams: {
-    genres: string | undefined;
-    sort: string | undefined;
-    providers: string | undefined;
-    region: string | undefined;
-  };
+  searchParams: SearchParams;
 }
 
 const TvPage = async ({ searchParams }: TvPageProps) => {
-  const seriesPromise = (
-    await fetch(
-      `${endpoints.discover.tv}&with_genres=${searchParams["genres"]}&sort_by=${
-        searchParams["sort"] || "popularity.desc"
-      }&watch_region=${searchParams["region"]}&with_watch_providers=${
-        searchParams["providers"]
-      }`,
-      {
-        ...options,
-        next: { revalidate: 2592000 },
-      }
-    )
+  
+  const seriesPromise: Promise<ApiResponse<Tv>> = (
+    await fetch(generateQueryUrl(endpoints.discover.tv, searchParams), options)
   ).json();
-  const series: ApiResponse<Tv> = await seriesPromise;
+  const series = await seriesPromise;
+
   return (
     <Container>
       <div className="flex gap-4">
