@@ -13,8 +13,8 @@
     "tv": "https://api.themoviedb.org/3/genre/tv/list"
   },
   "discover": {
-    "movies": "https://api.themoviedb.org/3/discover/movie?include_adult=false",
-    "tv": "https://api.themoviedb.org/3/discover/tv?include_adult=false"
+    "movies": "https://api.themoviedb.org/3/discover/movie?",
+    "tv": "https://api.themoviedb.org/3/discover/tv?"
   },
   "people": "https://api.themoviedb.org/3/person/popular",
   "movies": {
@@ -28,5 +28,10 @@
     "onTheAir": "https://api.themoviedb.org/3/tv/on_the_air?",
     "popular": "https://api.themoviedb.org/3/tv/popular?",
     "topRated": "https://api.themoviedb.org/3/tv/top_rated?"
+  },
+  "providers":{
+    "regions":"https://api.themoviedb.org/3/watch/providers/regions",
+    "movie":"https://api.themoviedb.org/3/watch/providers/movie",
+    "tv":"https://api.themoviedb.org/3/watch/providers/tv"
   }
 }

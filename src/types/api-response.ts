@@ -1,4 +1,6 @@
+import { Country } from "./country";
 import { Genre } from "./genre";
+import { WatchProvider } from "./watch-provider";
 
 export interface ApiResponse<T> {
   page: number;
@@ -11,4 +13,12 @@ export type ResultsOnly<T> = Pick<ApiResponse<T>, "results">;
 
 export type GenreResponse = {
   [Property in keyof ResultsOnly<Genre> as "genres"]: Genre[];
+};
+
+export type CountryResponse = {
+  [Property in keyof ResultsOnly<Country>]: Country[];
+};
+
+export type ProviderResponse = {
+  [Property in keyof ResultsOnly<WatchProvider>]: WatchProvider[];
 };

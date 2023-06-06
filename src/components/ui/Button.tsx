@@ -1,10 +1,10 @@
 "use client";
-import { ButtonHTMLAttributes, FC } from "react";
+import { ButtonHTMLAttributes, FC, MouseEventHandler } from "react";
 
 interface ButtonProps {
   type?: "primary" | "secondary" | "default" | "tmdb";
   text?: string | JSX.Element;
-  handler?: (e: unknown | any) => unknown;
+  handler?: MouseEventHandler;
   attrs?: ButtonHTMLAttributes<HTMLButtonElement>;
   icon?: JSX.Element;
 }

@@ -32,6 +32,11 @@ button.button {
 button.primary {
   @apply bg-brand/95 tracking-wide hover:bg-brand transition-colors focus-visible:bg-brand
 }
+
+button.secondary {
+  @apply bg-transparent tracking-wide hover:bg-gray-dark border border-gray-dark transition-colors focus-visible:bg-brand
+}
+
 button.tmdb {
   @apply bg-tmdb-teal uppercase text-gray-dark tracking-wide font-semibold hover:bg-tmdb-blue shadow-sm hover:shadow-tmdb-blue/20 transition-all 
 }
