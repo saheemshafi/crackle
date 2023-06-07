@@ -52,9 +52,6 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     Promise.all([countriesPromise]).then(([countries]) => {
       setCountries(countries.results);
     });
-    return () => {
-      setMobileFiltersOpen(false);
-    };
   }, [type]);
 
   useEffect(() => {
@@ -91,6 +88,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     params.set("region", region);
     router.push(`${pathname}?${params}`);
     setIsProvidersOpen(false);
+    setMobileFiltersOpen(false);
   }
 
   function removeFilters() {
@@ -99,17 +97,18 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     setActiveProviders([]);
     setRegion("US");
     router.push(pathname);
+    setMobileFiltersOpen(false);
   }
 
   return (
-    <div
+    <aside
       className={twMerge(
-        "scroll-design absolute inset-x-4 shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 pr-1 backdrop-blur-sm sm:relative  sm:inset-x-0 sm:right-0 sm:block sm:w-64 sm:rounded-none sm:bg-transparent",
-        mobileFiltersOpen ? "block animate-in shadow-lg" : "hidden"
+        "scroll-design fixed inset-0 top-[56px] sm:top-auto p-3 sm:p-0 shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 pr-1 backdrop-blur-sm sm:relative  sm:inset-auto sm:right-0 sm:block sm:w-64 sm:rounded-none sm:bg-transparent",
+        mobileFiltersOpen ? "animate-in block shadow-lg" : "hidden"
       )}
     >
-      <div className="mb-3 items-center flex justify-between rounded border border-gray-dark px-3 py-4 shadow sm:hidden">
-        <p className="text-lg font-work-sans">Filters</p>
+      <div className="mb-3 flex items-center justify-between rounded border border-gray-dark px-3 py-4 shadow sm:hidden">
+        <p className="font-work-sans text-lg">Filters</p>
         <Button
           icon={<BiX size={28} />}
           text={<span className="sr-only">Close Filters</span>}
@@ -215,7 +214,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
             <Button
               text={
                 <>
-                  Providers{" "}
+                  Providers
                   <RxCaretDown
                     size={18}
                     className={`transition-transform ${
@@ -228,10 +227,10 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
               type="secondary"
             />
           </div>
-          <div className="scroll-design max-h-[300px] overflow-auto">
+          <div className="scroll-design overflow-auto">
             <div
-              className={`grid overflow-y-hidden transition-[max-height,padding] duration-500 ease-in-out ${
-                isProvidersOpen ? "max-h-[500vh] p-2 " : "max-h-[0vh] p-0"
+              className={`grid overflow-y-auto scroll-design px-2 ${
+                isProvidersOpen ? "max-h-[200px] py-3" : "max-h-[0px] py-0"
               }`}
             >
               <WatchProviders
@@ -239,7 +238,6 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
                 region={region}
                 activeProviders={activeProviders}
                 setActiveProviders={setActiveProviders}
-                handler={() => {}}
               />
             </div>
           </div>
@@ -253,7 +251,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
           handler={removeFilters}
         />
       </div>
-    </div>
+    </aside>
   );
 };
 
