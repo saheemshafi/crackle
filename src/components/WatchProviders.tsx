@@ -19,7 +19,6 @@ import Skeleton from "./ui/Skeleton";
 
 interface WatchProvidersProps {
   region: Country["iso_3166_1"];
-  handler: (e: MouseEvent, activeProviders: string[]) => void;
   type: "movie" | "tv";
   activeProviders: string[];
   setActiveProviders: Dispatch<SetStateAction<string[]>>;
@@ -27,12 +26,12 @@ interface WatchProvidersProps {
 
 const WatchProviders: FC<WatchProvidersProps> = ({
   region,
-  handler,
   type,
   activeProviders,
   setActiveProviders,
 }) => {
   const [providers, setProviders] = useState<WatchProvider[]>([]);
+
   useEffect(() => {
     fetch(
       `${
@@ -50,6 +49,7 @@ const WatchProviders: FC<WatchProvidersProps> = ({
         setProviders(provider.results);
       });
   }, [region, type]);
+
   return (
     <div className="flex flex-wrap justify-between gap-2">
       {providers.length > 0
@@ -64,7 +64,6 @@ const WatchProviders: FC<WatchProvidersProps> = ({
                   : ""
               )}
               onClick={(e) => {
-                handler(e, activeProviders);
                 if (
                   !activeProviders.includes(provider.provider_id.toString())
                 ) {
@@ -93,7 +92,12 @@ const WatchProviders: FC<WatchProvidersProps> = ({
           ))
         : new Array(12)
             .fill(null)
-            .map((_, i) => <Skeleton key={i} className="h-9 w-9 rounded bg-gray-dark border border-gray-md/30" />)}
+            .map((_, i) => (
+              <Skeleton
+                key={i}
+                className="h-9 w-9 rounded border border-gray-md/30 bg-gray-dark"
+              />
+            ))}
     </div>
   );
 };
