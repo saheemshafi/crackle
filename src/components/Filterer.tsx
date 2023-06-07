@@ -101,7 +101,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   }
 
   return (
-    <div
+    <aside
       className={twMerge(
         "scroll-design fixed inset-0 top-[56px] sm:top-auto p-3 sm:p-0 shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 pr-1 backdrop-blur-sm sm:relative  sm:inset-auto sm:right-0 sm:block sm:w-64 sm:rounded-none sm:bg-transparent",
         mobileFiltersOpen ? "animate-in block shadow-lg" : "hidden"
@@ -229,8 +229,8 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
           </div>
           <div className="scroll-design overflow-auto">
             <div
-              className={`grid overflow-y-hidden px-2 ${
-                isProvidersOpen ? "max-h-[500vh] py-2" : "max-h-[0vh] py-0"
+              className={`grid overflow-y-auto scroll-design px-2 ${
+                isProvidersOpen ? "max-h-[200px] py-3" : "max-h-[0px] py-0"
               }`}
             >
               <WatchProviders
@@ -251,7 +251,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
           handler={removeFilters}
         />
       </div>
-    </div>
+    </aside>
   );
 };
 
