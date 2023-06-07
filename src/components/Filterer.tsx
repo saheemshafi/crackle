@@ -1,6 +1,6 @@
 "use client";
 import { Genre } from "@/types/genre";
-import { FC, useEffect, useState, MouseEvent } from "react";
+import { FC, useEffect, useState, MouseEvent, useContext } from "react";
 import endpoints from "@/lib/constants/endpoints.json";
 import { clientOptions } from "@/lib/api/options";
 import { CountryResponse } from "@/types/api-response";
@@ -12,6 +12,9 @@ import WatchProviders from "./WatchProviders";
 import { RxCaretDown } from "react-icons/rx";
 import GenreBox from "./GenreBox";
 import Skeleton from "./ui/Skeleton";
+import { GlobalContext } from "@/providers/GlobalProvider";
+import { twMerge } from "tailwind-merge";
+import { BiX } from "react-icons/bi";
 
 type SortParams =
   | "popularity.asc"
@@ -38,6 +41,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
+  const { mobileFiltersOpen, setMobileFiltersOpen } = useContext(GlobalContext);
 
   useEffect(() => {
     const countriesPromise: Promise<CountryResponse> = fetch(
@@ -48,6 +52,9 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     Promise.all([countriesPromise]).then(([countries]) => {
       setCountries(countries.results);
     });
+    return () => {
+      setMobileFiltersOpen(false);
+    };
   }, [type]);
 
   useEffect(() => {
@@ -95,7 +102,25 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   }
 
   return (
-    <div className="scroll-design sticky top-[calc(56px_+_1rem)] max-h-[calc(100vh_-_56px_-_1rem)] w-64 shrink-0 grow-0 self-start overflow-y-auto bg-gray-dark/10 pr-1 md:top-[calc(56px_+_1.25rem)] md:max-h-[calc(100vh_-_56px_-_1.25rem)]">
+    <div
+      className={twMerge(
+        "scroll-design absolute inset-x-4 shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 pr-1 backdrop-blur-sm sm:relative  sm:inset-x-0 sm:right-0 sm:block sm:w-64 sm:rounded-none sm:bg-transparent",
+        mobileFiltersOpen ? "block animate-in shadow-lg" : "hidden"
+      )}
+    >
+      <div className="mb-3 items-center flex justify-between rounded border border-gray-dark px-3 py-4 shadow sm:hidden">
+        <p className="text-lg font-work-sans">Filters</p>
+        <Button
+          icon={<BiX size={28} />}
+          text={<span className="sr-only">Close Filters</span>}
+          attrs={{
+            className:
+              "grid h-8 w-8 place-items-center rounded-sm outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50",
+            type: "button",
+          }}
+          handler={() => setMobileFiltersOpen(false)}
+        />
+      </div>
       <div className="mb-3 rounded border border-gray-dark px-3 py-4 shadow">
         <label
           className="mb-1 block font-work-sans text-sm text-gray-light"
@@ -181,7 +206,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
                 ))}
               </select>
             ) : (
-              <Skeleton className="h-10 rounded bg-gray-dark w-full" />
+              <Skeleton className="h-10 w-full rounded bg-gray-dark" />
             )}
           </div>
         </div>
@@ -203,23 +228,24 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
               type="secondary"
             />
           </div>
-
-          <div
-            className={`grid overflow-y-hidden transition-[max-height,padding] duration-500 ease-in-out ${
-              isProvidersOpen ? "max-h-[500vh] p-2 " : "max-h-[0vh] p-0"
-            }`}
-          >
-            <WatchProviders
-              type={type}
-              region={region}
-              activeProviders={activeProviders}
-              setActiveProviders={setActiveProviders}
-              handler={() => {}}
-            />
+          <div className="scroll-design max-h-[300px] overflow-auto">
+            <div
+              className={`grid overflow-y-hidden transition-[max-height,padding] duration-500 ease-in-out ${
+                isProvidersOpen ? "max-h-[500vh] p-2 " : "max-h-[0vh] p-0"
+              }`}
+            >
+              <WatchProviders
+                type={type}
+                region={region}
+                activeProviders={activeProviders}
+                setActiveProviders={setActiveProviders}
+                handler={() => {}}
+              />
+            </div>
           </div>
         </div>
       </div>
-      <div className="mb-3 flex items-start gap-2">
+      <div className="mb-3 flex items-start gap-2 px-2 sm:px-0">
         <Button handler={handleFilter} type="primary" text={"Apply"} />
         <Button
           text={"Clear Filters"}
