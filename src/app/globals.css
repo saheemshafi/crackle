@@ -34,7 +34,7 @@ button.primary {
 }
 
 button.secondary {
-  @apply border border-gray-dark bg-transparent tracking-wide transition-colors hover:bg-gray-dark focus-visible:bg-brand;
+  @apply border border-gray-dark bg-transparent tracking-wide transition-colors hover:bg-gray-dark focus-visible:bg-gray-dark;
 }
 
 button.tmdb {
