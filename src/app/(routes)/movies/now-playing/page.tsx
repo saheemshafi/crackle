@@ -4,16 +4,22 @@ import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
+import Paginate from "@/components/Paginate";
+import { SearchParams } from "@/lib/helpers/query-url";
 
-interface NowPlayingPageProps {}
+interface NowPlayingPageProps {
+  searchParams: { page: SearchParams["page"] };
+}
 
-const NowPlayingPage = async ({}: NowPlayingPageProps) => {
-
+const NowPlayingPage = async ({ searchParams }: NowPlayingPageProps) => {
   const moviesPromise: Promise<ApiResponse<Movie>> = (
-    await fetch(endpoints.movies.nowPlaying, options)
+    await fetch(
+      `${endpoints.movies.nowPlaying}?page=${searchParams["page"] || "1"}`,
+      options
+    )
   ).json();
   const movies = await moviesPromise;
-  
+
   return (
     <Container>
       <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
@@ -24,6 +30,7 @@ const NowPlayingPage = async ({}: NowPlayingPageProps) => {
           <MediaCard key={movie.id} media={movie} />
         ))}
       </div>
+      <Paginate items={movies} />
     </Container>
   );
 };

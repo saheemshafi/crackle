@@ -6,23 +6,23 @@ import endpoints from "@/lib/constants/endpoints.json";
 import Container from "@/components/Container";
 import Filterer from "@/components/Filterer";
 import { SearchParams, generateQueryUrl } from "@/lib/helpers/query-url";
-import Button from "@/components/ui/Button";
-import { BiFilter } from "react-icons/bi";
 import FilterTrigger from "@/components/ui/FilterTrigger";
+import Paginate from "@/components/Paginate";
 
 interface MoviesPageProps {
   searchParams: SearchParams;
 }
 
 const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
+
   const moviesPromise = (
     await fetch(
       generateQueryUrl(endpoints.discover.movies, searchParams),
       options
     )
   ).json();
-
   const movies: ApiResponse<Movie> = await moviesPromise;
+  
   return (
     <Container>
       <div className="flex gap-4">
@@ -41,6 +41,7 @@ const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
         </div>
         <Filterer type="movie" />
       </div>
+      <Paginate items={movies} />
     </Container>
   );
 };

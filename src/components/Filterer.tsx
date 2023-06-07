@@ -86,6 +86,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
     params.set("sort", sort);
     params.set("providers", activeProviders.join(","));
     params.set("region", region);
+    params.set("page", "1");
     router.push(`${pathname}?${params}`);
     setIsProvidersOpen(false);
     setMobileFiltersOpen(false);
@@ -103,10 +104,8 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   return (
     <aside
       className={twMerge(
-        "scroll-design fixed overflow-y-auto sm:overflow-y-visible inset-0 top-[56px] shrink-0 grow-0 self-start rounded-md bg-dark/95 p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0  sm:top-auto sm:block sm:w-64 sm:rounded-none sm:bg-transparent sm:p-0",
-        mobileFiltersOpen
-          ? "animate-in block shadow-lg"
-          : "hidden"
+        "scroll-design fixed inset-0 top-[56px] shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-none sm:bg-transparent sm:p-0",
+        mobileFiltersOpen ? "animate-in block shadow-lg" : "hidden"
       )}
     >
       <div className="mb-3 flex items-center justify-between rounded border border-gray-dark px-3 py-4 shadow sm:hidden">
