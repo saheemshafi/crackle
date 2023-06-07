@@ -4,13 +4,19 @@ import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
+import Paginate from "@/components/Paginate";
+import { SearchParams } from "@/lib/helpers/query-url";
 
-interface UpcomingMoviesProps {}
+interface UpcomingMoviesProps {
+  searchParams: { page: SearchParams["page"] };
+}
 
-const UpcomingMoviesPage = async ({}: UpcomingMoviesProps) => {
-  
+const UpcomingMoviesPage = async ({ searchParams }: UpcomingMoviesProps) => {
   const moviesPromise: Promise<ApiResponse<Movie>> = (
-    await fetch(endpoints.movies.upcoming, options)
+    await fetch(
+      `${endpoints.movies.upcoming}?page=${searchParams["page"] || "1"}`,
+      options
+    )
   ).json();
   const movies = await moviesPromise;
 
@@ -24,6 +30,7 @@ const UpcomingMoviesPage = async ({}: UpcomingMoviesProps) => {
           <MediaCard key={movie.id} media={movie} />
         ))}
       </div>
+      <Paginate items={movies} />
     </Container>
   );
 };

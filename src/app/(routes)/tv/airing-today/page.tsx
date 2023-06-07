@@ -4,13 +4,21 @@ import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
 import { Tv } from "@/types/tv";
 import MediaCard from "@/components/MediaCard";
-interface AiringTodayPageProps {}
+import Paginate from "@/components/Paginate";
+import { SearchParams } from "@/lib/helpers/query-url";
+interface AiringTodayPageProps {
+  searchParams: { page: SearchParams["page"] };
+}
 
-const AiringTodayPage = async ({}: AiringTodayPageProps) => {
-
-  const seriesPromise:Promise<ApiResponse<Tv>> = (await fetch(endpoints.tv.airingToday, options)).json();
+const AiringTodayPage = async ({ searchParams }: AiringTodayPageProps) => {
+  const seriesPromise: Promise<ApiResponse<Tv>> = (
+    await fetch(
+      `${endpoints.tv.airingToday}?page=${searchParams["page"] || "1"}`,
+      options
+    )
+  ).json();
   const series = await seriesPromise;
-  
+
   return (
     <Container>
       <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
@@ -21,6 +29,7 @@ const AiringTodayPage = async ({}: AiringTodayPageProps) => {
           <MediaCard key={series.id} media={series} />
         ))}
       </div>
+      <Paginate items={series} />
     </Container>
   );
 };

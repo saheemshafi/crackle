@@ -4,15 +4,21 @@ import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
 import { Tv } from "@/types/tv";
 import MediaCard from "@/components/MediaCard";
-interface PopularSeriesProps {}
+import Paginate from "@/components/Paginate";
+import { SearchParams } from "@/lib/helpers/query-url";
+interface PopularSeriesProps {
+  searchParams: { page: SearchParams["page"] };
+}
 
-const PopularSeriesPage = async ({}: PopularSeriesProps) => {
-
+const PopularSeriesPage = async ({ searchParams }: PopularSeriesProps) => {
   const seriesPromise: Promise<ApiResponse<Tv>> = (
-    await fetch(endpoints.tv.popular, options)
+    await fetch(
+      `${endpoints.tv.popular}?page=${searchParams["page"] || "1"}`,
+      options
+    )
   ).json();
   const series = await seriesPromise;
-  
+
   return (
     <Container>
       <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
@@ -23,6 +29,7 @@ const PopularSeriesPage = async ({}: PopularSeriesProps) => {
           <MediaCard key={series.id} media={series} />
         ))}
       </div>
+      <Paginate items={series} />
     </Container>
   );
 };

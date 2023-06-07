@@ -4,15 +4,22 @@ import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
+import Paginate from "@/components/Paginate";
+import { SearchParams } from "@/lib/helpers/query-url";
 
-interface TopRatedMoviesProps {}
+interface TopRatedMoviesProps {
+  searchParams: { page: SearchParams["page"] };
+}
 
-const TopRatedMoviesPage = async ({}: TopRatedMoviesProps) => {
-  
+const TopRatedMoviesPage = async ({ searchParams }: TopRatedMoviesProps) => {
   const moviesPromise: Promise<ApiResponse<Movie>> = (
-    await fetch(endpoints.movies.topRated, options)
+    await fetch(
+      `${endpoints.movies.topRated}?page=${searchParams["page"] || "1"}`,
+      options
+    )
   ).json();
   const movies = await moviesPromise;
+
 
   return (
     <Container>
@@ -24,6 +31,7 @@ const TopRatedMoviesPage = async ({}: TopRatedMoviesProps) => {
           <MediaCard key={movie.id} media={movie} />
         ))}
       </div>
+      <Paginate items={movies} />
     </Container>
   );
 };

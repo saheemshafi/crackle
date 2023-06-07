@@ -1,16 +1,22 @@
 import Container from "@/components/Container";
+import Paginate from "@/components/Paginate";
 import PersonCard from "@/components/PersonCard";
 import { options } from "@/lib/api/options";
 import endpoints from "@/lib/constants/endpoints.json";
+import { SearchParams } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";
 import { Person } from "@/types/person";
 
-interface PopularFacesPage {}
+interface PopularFacesPage {
+  searchParams: { page: SearchParams["page"] };
+}
 
-const PopularFacesPage = async ({}: PopularFacesPage) => {
-  
+const PopularFacesPage = async ({ searchParams }: PopularFacesPage) => {
   const peoplePromise: Promise<ApiResponse<Person>> = (
-    await fetch(endpoints.people, options)
+    await fetch(
+      `${endpoints.people}?page=${searchParams["page"] || 1}`,
+      options
+    )
   ).json();
   const people = await peoplePromise;
 
@@ -24,6 +30,7 @@ const PopularFacesPage = async ({}: PopularFacesPage) => {
           <PersonCard person={person} key={person.id} />
         ))}
       </div>
+      <Paginate items={people} />
     </Container>
   );
 };

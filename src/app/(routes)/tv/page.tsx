@@ -7,6 +7,7 @@ import MediaCard from "@/components/MediaCard";
 import Filterer from "@/components/Filterer";
 import { SearchParams, generateQueryUrl } from "@/lib/helpers/query-url";
 import FilterTrigger from "@/components/ui/FilterTrigger";
+import Paginate from "@/components/Paginate";
 
 interface TvPageProps {
   searchParams: SearchParams;
@@ -37,6 +38,7 @@ const TvPage = async ({ searchParams }: TvPageProps) => {
         </div>
         <Filterer type="tv" />
       </div>
+      <Paginate items={series} />
     </Container>
   );
 };
