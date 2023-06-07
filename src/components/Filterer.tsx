@@ -103,8 +103,10 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   return (
     <aside
       className={twMerge(
-        "scroll-design fixed inset-0 top-[56px] sm:top-auto p-3 sm:p-0 shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 pr-1 backdrop-blur-sm sm:relative  sm:inset-auto sm:right-0 sm:block sm:w-64 sm:rounded-none sm:bg-transparent",
-        mobileFiltersOpen ? "animate-in block shadow-lg" : "hidden"
+        "scroll-design fixed overflow-y-auto sm:overflow-y-visible inset-0 top-[56px] shrink-0 grow-0 self-start rounded-md bg-dark/95 p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0  sm:top-auto sm:block sm:w-64 sm:rounded-none sm:bg-transparent sm:p-0",
+        mobileFiltersOpen
+          ? "animate-in block shadow-lg"
+          : "hidden"
       )}
     >
       <div className="mb-3 flex items-center justify-between rounded border border-gray-dark px-3 py-4 shadow sm:hidden">
@@ -229,7 +231,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
           </div>
           <div className="scroll-design overflow-auto">
             <div
-              className={`grid overflow-y-auto scroll-design px-2 ${
+              className={`scroll-design grid overflow-y-auto px-2 ${
                 isProvidersOpen ? "max-h-[200px] py-3" : "max-h-[0px] py-0"
               }`}
             >
