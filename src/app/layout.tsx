@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { GlobalProvider } from "@/providers/GlobalProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authentication/auth-options";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -27,7 +28,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <body className="flex items-start bg-dark font-inter scroll-design">
+      <body className="scroll-design flex items-start bg-dark font-inter">
         <AuthSessionProvider session={session}>
           <GlobalProvider>
             <Sidebar />
@@ -38,6 +39,7 @@ export default async function RootLayout({
               </main>
               <Footer />
             </div>
+            <Toaster/>
           </GlobalProvider>
         </AuthSessionProvider>
       </body>

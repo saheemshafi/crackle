@@ -33,5 +33,8 @@
     "regions":"https://api.themoviedb.org/3/watch/providers/regions",
     "movie":"https://api.themoviedb.org/3/watch/providers/movie",
     "tv":"https://api.themoviedb.org/3/watch/providers/tv"
+  },
+  "actions":{
+    "watchlist":"https://api.themoviedb.org/3/account/null/watchlist"
   }
 }
