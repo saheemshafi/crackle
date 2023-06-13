@@ -23,7 +23,7 @@ const Header = ({}: HeaderProps) => {
   const { data, status } = useSession();
   const user = data?.user as UserProfile;
   return (
-    <header className="sticky top-0 z-50 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-lg md:px-5">
+    <header className="sticky top-0 z-50 flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5">
       <div>
         <Button
           icon={<RxHamburgerMenu size={22} />}

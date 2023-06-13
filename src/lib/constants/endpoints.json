@@ -21,7 +21,8 @@
     "popular": "https://api.themoviedb.org/3/movie/popular",
     "upcoming": "https://api.themoviedb.org/3/movie/upcoming",
     "nowPlaying": "https://api.themoviedb.org/3/movie/now_playing",
-    "topRated": "https://api.themoviedb.org/3/movie/top_rated"
+    "topRated": "https://api.themoviedb.org/3/movie/top_rated",
+    "movieDetails": "https://api.themoviedb.org/3/movie"
   },
   "tv": {
     "airingToday": "https://api.themoviedb.org/3/tv/airing_today",
@@ -29,12 +30,13 @@
     "popular": "https://api.themoviedb.org/3/tv/popular",
     "topRated": "https://api.themoviedb.org/3/tv/top_rated"
   },
-  "providers":{
-    "regions":"https://api.themoviedb.org/3/watch/providers/regions",
-    "movie":"https://api.themoviedb.org/3/watch/providers/movie",
-    "tv":"https://api.themoviedb.org/3/watch/providers/tv"
+  "providers": {
+    "regions": "https://api.themoviedb.org/3/watch/providers/regions",
+    "movie": "https://api.themoviedb.org/3/watch/providers/movie",
+    "tv": "https://api.themoviedb.org/3/watch/providers/tv"
   },
-  "actions":{
-    "watchlist":"https://api.themoviedb.org/3/account/null/watchlist"
+  "actions": {
+    "watchlist": "https://api.themoviedb.org/3/account/null/watchlist",
+    "favourite":"https://api.themoviedb.org/3/account/null/favorite"
   }
 }

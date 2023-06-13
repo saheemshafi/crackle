@@ -1,3 +1,4 @@
+import { Cast } from "./cast";
 import { Country } from "./country";
 import { Genre } from "./genre";
 import { WatchProvider } from "./watch-provider";
@@ -22,3 +23,16 @@ export type CountryResponse = {
 export type ProviderResponse = {
   [Property in keyof ResultsOnly<WatchProvider>]: WatchProvider[];
 };
+
+export interface MediaAccountState {
+  favorite: boolean;
+  id: number;
+  rated: boolean;
+  watchlist: boolean;
+}
+
+export interface CastResponse {
+  cast: Cast[];
+  crew: Cast[];
+  id: number;
+}

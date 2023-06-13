@@ -12,7 +12,7 @@ import { IoCaretForwardOutline, IoCaretBackOutline } from "react-icons/io5";
 import React from "react";
 
 interface SliderProps {
-  title?: string | JSX.Element;
+  title?: string | JSX.Element | null;
   children: React.ReactNode;
 }
 
@@ -87,9 +87,9 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
   return (
     <div>
       <div className="mb-3 flex justify-between">
-        <h2 className="relative mb-6 pb-3 text-xl font-medium capitalize after:absolute after:bottom-0 after:left-0 after:h-1 after:w-7 after:rounded-md after:bg-brand">
+        {title && <h2 className="relative mb-6 pb-3 text-xl font-medium capitalize after:absolute after:bottom-0 after:left-0 after:h-1 after:w-7 after:rounded-md after:bg-brand">
           {title}
-        </h2>
+        </h2>}
         <div className={`space-x-1 ${totalSlides <= 1 ? "hidden" : "block"}`}>
           <button
             type="button"
