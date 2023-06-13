@@ -24,9 +24,18 @@ interface MediaCardMenuProps {
 }
 
 const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
-  const user = useSession().data?.user as UserProfile;
+  const session = useSession();
+  const user = session.data?.user as UserProfile;
 
   const addToWatchlist: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    if (session.status == "unauthenticated") {
+      toast("You Need To Login First!", {
+        ...toastOptions,
+        icon: <RxInfoCircled size={20} />,
+      });
+      return;
+    }
+
     const data: MediaType = {
       media_id: id,
       media_type: type == "movie" ? "movie" : "tv",
@@ -48,6 +57,7 @@ const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
         });
         return;
       }
+
       const response = await fetch(
         `${endpoints.actions.watchlist}?session_id=${user.session_id}`,
         {
@@ -58,6 +68,7 @@ const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
       );
       if (response.ok) {
         toast("Added To Watchlist!", toastOptions);
+        return;
       }
     } catch (error) {
       toast("Oops! Server Error", {

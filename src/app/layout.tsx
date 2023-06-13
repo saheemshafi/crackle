@@ -34,7 +34,7 @@ export default async function RootLayout({
             <Sidebar />
             <div className="main-container w-full md:max-w-[calc(100%-12rem)] md:basis-[calc(100%-12rem)]">
               <Header />
-              <main className="min-h-[calc(100vh_-_60px_-_56px)] py-3">
+              <main className="min-h-[calc(100vh_-_60px_-_56px)]">
                 {children}
               </main>
               <Footer />
