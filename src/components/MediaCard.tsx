@@ -8,6 +8,7 @@ import MenuList from "./ui/MenuList";
 import { AiOutlineEllipsis } from "react-icons/ai";
 import { BsListUl } from "react-icons/bs";
 import { BiTagAlt } from "react-icons/bi";
+import MediaCardMenu from "./MediaCardMenu";
 
 interface MediaCardProps {
   sliderItem?: boolean;
@@ -25,24 +26,10 @@ const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
       } group relative isolate overflow-hidden rounded-lg shadow-md`}
     >
       <div className="absolute right-1 top-1 z-[1] sm:right-2 sm:top-2">
-        <MenuList
-          classes="w-[110px] sm:w-[130px]"
-          buttonClasses="grid place-items-center outline-none focus-visible:ring-2 focus-visible:ring-brand/50 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity p-0.5 rounded-full group-hover:shadow-sm shadow-black/30 bg-black/80"
-          icon={<AiOutlineEllipsis size={20} />}
-        >
-          <ul>
-            <li>
-              <button className="menu-link">
-                <BsListUl size={15} className="hidden sm:inline" /> Add To List
-              </button>
-            </li>
-            <li>
-              <button className="menu-link">
-                <BiTagAlt size={15} className="hidden sm:inline" /> Watchlist
-              </button>
-            </li>
-          </ul>
-        </MenuList>
+        <MediaCardMenu
+          type={isMovie(media) ? "movie" : "tv"}
+          id={media.id}
+        />
       </div>
       <Link
         title={isMovie(media) ? media.title : media.original_name}
