@@ -1,28 +1,55 @@
 import "@/app/globals.css";
-import { Inter, Work_Sans } from "next/font/google";
 import { Metadata } from "next";
-import Container from "@/components/Container";
 import MediaPageHeader from "@/components/MediaPageHeader";
+import endpoints from "@/lib/constants/endpoints.json";
+import { options } from "@/lib/api/options";
+import { MovieDetails } from "@/types/movie";
 
-const inter = Inter({ subsets: ["latin"] });
-const workSans = Work_Sans({ subsets: ["latin"] });
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { movieId: string };
+}): Promise<Metadata> => {
+  const response = await fetch(
+    `${endpoints.movies.movieDetails}/${params.movieId}`,
+    options
+  );
+  const movieDetails: MovieDetails = await response.json();
+  const genres = movieDetails.genres.map((genre) => genre.name);
 
-export const metadata: Metadata = {
-  title:
-    "Crackle : Your Gateway to Movie Marvels - Explore, Discover, and Immerse in the World of Films",
-  description:
-    "Crackle: Your Movie Information Hub - Explore, Discover, and Dive into the World of Films. Get the latest updates, reviews, and insights on your favorite movies. Uncover hidden gems, browse genres, and find personalized recommendations.",
+  return {
+    title: movieDetails.title,
+    description: movieDetails.overview,
+    keywords: genres,
+    openGraph: {
+      title: movieDetails.title,
+      description: movieDetails.overview,
+      type: "article",
+      tags: genres,
+      images: [
+        `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`,
+      ],
+    },
+  };
 };
 
 export default async function MoviePageLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { movieId: string };
 }) {
+  const response = await fetch(
+    `${endpoints.movies.movieDetails}/${params.movieId}`,
+    options
+  );
+  const movieDetails: MovieDetails = await response.json();
+
   return (
     <>
-      <MediaPageHeader />
-      <Container>{children}</Container>
+      <MediaPageHeader media={movieDetails} />
+      {children}
     </>
   );
 }
