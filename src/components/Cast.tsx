@@ -20,9 +20,12 @@ const Cast = async ({ mediaId, type }: CastProps) => {
   return (
     <>
       <section className="mb-6">
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {castResponse.cast.map((cast) => (
-            <div key={cast.id} className="flex gap-2 rounded bg-gray-dark p-2">
+            <div
+              key={`${cast.id}-${cast.cast_id}`}
+              className="flex gap-2 rounded bg-gray-dark p-2"
+            >
               <div className="aspect-square h-12 w-12">
                 <Image
                   src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}
@@ -50,11 +53,14 @@ const Cast = async ({ mediaId, type }: CastProps) => {
           ))}
         </div>
       </section>
-      <section className="">
+      <section>
         <h2 className="mb-2 font-work-sans text-lg font-medium">Crew</h2>
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {castResponse.crew.map((cast) => (
-            <div key={cast.id} className="flex gap-2 rounded bg-gray-dark p-2">
+            <div
+              key={`${cast.id}-${cast.job}`}
+              className="flex gap-2 rounded bg-gray-dark p-2"
+            >
               <div className="aspect-square h-12 w-12">
                 <Image
                   src={`https://image.tmdb.org/t/p/w185${cast.profile_path}`}

@@ -18,23 +18,23 @@ const CastPage = async ({ params }: CastPageProps) => {
   const movieDetails: MovieDetails = await response.json();
   return (
     <>
-      <section className="p-5 text-white">
+      <div className="p-4 text-white md:p-5">
         <div>
           <Link
             href={`/movies/${params.movieId}`}
-            className="flex w-fit items-center gap-2 rounded border border-gray-dark px-3 py-1 transition-colors hover:bg-gray-dark"
+            className="flex w-fit items-center gap-2 rounded border border-gray-dark bg-gradient-to-r from-gray-dark to-dark px-3 py-1 font-medium transition-colors hover:border-gray-md/30 focus-visible:border-gray-md/30"
           >
-            <BiArrowBack /> Back to {movieDetails.original_title}
+            <BiArrowBack /> {movieDetails.original_title}
           </Link>
         </div>
-        <div className="mt-3 rounded-md border border-gray-dark bg-dark p-3">
+        <div className="mt-3 rounded-md bg-dark md:border md:border-gray-dark md:p-3">
           <h2 className="mb-2 font-work-sans text-lg font-medium">Cast</h2>
           <Suspense fallback="Loading Cast...">
             {/* @ts-ignore-error */}
             <Cast mediaId={params.movieId} type={"movie"} />
           </Suspense>
         </div>
-      </section>
+      </div>
     </>
   );
 };
