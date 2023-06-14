@@ -61,7 +61,7 @@ const MenuList: FC<MenuListProps> = ({
   return (
     <div
       data-menu-container
-      className="group relative isolate"
+      className="group relative"
       ref={dropdownMenu}
     >
       <button
