@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authentication/auth-options";
 import { UserProfile } from "@/types/user";
 import { MediaAccountState } from "@/types/api-response";
+import Container from "@/components/Container";
 
 export const revalidate = 0;
 
@@ -30,14 +31,21 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
   const accountState: MediaAccountState = await accountStateResponse.json();
   return (
     <>
-      <section className="flex items-start gap-6 bg-gradient-to-t from-gray-dark to-dark p-5 text-white">
-        <div className="shrink-0">
+      <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">
+        <div
+          className="w-full sm:w-auto rounded-lg shrink"
+          style={{
+            background: `linear-gradient(to bottom left,#0e0f10f7,#121416),url(https://image.tmdb.org/t/p/w780${movieDetails.backdrop_path})`,
+            backgroundSize:"cover",
+            backgroundRepeat:"no-repeat"
+          }}
+        >
           <Image
             src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
             alt={movieDetails.title}
             width={600}
             height={600}
-            className="aspect-[2/3] max-w-[300px] rounded-lg object-cover shadow-md"
+            className="aspect-[2/3] w-full sm:max-w-[250px] rounded-lg object-cover shadow-md"
           />
         </div>
         <div className="flex-1">
@@ -52,7 +60,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             <p className="mb-2 font-work-sans text-sm italic text-gray-light">
               {movieDetails.tagline}
             </p>
-            <div className="flex items-center text-sm">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-y-2 items-start sm:items-center text-sm">
               <span className="rounded border border-gray-md px-1 font-semibold uppercase text-gray-md">
                 {movieDetails.original_language}
               </span>
@@ -92,7 +100,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
               <h2 className="mb-2 font-work-sans text-lg font-medium">
                 Production
               </h2>
-              <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+              <div className="grid sm:grid-cols-2 gap-2 lg:grid-cols-3 md:gap-3">
                 {movieDetails.production_companies.map((company) => (
                   <div
                     key={company.id}
@@ -124,7 +132,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             </div>
           </div>
         </div>
-      </section>
+      </Container>
     </>
   );
 };
