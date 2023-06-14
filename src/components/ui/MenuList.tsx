@@ -14,6 +14,7 @@ interface MenuListProps {
   buttonClasses?: string;
   children: React.ReactNode;
   classes?: AllHTMLAttributes<HTMLDivElement>["className"];
+  adjustFirstOnSmall?: boolean;
 }
 
 const MenuList: FC<MenuListProps> = ({
@@ -21,6 +22,7 @@ const MenuList: FC<MenuListProps> = ({
   buttonHTML,
   buttonClasses,
   children,
+  adjustFirstOnSmall,
   classes = "",
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -78,8 +80,9 @@ const MenuList: FC<MenuListProps> = ({
       <div
         onClick={() => toggle()}
         className={twMerge(
-          "menu absolute right-0 top-[calc(100%+0.5rem)] w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all group-first:left-0 sm:group-first:left-auto",
+          "menu absolute right-0 top-[calc(100%+0.5rem)] w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all",
           classes,
+          adjustFirstOnSmall && "group-first:left-0 sm:group-first:left-auto",
           isOpen ? "block opacity-0" : "hidden",
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
         )}

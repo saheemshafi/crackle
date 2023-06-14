@@ -25,6 +25,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
   return (
     <nav className="flex justify-center gap-4 border-y border-y-gray-dark bg-dark px-4 py-2">
       <MenuList
+        adjustFirstOnSmall
         buttonClasses="relative font-work-sans flex items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
         buttonHTML={
           <>
@@ -65,6 +66,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
       </MenuList>
 
       <MenuList
+        adjustFirstOnSmall
         buttonClasses="relative font-work-sans flex items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
         buttonHTML={
           <>
@@ -96,6 +98,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
         </ul>
       </MenuList>
       <MenuList
+        adjustFirstOnSmall
         buttonClasses="relative font-work-sans flex items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
         buttonHTML={
           <>
