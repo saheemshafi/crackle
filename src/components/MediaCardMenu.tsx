@@ -2,12 +2,14 @@
 
 import { FC } from "react";
 import { AiOutlineEllipsis } from "react-icons/ai";
-import { BiTagAlt } from "react-icons/bi";
+import { BiInfoCircle, BiTagAlt } from "react-icons/bi";
 import { BsListUl } from "react-icons/bs";
 import MenuList from "./ui/MenuList";
 import { useSession } from "next-auth/react";
 import { UserProfile } from "@/types/user";
 import { handleWatchlist } from "@/lib/utlities/tmdb-utils";
+import { toastOptions } from "@/lib/utlities/toast";
+import toast from "react-hot-toast";
 
 interface MediaCardMenuProps {
   type: "movie" | "tv";
@@ -32,7 +34,16 @@ const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
         </li>
         <li>
           <button
-            onClick={() => handleWatchlist(type, id, user.session_id || null)}
+            onClick={() => {
+              if (!user) {
+                toast("Please Login First!", {
+                  ...toastOptions,
+                  icon: <BiInfoCircle size={20} className="text-brand"/>,
+                });
+                return;
+              }
+              handleWatchlist(type, id, user.session_id || null);
+            }}
             className="menu-link"
           >
             <BiTagAlt size={15} className="hidden sm:inline" /> Watchlist

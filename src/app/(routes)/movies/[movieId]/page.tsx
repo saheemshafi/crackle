@@ -25,7 +25,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
   );
   const movieDetails: MovieDetails = await response.json();
   const accountStateResponse = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user.session_id}`,
+    `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
     { ...options, next: { revalidate: 0 }, cache: "no-store" }
   );
   const accountState: MediaAccountState = await accountStateResponse.json();
@@ -33,11 +33,11 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
     <>
       <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">
         <div
-          className="w-full sm:min-w-[250px] sm:w-auto rounded-lg shrink"
+          className="w-full shrink rounded-lg sm:w-auto sm:min-w-[250px]"
           style={{
             background: `linear-gradient(to bottom left,#0e0f10f7,#121416),url(https://image.tmdb.org/t/p/w780${movieDetails.backdrop_path})`,
-            backgroundSize:"cover",
-            backgroundRepeat:"no-repeat"
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
           }}
         >
           <Image
@@ -45,7 +45,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             alt={movieDetails.title}
             width={342}
             height={600}
-            className="aspect-[2/3] w-full sm:max-w-[250px] rounded-lg object-cover shadow-md"
+            className="aspect-[2/3] w-full rounded-lg object-cover shadow-md sm:max-w-[250px]"
           />
         </div>
         <div className="flex-1">
@@ -60,7 +60,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             <p className="mb-2 font-work-sans text-sm italic text-gray-light">
               {movieDetails.tagline}
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap gap-y-2 items-start sm:items-center text-sm">
+            <div className="flex flex-col flex-wrap items-start gap-y-2 text-sm sm:flex-row sm:items-center">
               <span className="rounded border border-gray-md px-1 font-semibold uppercase text-gray-md">
                 {movieDetails.original_language}
               </span>
@@ -79,6 +79,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
                 {movieDetails.runtime % 60}m
               </span>
             </div>
+
             <MediaPageActions
               accountState={accountState}
               type={"movie"}
@@ -100,7 +101,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
               <h2 className="mb-2 font-work-sans text-lg font-medium">
                 Production
               </h2>
-              <div className="grid sm:grid-cols-2 gap-2 lg:grid-cols-3 md:gap-3">
+              <div className="grid gap-2 sm:grid-cols-2 md:gap-3 lg:grid-cols-3">
                 {movieDetails.production_companies.map((company) => (
                   <div
                     key={company.id}
