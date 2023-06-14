@@ -22,7 +22,7 @@ const CastPage = async ({ params }: CastPageProps) => {
       <Container>
         <div>
           <Link
-            href={`/movies/${params.movieId}`}
+            href={`/movies/${params.movieId}/overview`}
             className="flex w-fit items-center gap-2 rounded border border-gray-dark bg-gradient-to-r from-gray-dark to-dark px-3 py-1 font-medium transition-colors hover:border-gray-md/30 focus-visible:border-gray-md/30"
           >
             <BiArrowBack /> {movieDetails.original_title}

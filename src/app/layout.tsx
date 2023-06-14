@@ -28,7 +28,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="en">
-      <body className="scroll-design flex items-start bg-dark font-inter relative z-[0]">
+      <body className="scroll-design flex items-start bg-dark font-inter isolate">
         <AuthSessionProvider session={session}>
           <GlobalProvider>
             <Sidebar />
