@@ -1,6 +1,6 @@
 import { MediaType } from "@/types/media-request";
 import endpoints from "@/lib/constants/endpoints.json";
-import toast from "react-hot-toast";
+import toast, { CheckmarkIcon } from "react-hot-toast";
 import { clientOptions } from "../api/options";
 import { toastOptions } from "./toast";
 import { RxInfoCircled } from "react-icons/rx";
@@ -8,6 +8,7 @@ import { VscError } from "react-icons/vsc";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
+import { BiCheck, BiErrorAlt, BiErrorCircle } from "react-icons/bi";
 
 export const handleWatchlist = async (
   type: "movie" | "tv",
@@ -54,21 +55,21 @@ export const handleWatchlist = async (
     );
     if (response.ok) {
       if (data.watchlist) {
-        toast("Added To Watchlist!", {
+        toast.success("Added To Watchlist!", {
           ...toastOptions,
-          icon: <RxInfoCircled size={20} />,
+          icon: <BiCheck size={20} className="text-brand" />,
         });
         return;
       }
       toast("Removed From Watchlist!", {
         ...toastOptions,
-        icon: <RxInfoCircled size={20} />,
+        icon: <RxInfoCircled size={20} className="text-brand" />,
       });
     }
   } catch (error) {
-    toast("Oops! Server Error", {
+    toast.error("Oops! Something Went Wrong", {
       ...toastOptions,
-      icon: <VscError size={20} />,
+      icon: <BiErrorAlt className="text-brand" size={20} />,
     });
   }
 };

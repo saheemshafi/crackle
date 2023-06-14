@@ -1,12 +1,14 @@
 "use client";
 
 import { handleWatchlist } from "@/lib/utlities/tmdb-utils";
+import { toastOptions } from "@/lib/utlities/toast";
 import { MediaAccountState } from "@/types/api-response";
 import { UserProfile } from "@/types/user";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { FC } from "react";
-import { BiTagAlt } from "react-icons/bi";
+import { toast } from "react-hot-toast";
+import { BiInfoCircle, BiTagAlt } from "react-icons/bi";
 import { BsListUl } from "react-icons/bs";
 import { twMerge } from "tailwind-merge";
 
@@ -23,7 +25,6 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
   const session = useSession();
   const user = session.data?.user as UserProfile;
   const router = useRouter();
-  const pathname = usePathname();
   return (
     <div className="mt-3 flex items-center gap-2">
       {/* Pending feature */}
@@ -39,6 +40,13 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
           !accountState.watchlist ? "Add To Watchlist" : "Remove From Watchlist"
         }
         onClick={async (e) => {
+          if (!user) {
+            toast("Please Login First!", {
+              ...toastOptions,
+              icon: <BiInfoCircle size={20} className="text-brand"/>,
+            });
+            return;
+          }
           await handleWatchlist(type, mediaId, user.session_id || null);
           router.refresh();
         }}
