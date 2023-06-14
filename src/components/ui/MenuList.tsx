@@ -1,5 +1,11 @@
 "use client";
-import React, { FC, useState, AllHTMLAttributes, useEffect, useRef } from "react";
+import React, {
+  FC,
+  useState,
+  AllHTMLAttributes,
+  useEffect,
+  useRef,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
 interface MenuListProps {
@@ -44,16 +50,16 @@ const MenuList: FC<MenuListProps> = ({
       if (dropdownMenu.current?.contains(e.target)) return;
       handleClose();
     }
-    document.addEventListener('mousedown', close);
+    document.addEventListener("mousedown", close);
     return () => {
-      document.removeEventListener('mousedown', close);
-    }
-  }, [])
+      document.removeEventListener("mousedown", close);
+    };
+  }, []);
 
   return (
     <div
       data-menu-container
-      className="isolate relative group"
+      className="group relative isolate"
       ref={dropdownMenu}
     >
       <button
@@ -72,7 +78,7 @@ const MenuList: FC<MenuListProps> = ({
       <div
         onClick={() => toggle()}
         className={twMerge(
-          "menu group-first:left-0 sm:group-first:left-auto absolute right-0 top-[calc(100%+0.5rem)] w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all",
+          "menu absolute right-0 top-[calc(100%+0.5rem)] w-40 transform overflow-hidden rounded-md border border-gray-md/20 bg-gray-dark shadow-md transition-all group-first:left-0 sm:group-first:left-auto",
           classes,
           isOpen ? "block opacity-0" : "hidden",
           isOpening ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
