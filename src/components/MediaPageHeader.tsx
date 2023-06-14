@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { toastOptions } from "@/lib/utlities/toast";
 import { BiCopy } from "react-icons/bi";
+import { twMerge } from "tailwind-merge";
 
 interface MediaPageHeaderProps {
   media: MovieDetails;
@@ -23,10 +24,14 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
   }, [pathname]);
 
   return (
-    <nav className="flex justify-center gap-4 border-y border-y-gray-dark bg-dark px-4 py-2">
+    <nav className="relative z-10 flex justify-center gap-4 border-y border-y-gray-dark bg-dark px-4 py-2">
       <MenuList
         adjustFirstOnSmall
-        buttonClasses="relative font-work-sans flex items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
+        buttonClasses={twMerge(
+          `relative font-work-sans flex relative items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50`,
+          pathname.includes("overview") &&
+            "after:absolute after:rounded-t-full after:w-8 after:h-1 after:bg-brand after:left-1/2 after:-translate-x-1/2 after:-bottom-[8px]"
+        )}
         buttonHTML={
           <>
             <span>Overview</span> <RxCaretDown size={18} />
@@ -35,10 +40,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
       >
         <ul>
           <li>
-            <Link
-              className="menu-link"
-              href={pathname.substring(0, pathname.lastIndexOf("/"))}
-            >
+            <Link className="menu-link" href={`/movies/${media.id}/overview`}>
               Main
             </Link>
           </li>
@@ -48,7 +50,10 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`/movies/${media.id}/cast-crew`}>
+            <Link
+              className="menu-link"
+              href={`/movies/${media.id}/overview/cast-crew`}
+            >
               Cast & Crew
             </Link>
           </li>
@@ -67,7 +72,11 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
 
       <MenuList
         adjustFirstOnSmall
-        buttonClasses="relative font-work-sans flex items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50"
+        buttonClasses={twMerge(
+          "relative font-work-sans flex items-center gap-0.5 rounded sm:px-3 sm:py-1 p-1 text-white outline-none hover:bg-gray-dark focus-visible:bg-gray-dark focus-visible:ring-2 focus-visible:ring-brand/50",
+          pathname.includes("media") &&
+            "after:absolute after:rounded-t-full after:w-8 after:h-1 after:bg-brand after:left-1/2 after:-translate-x-1/2 after:-bottom-[8px]"
+        )}
         buttonHTML={
           <>
             <span>Media</span> <RxCaretDown size={18} />
@@ -76,25 +85,68 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
       >
         <ul>
           <li>
-            <Link className="menu-link" href={"/user/profile"}>
+            <Link
+              className="menu-link"
+              href={`movies/${media.id}/media/backdrops`}
+            >
               Backdrops
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={"/user/watch-list"}>
+            <Link className="menu-link" href={`movies/${media.id}/media/logos`}>
               Logos
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`/user/ratings`}>
+            <Link
+              className="menu-link"
+              href={`movies/${media.id}/media/posters`}
+            >
               Posters
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`/user/ratings`}>
+            <Link
+              className="menu-link"
+              href={`movies/${media.id}/media/videos`}
+            >
               Videos
             </Link>
           </li>
+          {/* <li>
+            <Link
+              className="menu-link"
+              href={`movies/${media.id}/media/trailers`}
+            >
+              Trailers
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="menu-link"
+              href={`movies/${media.id}/media/teasers`}
+            >
+              Teasers
+            </Link>
+          </li>
+          <li>
+            <Link className="menu-link" href={`movies/${media.id}/media/clips`}>
+              Clips
+            </Link>
+          </li>
+          <li>
+            <Link className="menu-link" href={`movies/${media.id}/media/bts`}>
+              Behind The Scenes
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="menu-link"
+              href={`movies/${media.id}/media/featurettes`}
+            >
+              Featurettes
+            </Link>
+          </li> */}
         </ul>
       </MenuList>
       <MenuList
