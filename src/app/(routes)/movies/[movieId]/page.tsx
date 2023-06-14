@@ -33,7 +33,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
     <>
       <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">
         <div
-          className="w-full sm:w-auto rounded-lg shrink"
+          className="w-full sm:min-w-[250px] sm:w-auto rounded-lg shrink"
           style={{
             background: `linear-gradient(to bottom left,#0e0f10f7,#121416),url(https://image.tmdb.org/t/p/w780${movieDetails.backdrop_path})`,
             backgroundSize:"cover",
@@ -41,9 +41,9 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
           }}
         >
           <Image
-            src={`https://image.tmdb.org/t/p/original${movieDetails.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
             alt={movieDetails.title}
-            width={600}
+            width={342}
             height={600}
             className="aspect-[2/3] w-full sm:max-w-[250px] rounded-lg object-cover shadow-md"
           />
