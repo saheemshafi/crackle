@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authentication/auth-options";
 import { UserProfile } from "@/types/user";
 import { MediaAccountState } from "@/types/api-response";
+import Container from "@/components/Container";
 
 export const revalidate = 0;
 
@@ -30,7 +31,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
   const accountState: MediaAccountState = await accountStateResponse.json();
   return (
     <>
-      <section className="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark p-5 text-white sm:flex-row">
+      <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">
         <div
           className="w-full sm:w-auto rounded-lg shrink"
           style={{
@@ -131,7 +132,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             </div>
           </div>
         </div>
-      </section>
+      </Container>
     </>
   );
 };

@@ -5,6 +5,7 @@ import { MovieDetails } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
 import { BiArrowBack } from "react-icons/bi";
+import Container from "@/components/Container";
 
 interface CastPageProps {
   params: { movieId: number };
@@ -18,7 +19,7 @@ const CastPage = async ({ params }: CastPageProps) => {
   const movieDetails: MovieDetails = await response.json();
   return (
     <>
-      <div className="p-4 text-white md:p-5">
+      <Container>
         <div>
           <Link
             href={`/movies/${params.movieId}`}
@@ -34,7 +35,7 @@ const CastPage = async ({ params }: CastPageProps) => {
             <Cast mediaId={params.movieId} type={"movie"} />
           </Suspense>
         </div>
-      </div>
+      </Container>
     </>
   );
 };

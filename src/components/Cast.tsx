@@ -19,7 +19,7 @@ const Cast = async ({ mediaId, type }: CastProps) => {
 
   return (
     <>
-      <section className="mb-6">
+      <section className="mb-6 scroll-mt-12" id="cast">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {castResponse.cast.map((cast) => (
             <div
@@ -53,7 +53,7 @@ const Cast = async ({ mediaId, type }: CastProps) => {
           ))}
         </div>
       </section>
-      <section>
+      <section id="crew" className="scroll-mt-10">
         <h2 className="mb-2 font-work-sans text-lg font-medium">Crew</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {castResponse.crew.map((cast) => (
