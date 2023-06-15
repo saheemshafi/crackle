@@ -1,14 +1,13 @@
 import { MediaType } from "@/types/media-request";
 import endpoints from "@/lib/constants/endpoints.json";
-import toast, { CheckmarkIcon } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { clientOptions } from "../api/options";
 import { toastOptions } from "./toast";
 import { RxInfoCircled } from "react-icons/rx";
-import { VscError } from "react-icons/vsc";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
-import { BiCheck, BiErrorAlt, BiErrorCircle } from "react-icons/bi";
+import { BiCheck, BiErrorAlt } from "react-icons/bi";
 
 export const handleWatchlist = async (
   type: "movie" | "tv",
