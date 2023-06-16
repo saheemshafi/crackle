@@ -16,7 +16,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
   const { sidebarOpen, setSidebarOpen } = useContext(GlobalContext);
   return (
     <aside
-      className={`scroll-design min-w-48 fixed left-0 top-[56px] z-10 h-[calc(100vh-56px)] w-48 shrink-0 grow-0 basis-48 transform overflow-y-auto bg-gray-dark transition-transform duration-200 ease-in-out md:sticky md:left-auto md:top-0 md:h-screen md:min-h-screen md:w-auto md:translate-x-0  md:transform-none ${
+      className={`scroll-design min-w-48 fixed left-0 top-[56px] z-[21] h-[calc(100vh-56px)] w-48 shrink-0 grow-0 basis-48 transform overflow-y-auto bg-gray-dark transition-transform duration-200 ease-in-out md:sticky md:left-auto md:top-0 md:h-screen md:min-h-screen md:w-auto md:translate-x-0  md:transform-none ${
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >

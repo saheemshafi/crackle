@@ -44,6 +44,8 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`}
             alt={movieDetails.title}
             width={342}
+            blurDataURL="/images/image-placeholder.jpg"
+            placeholder="blur"
             height={600}
             className="aspect-[2/3] w-full rounded-lg object-cover shadow-md sm:max-w-[250px]"
           />
