@@ -26,7 +26,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
   const movieDetails: MovieDetails = await response.json();
   const accountStateResponse = await fetch(
     `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
-    { ...options, next: { revalidate: 0 }, cache: "no-store" }
+    { ...options, next: { revalidate: 0 } }
   );
   const accountState: MediaAccountState = await accountStateResponse.json();
   return (

@@ -4,8 +4,8 @@ import { handleWatchlist } from "@/lib/utlities/tmdb-utils";
 import { toastOptions } from "@/lib/utlities/toast";
 import { MediaAccountState } from "@/types/api-response";
 import { UserProfile } from "@/types/user";
-import { signIn, useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { toast } from "react-hot-toast";
 import { BiInfoCircle, BiTagAlt } from "react-icons/bi";
@@ -43,7 +43,7 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
           if (!user) {
             toast("Please Login First!", {
               ...toastOptions,
-              icon: <BiInfoCircle size={20} className="text-brand"/>,
+              icon: <BiInfoCircle size={20} className="text-brand" />,
             });
             return;
           }

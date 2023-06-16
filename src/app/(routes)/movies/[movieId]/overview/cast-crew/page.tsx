@@ -6,7 +6,20 @@ import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
 import { BiArrowBack } from "react-icons/bi";
 import Container from "@/components/Container";
+import { Metadata } from "next";
 
+export const generateMetadata = async ({
+  params,
+}: CastPageProps): Promise<Metadata> => {
+  const response = await fetch(
+    `${endpoints.movies.movieDetails}/${params.movieId}`,
+    options
+  );
+  const movieDetails: MovieDetails = await response.json();
+  return {
+    title: `Cast And Crew of ${movieDetails.title}`,
+  };
+};
 interface CastPageProps {
   params: { movieId: number };
 }
@@ -28,8 +41,10 @@ const CastPage = async ({ params }: CastPageProps) => {
             <BiArrowBack /> {movieDetails.original_title}
           </Link>
         </div>
-        <div className="mt-3 rounded-md bg-dark md:border md:border-gray-dark md:p-3">
-          <h2 className="mb-2 font-work-sans text-lg font-medium">Cast</h2>
+        <div className="mt-3 rounded-md">
+          <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
+            Cast & Crew
+          </h1>
           <Suspense fallback="Loading Cast...">
             {/* @ts-ignore-error */}
             <Cast mediaId={params.movieId} type={"movie"} />

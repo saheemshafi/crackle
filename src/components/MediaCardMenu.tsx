@@ -10,6 +10,7 @@ import { UserProfile } from "@/types/user";
 import { handleWatchlist } from "@/lib/utlities/tmdb-utils";
 import { toastOptions } from "@/lib/utlities/toast";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 interface MediaCardMenuProps {
   type: "movie" | "tv";
@@ -19,6 +20,7 @@ interface MediaCardMenuProps {
 const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
   const session = useSession();
   const user = session.data?.user as UserProfile;
+  const router = useRouter();
 
   return (
     <MenuList
@@ -34,15 +36,16 @@ const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
         </li>
         <li>
           <button
-            onClick={() => {
+            onClick={async () => {
               if (!user) {
                 toast("Please Login First!", {
                   ...toastOptions,
-                  icon: <BiInfoCircle size={20} className="text-brand"/>,
+                  icon: <BiInfoCircle size={20} className="text-brand" />,
                 });
                 return;
               }
-              handleWatchlist(type, id, user.session_id || null);
+              await handleWatchlist(type, id, user.session_id || null);
+              router.refresh();
             }}
             className="menu-link"
           >

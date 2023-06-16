@@ -45,7 +45,10 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={"/user/watch-list"}>
+            <Link
+              className="menu-link"
+              href={`/movies/${media.id}/overview/alternate-titles`}
+            >
               Alternate Titles
             </Link>
           </li>
@@ -58,12 +61,18 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`/user/ratings`}>
+            <Link
+              className="menu-link"
+              href={`/movies/${media.id}/overview/release-dates`}
+            >
               Release Dates
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`/user/ratings`}>
+            <Link
+              className="menu-link"
+              href={`/movies/${media.id}/overview/translations`}
+            >
               Translations
             </Link>
           </li>
