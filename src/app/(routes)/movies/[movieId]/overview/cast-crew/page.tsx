@@ -41,7 +41,7 @@ const CastPage = async ({ params }: CastPageProps) => {
             <BiArrowBack /> {movieDetails.original_title}
           </Link>
         </div>
-        <div className="mt-3 rounded-md">
+        <div className="mt-10 rounded-md">
           <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
             Cast & Crew
           </h1>

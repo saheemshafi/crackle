@@ -24,7 +24,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
   }, [pathname]);
 
   return (
-    <nav className="relative z-10 flex justify-center gap-4 border-y border-y-gray-dark bg-dark px-4 py-2">
+    <nav className="relative z-[19] flex justify-center gap-4 border-y border-y-gray-dark bg-dark px-4 py-2">
       <MenuList
         adjustFirstOnSmall
         buttonClasses={twMerge(
