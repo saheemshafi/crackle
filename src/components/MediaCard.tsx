@@ -5,6 +5,7 @@ import { Tv } from "@/types/tv";
 import { isMovie } from "@/lib/helpers/type-narrowing";
 import Link from "next/link";
 import MediaCardMenu from "./MediaCardMenu";
+import { formatter } from "@/lib/helpers/date";
 
 interface MediaCardProps {
   sliderItem?: boolean;
@@ -12,7 +13,6 @@ interface MediaCardProps {
 }
 export const revalidate = 86400;
 
-const { format } = Intl.DateTimeFormat("en-us", { dateStyle: "medium" });
 const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
   return (
     <div
@@ -58,8 +58,10 @@ const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
         </Link>
         <small className="-mt-1 text-sm text-gray-light">
           {isMovie(media)
-            ? media.release_date && format(new Date(media.release_date))
-            : media.first_air_date && format(new Date(media.first_air_date))}
+            ? media.release_date &&
+              formatter.format(new Date(media.release_date))
+            : media.first_air_date &&
+              formatter.format(new Date(media.first_air_date))}
         </small>
       </div>
     </div>
