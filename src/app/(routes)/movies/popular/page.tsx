@@ -6,19 +6,17 @@ import { Movie } from "@/types/movie";
 import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
 import { SearchParams } from "@/lib/helpers/query-url";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface PopularMoviesProps {
   searchParams: { page: SearchParams["page"] };
 }
 
 const PopularMoviesPage = async ({ searchParams }: PopularMoviesProps) => {
-  console.log(searchParams)
-  const moviesPromise: Promise<ApiResponse<Movie>> = (
-    await fetch(
-      `${endpoints.movies.popular}?page=${searchParams["page"] || "1"}`,
-      options
-    )
-  ).json();
+  const moviesPromise = fetcher<ApiResponse<Movie>>(
+    endpoints.movies.popular,
+    `?page=${searchParams["page"] || "1"}`
+  );
   const movies = await moviesPromise;
 
   return (

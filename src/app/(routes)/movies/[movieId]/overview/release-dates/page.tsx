@@ -2,9 +2,7 @@ import InfoCard from "@/components/InfoCard";
 import { options } from "@/lib/api/options";
 import { CountryResponse, ReleaseDateResponse } from "@/types/api-response";
 import { MovieDetails } from "@/types/movie";
-import Link from "next/link";
 import endpoints from "@/lib/constants/endpoints.json";
-import { BiArrowBack } from "react-icons/bi";
 import Container from "@/components/Container";
 import { formatter } from "@/lib/helpers/date";
 import { Metadata } from "next";
@@ -12,6 +10,10 @@ import Image from "next/image";
 import { getRegion, getReleaseType } from "@/lib/helpers/format-helpers";
 import AsideLinks from "@/components/AsideLinks";
 import AsideLinksTrigger from "@/components/ui/AsideLinksTrigger";
+import Table from "@/components/Table";
+import TableItem from "@/components/TableItem";
+import GoBack from "@/components/GoBack";
+import { fetcher } from "@/lib/api/fetcher";
 
 export const generateMetadata = async ({
   params,
@@ -30,30 +32,20 @@ interface ReleasesPageProps {
 }
 
 const ReleasesPage = async ({ params }: ReleasesPageProps) => {
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}`,
-    options
+  
+  const movieDetails = await fetcher<MovieDetails>(
+    `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  const releaseDateResponse = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}/release_dates`,
-    options
+  const regions = await fetcher<CountryResponse>(endpoints.providers.regions);
+  const releaseDates = await fetcher<ReleaseDateResponse>(
+    `${endpoints.movies.movieDetails}/${params.movieId}/release_dates`
   );
-  const regionResponse = await fetch(`${endpoints.providers.regions}`, options);
-  const regions: CountryResponse = await regionResponse.json();
-
-  const movieDetails: MovieDetails = await response.json();
-  const releaseDates: ReleaseDateResponse = await releaseDateResponse.json();
 
   return (
     <Container>
-      <div>
-        <Link
-          href={`/movies/${params.movieId}/overview`}
-          className="flex w-fit items-center gap-2 rounded border border-gray-dark bg-gradient-to-r from-gray-dark to-dark px-3 py-1 font-medium transition-colors hover:border-gray-md/30 focus-visible:border-gray-md/30"
-        >
-          <BiArrowBack /> {movieDetails.original_title}
-        </Link>
-      </div>
+      <GoBack link={`/movies/${params.movieId}/overview`}>
+        {movieDetails.title}
+      </GoBack>
       <div className="mt-10 flex gap-4">
         <AsideLinks
           regions={regions.results}
@@ -85,35 +77,39 @@ const ReleasesPage = async ({ params }: ReleasesPageProps) => {
                       className="inline aspect-video h-5 w-5 object-contain"
                     />{" "}
                     <span>
-                      {getRegion(regions.results, releaseDate.iso_3166_1)}
+                      {(
+                        getRegion(regions.results, releaseDate.iso_3166_1) || ""
+                      )?.length > 0
+                        ? getRegion(regions.results, releaseDate.iso_3166_1)
+                        : releaseDate.iso_3166_1}
                     </span>
                   </>
                 }
               >
-                <table className="w-full rounded-md text-sm sm:text-base">
-                  <thead className="border-b border-gray-md/30 bg-dark/20 text-gray-light">
+                <Table
+                  head={
                     <tr>
-                      <td className="p-1">Date</td>
-                      <td className="p-1">Certification</td>
-                      <td className="p-1">Type</td>
+                      <TableItem>Date</TableItem>
+                      <TableItem>Certification</TableItem>
+                      <TableItem>Type</TableItem>
                     </tr>
-                  </thead>
-                  <tbody className="font-work-sans">
+                  }
+                  rows={
                     <tr>
-                      <td className="p-1">
+                      <TableItem>
                         {formatter.format(
                           new Date(releaseDate.release_dates[0].release_date)
                         )}
-                      </td>
-                      <td className="p-1">
+                      </TableItem>
+                      <TableItem>
                         {releaseDate.release_dates[0].certification}
-                      </td>
-                      <td className="p-1">
+                      </TableItem>
+                      <TableItem>
                         {getReleaseType(releaseDate.release_dates[0].type)}
-                      </td>
+                      </TableItem>
                     </tr>
-                  </tbody>
-                </table>
+                  }
+                ></Table>
               </InfoCard>
             ))}
           </div>

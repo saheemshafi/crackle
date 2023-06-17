@@ -15,6 +15,7 @@ import Skeleton from "./ui/Skeleton";
 import { GlobalContext } from "@/providers/GlobalProvider";
 import { twMerge } from "tailwind-merge";
 import { BiX } from "react-icons/bi";
+import { fetcher } from "@/lib/api/fetcher";
 
 type SortParams =
   | "popularity.asc"
@@ -44,10 +45,11 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   const { mobileFiltersOpen, setMobileFiltersOpen } = useContext(GlobalContext);
 
   useEffect(() => {
-    const countriesPromise: Promise<CountryResponse> = fetch(
+    const countriesPromise = fetcher<CountryResponse>(
       endpoints.providers.regions,
+      "",
       clientOptions
-    ).then((res: Response) => res.json());
+    );
 
     Promise.all([countriesPromise]).then(([countries]) => {
       setCountries(countries.results);
@@ -104,7 +106,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
   return (
     <aside
       className={twMerge(
-        "scroll-design fixed inset-0 top-[56px] z-[21] sm:z-0 shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-none sm:bg-transparent sm:p-0",
+        "scroll-design fixed inset-0 top-[56px] z-[21] shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/95 p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto sm:z-0  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-none sm:bg-transparent sm:p-0",
         mobileFiltersOpen ? "animate-in block shadow-lg" : "hidden"
       )}
     >

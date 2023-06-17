@@ -3,25 +3,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { RxMagnifyingGlass } from "react-icons/rx";
 import MenuList from "./ui/MenuList";
-import { UserProfile } from "@/types/user";
 import { RxHamburgerMenu } from "react-icons/rx";
 import SignInBtn from "./ui/SignInBtn";
 import SignOutBtn from "./ui/SignOutBtn";
 import Button from "./ui/Button";
 import { useContext } from "react";
 import { GlobalContext } from "@/providers/GlobalProvider";
-import { useSession } from "next-auth/react";
 import { TbListDetails } from "react-icons/tb";
 import { IoMdStopwatch } from "react-icons/io";
 import { AiOutlineStar } from "react-icons/ai";
 import Skeleton from "./ui/Skeleton";
+import { useAuth } from "@/lib/hooks/useUser";
 
 interface HeaderProps {}
 
 const Header = ({}: HeaderProps) => {
   const { sidebarOpen, setSidebarOpen } = useContext(GlobalContext);
-  const { data, status } = useSession();
-  const user = data?.user as UserProfile;
+  const { status, user } = useAuth();
   return (
     <header className="sticky top-0 z-[20] flex h-14 w-full items-center justify-between bg-dark px-4 font-work-sans font-normal text-white shadow-sm md:px-5">
       <div>

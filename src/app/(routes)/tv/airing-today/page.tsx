@@ -6,17 +6,16 @@ import { Tv } from "@/types/tv";
 import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
 import { SearchParams } from "@/lib/helpers/query-url";
+import { fetcher } from "@/lib/api/fetcher";
 interface AiringTodayPageProps {
   searchParams: { page: SearchParams["page"] };
 }
 
 const AiringTodayPage = async ({ searchParams }: AiringTodayPageProps) => {
-  const seriesPromise: Promise<ApiResponse<Tv>> = (
-    await fetch(
-      `${endpoints.tv.airingToday}?page=${searchParams["page"] || "1"}`,
-      options
-    )
-  ).json();
+  const seriesPromise = fetcher<ApiResponse<Tv>>(
+    endpoints.tv.airingToday,
+    `?page=${searchParams["page"] || "1"}`
+  );
   const series = await seriesPromise;
 
   return (

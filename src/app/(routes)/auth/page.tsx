@@ -1,9 +1,8 @@
 import Container from "@/components/Container";
 import LoginForm from "@/components/LoginForm";
-import { authOptions } from "@/lib/authentication/auth-options";
+import { getAuthUser } from "@/lib/api/getUser";
 import { UserProfile } from "@/types/user";
 import { Metadata } from "next";
-import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 interface AuthPageProps {
@@ -15,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 const AuthPage = async ({ searchParams }: AuthPageProps) => {
-  const user = (await getServerSession(authOptions))?.user as UserProfile;
+  const user = (await getAuthUser())?.user as UserProfile;
   if (user) {
     redirect("/");
   }

@@ -4,11 +4,11 @@ import { options } from "@/lib/api/options";
 import { MovieDetails } from "@/types/movie";
 import { BsDot } from "react-icons/bs";
 import MediaPageActions from "@/components/MediaPageActions";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authentication/auth-options";
 import { UserProfile } from "@/types/user";
 import { MediaAccountState } from "@/types/api-response";
 import Container from "@/components/Container";
+import { getAuthUser } from "@/lib/api/getUser";
+import { fetcher } from "@/lib/api/fetcher";
 
 export const revalidate = 0;
 
@@ -17,18 +17,17 @@ interface MovieDetailPageProps {
 }
 
 const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthUser();
   const user = session?.user as UserProfile;
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}`,
-    options
+  const movieDetails = await fetcher<MovieDetails>(
+    `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  const movieDetails: MovieDetails = await response.json();
-  const accountStateResponse = await fetch(
+  const accountState = await fetcher<MediaAccountState>(
     `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
-    { ...options, next: { revalidate: 0 } }
+    "",
+    { next: { revalidate: 0 } }
   );
-  const accountState: MediaAccountState = await accountStateResponse.json();
+
   return (
     <>
       <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">

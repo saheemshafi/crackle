@@ -1,28 +1,25 @@
 import MediaCard from "@/components/MediaCard";
-import { options } from "@/lib/api/options";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
 import Container from "@/components/Container";
 import Filterer from "@/components/Filterer";
-import { SearchParams, generateQueryUrl } from "@/lib/helpers/query-url";
+import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
 import FilterTrigger from "@/components/ui/FilterTrigger";
 import Paginate from "@/components/Paginate";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface MoviesPageProps {
   searchParams: SearchParams;
 }
 
 const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
-
-  const moviesPromise = (
-    await fetch(
-      generateQueryUrl(endpoints.discover.movies, searchParams),
-      options
-    )
-  ).json();
+  const moviesPromise = fetcher<ApiResponse<Movie>>(
+    endpoints.discover.movies,
+    generateQueryString(searchParams)
+  );
   const movies: ApiResponse<Movie> = await moviesPromise;
-  
+
   return (
     <Container>
       <div className="flex gap-4">

@@ -44,7 +44,7 @@ const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
           handler={() => setMobileAsideLinksOpen(false)}
         />
       </div>
-      <div>
+      <div onClick={(e) => setMobileAsideLinksOpen(false)}>
         <ul className="scroll-design p-2 sm:max-h-[600px] sm:overflow-y-auto">
           {links.map((item) => (
             <li key={item}>

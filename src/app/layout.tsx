@@ -6,9 +6,8 @@ import Footer from "@/components/Footer";
 import AuthSessionProvider from "@/providers/AuthSessionProvider";
 import { Metadata } from "next";
 import { GlobalProvider } from "@/providers/GlobalProvider";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authentication/auth-options";
 import { Toaster } from "react-hot-toast";
+import { getAuthUser } from "@/lib/api/getUser";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -25,10 +24,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
+  const session = await getAuthUser();
   return (
     <html lang="en">
-      <body className="scroll-design flex items-start bg-dark font-inter isolate">
+      <body className="scroll-design isolate flex items-start bg-dark font-inter">
         <AuthSessionProvider session={session}>
           <GlobalProvider>
             <Sidebar />
@@ -39,7 +38,7 @@ export default async function RootLayout({
               </main>
               <Footer />
             </div>
-            <Toaster/>
+            <Toaster />
           </GlobalProvider>
         </AuthSessionProvider>
       </body>
