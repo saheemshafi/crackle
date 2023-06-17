@@ -23,7 +23,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
     `${endpoints.movies.movieDetails}/${params.movieId}`
   );
   const accountState = await fetcher<MediaAccountState>(
-    `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user.session_id}`,
+    `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
     "",
     { next: { revalidate: 0 } }
   );
