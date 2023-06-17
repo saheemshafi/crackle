@@ -8,6 +8,7 @@ import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
 import { BiCheck, BiErrorAlt } from "react-icons/bi";
+import { fetcher } from "../api/fetcher";
 
 export const handleWatchlist = async (
   type: "movie" | "tv",
@@ -22,13 +23,12 @@ export const handleWatchlist = async (
     return;
   }
   let existsInWatchlist = false;
-  const watchlistResponse = await fetch(
-    `${endpoints.actions.watchlist}/${
-      type == "movie" ? "movies" : "tv"
-    }?session_id=${session_id}`,
-    clientOptions
+  const watchlistResponse = fetcher<ApiResponse<Movie> | ApiResponse<Tv>>(
+    `${endpoints.actions.watchlist}/${type == "movie" ? "movies" : "tv"}`,
+    `?session_id=${session_id}`,
+    { ...clientOptions, next: { revalidate: 0 } }
   );
-  const watchlist: ApiResponse<Movie | Tv> = await watchlistResponse.json();
+  const watchlist = await watchlistResponse;
 
   if (watchlist.results.some((item) => item.id == id)) {
     existsInWatchlist = true;
@@ -44,15 +44,20 @@ export const handleWatchlist = async (
   }
 
   try {
-    const response = await fetch(
-      `${endpoints.actions.watchlist}?session_id=${session_id}`,
+    const response: {
+      success: boolean;
+      status_code: number;
+      status_message: string;
+    } = await fetcher(
+      endpoints.actions.watchlist,
+      `?session_id=${session_id}`,
       {
         ...clientOptions,
         method: "POST",
         body: JSON.stringify(data),
       }
     );
-    if (response.ok) {
+    if (response.success) {
       if (data.watchlist) {
         toast.success("Added To Watchlist!", {
           ...toastOptions,

@@ -6,20 +6,18 @@ import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
 import Paginate from "@/components/Paginate";
 import { SearchParams } from "@/lib/helpers/query-url";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface TopRatedMoviesProps {
   searchParams: { page: SearchParams["page"] };
 }
 
 const TopRatedMoviesPage = async ({ searchParams }: TopRatedMoviesProps) => {
-  const moviesPromise: Promise<ApiResponse<Movie>> = (
-    await fetch(
-      `${endpoints.movies.topRated}?page=${searchParams["page"] || "1"}`,
-      options
-    )
-  ).json();
+  const moviesPromise = fetcher<ApiResponse<Movie>>(
+    endpoints.movies.topRated,
+    `?page=${searchParams["page"] || "1"}`
+  );
   const movies = await moviesPromise;
-
 
   return (
     <Container>

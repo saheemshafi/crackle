@@ -7,39 +7,25 @@ import { ApiResponse, GenreResponse } from "@/types/api-response";
 import { sortByGenre } from "@/lib/utlities/sorting";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
-  const genrePromise: Promise<GenreResponse> = fetch(endpoints.genres.movie, {
-    ...options,
-    next: { revalidate: 2592000 },
-  }).then((res: Response) => res.json());
-  const tvGenrePromise: Promise<GenreResponse> = fetch(endpoints.genres.tv, {
-    ...options,
-    next: { revalidate: 2592000 },
-  }).then((res: Response) => res.json());
-  const moviesPromise: Promise<ApiResponse<Movie>> = fetch(
-    endpoints.discover.movies,
-    {
-      ...options,
-      next: { revalidate: 2592000 },
-    }
-  ).then((res: Response) => res.json());
+  const moviesPromise = fetcher<ApiResponse<Movie>>(endpoints.discover.movies);
+  const seriesPromise = fetcher<ApiResponse<Tv>>(endpoints.discover.tv);
+  const moviesGenrePromise = fetcher<GenreResponse>(endpoints.genres.movie);
+  const seriesGenrePromise = fetcher<GenreResponse>(endpoints.genres.tv);
 
-  const seriesPromise: Promise<ApiResponse<Tv>> = fetch(endpoints.discover.tv, {
-    ...options,
-    next: { revalidate: 2592000 },
-  }).then((res: Response) => res.json());
-
-  const [movies, series, genres, tvGenres] = await Promise.all([
+  const [movies, series, genres, seriesGenres] = await Promise.all([
     moviesPromise,
     seriesPromise,
-    genrePromise,
-    tvGenrePromise,
+    moviesGenrePromise,
+    seriesGenrePromise,
   ]);
 
   const sortedMovies = sortByGenre(movies.results, genres);
-  const sortedSeries = sortByGenre(series.results, tvGenres);
+  const sortedSeries = sortByGenre(series.results, seriesGenres);
+
   return (
     <>
       {genres.genres.map((genre) =>
@@ -62,7 +48,7 @@ const Home = async ({}: HomeProps) => {
           </Container>
         ) : null
       )}
-      {tvGenres.genres.map((genre) =>
+      {seriesGenres.genres.map((genre) =>
         sortedSeries[genre.name]?.length > 0 ? (
           <Container key={genre.id} id={`series-${genre.name.toLowerCase()}`}>
             <Slider

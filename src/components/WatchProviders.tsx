@@ -10,12 +10,13 @@ import {
 } from "react";
 import { Country } from "@/types/country";
 import endpoints from "@/lib/constants/endpoints.json";
-import { options } from "@/lib/api/options";
+import { clientOptions, options } from "@/lib/api/options";
 import { ProviderResponse } from "@/types/api-response";
 import Image from "next/image";
 import { WatchProvider } from "@/types/watch-provider";
 import { twMerge } from "tailwind-merge";
 import Skeleton from "./ui/Skeleton";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface WatchProvidersProps {
   region: Country["iso_3166_1"];
@@ -33,21 +34,13 @@ const WatchProviders: FC<WatchProvidersProps> = ({
   const [providers, setProviders] = useState<WatchProvider[]>([]);
 
   useEffect(() => {
-    fetch(
-      `${
-        type == "movie" ? endpoints.providers.movie : endpoints.providers.tv
-      }?watch_region=${region}`,
-      {
-        ...options,
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_BEARER}`,
-        },
-      }
-    )
-      .then((providers) => providers.json())
-      .then((provider: ProviderResponse) => {
-        setProviders(provider.results);
-      });
+    fetcher<ProviderResponse>(
+      type == "movie" ? endpoints.providers.movie : endpoints.providers.tv,
+      "",
+      clientOptions
+    ).then((provider: ProviderResponse) => {
+      setProviders(provider.results);
+    });
   }, [region, type]);
 
   return (

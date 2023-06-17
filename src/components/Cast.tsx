@@ -4,6 +4,7 @@ import { CastResponse } from "@/types/api-response";
 import Slider from "./Slider";
 import Image from "next/image";
 import Link from "next/link";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface CastProps {
   mediaId: number;
@@ -11,16 +12,15 @@ interface CastProps {
 }
 
 const Cast = async ({ mediaId, type }: CastProps) => {
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${mediaId}/credits`,
-    options
+  
+  const castResponse = await fetcher<CastResponse>(
+    `${endpoints.movies.movieDetails}/${mediaId}/credits`
   );
-  const castResponse: CastResponse = await response.json();
 
   return (
     <>
       <section className="mb-6 scroll-mt-12" id="cast">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {castResponse.cast.map((cast) => (
             <div
               key={`${cast.id}-${cast.cast_id}`}
@@ -55,7 +55,7 @@ const Cast = async ({ mediaId, type }: CastProps) => {
       </section>
       <section id="crew" className="scroll-mt-10">
         <h2 className="mb-2 font-work-sans text-lg font-medium">Crew</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {castResponse.crew.map((cast) => (
             <div
               key={`${cast.id}-${cast.job}`}

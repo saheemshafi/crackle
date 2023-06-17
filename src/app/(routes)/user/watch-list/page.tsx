@@ -1,11 +1,11 @@
 import Container from "@/components/Container";
-import { authOptions } from "@/lib/authentication/auth-options";
-import { Session, getServerSession } from "next-auth";
+import { getAuthUser } from "@/lib/api/getUser";
+import { Session } from "next-auth";
 
 interface WatchlistPageProps {}
 
-const WatchlistPage =async ({}:WatchlistPageProps) => {
-  const session:Session | null = await getServerSession(authOptions);
+const WatchlistPage = async ({}: WatchlistPageProps) => {
+  const session: Session | null = await getAuthUser();
   return <Container>{JSON.stringify(session)}</Container>;
 };
 

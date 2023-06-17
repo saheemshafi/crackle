@@ -6,18 +6,18 @@ import { Movie } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
 import Paginate from "@/components/Paginate";
 import { SearchParams } from "@/lib/helpers/query-url";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface NowPlayingPageProps {
   searchParams: { page: SearchParams["page"] };
 }
 
 const NowPlayingPage = async ({ searchParams }: NowPlayingPageProps) => {
-  const moviesPromise: Promise<ApiResponse<Movie>> = (
-    await fetch(
-      `${endpoints.movies.nowPlaying}?page=${searchParams["page"] || "1"}`,
-      options
-    )
-  ).json();
+  
+  const moviesPromise = fetcher<ApiResponse<Movie>>(
+    endpoints.movies.nowPlaying,
+    `?page=${searchParams["page"] || "1"}`
+  );
   const movies = await moviesPromise;
 
   return (

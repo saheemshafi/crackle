@@ -8,6 +8,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Container from "@/components/Container";
 import { Metadata } from "next";
 import GoBack from "@/components/GoBack";
+import { fetcher } from "@/lib/api/fetcher";
 
 export const generateMetadata = async ({
   params,
@@ -26,11 +27,11 @@ interface CastPageProps {
 }
 
 const CastPage = async ({ params }: CastPageProps) => {
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}`,
-    options
+
+  const movieDetails = await fetcher<MovieDetails>(
+    `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  const movieDetails: MovieDetails = await response.json();
+  
   return (
     <>
       <Container>

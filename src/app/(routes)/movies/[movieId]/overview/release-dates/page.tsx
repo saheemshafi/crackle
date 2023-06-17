@@ -13,6 +13,7 @@ import AsideLinksTrigger from "@/components/ui/AsideLinksTrigger";
 import Table from "@/components/Table";
 import TableItem from "@/components/TableItem";
 import GoBack from "@/components/GoBack";
+import { fetcher } from "@/lib/api/fetcher";
 
 export const generateMetadata = async ({
   params,
@@ -31,19 +32,14 @@ interface ReleasesPageProps {
 }
 
 const ReleasesPage = async ({ params }: ReleasesPageProps) => {
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}`,
-    options
+  
+  const movieDetails = await fetcher<MovieDetails>(
+    `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  const releaseDateResponse = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}/release_dates`,
-    options
+  const regions = await fetcher<CountryResponse>(endpoints.providers.regions);
+  const releaseDates = await fetcher<ReleaseDateResponse>(
+    `${endpoints.movies.movieDetails}/${params.movieId}/release_dates`
   );
-  const regionResponse = await fetch(`${endpoints.providers.regions}`, options);
-  const regions: CountryResponse = await regionResponse.json();
-
-  const movieDetails: MovieDetails = await response.json();
-  const releaseDates: ReleaseDateResponse = await releaseDateResponse.json();
 
   return (
     <Container>

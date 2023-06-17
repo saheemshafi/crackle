@@ -5,18 +5,20 @@ import { Tv } from "@/types/tv";
 import Container from "@/components/Container";
 import MediaCard from "@/components/MediaCard";
 import Filterer from "@/components/Filterer";
-import { SearchParams, generateQueryUrl } from "@/lib/helpers/query-url";
+import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
 import FilterTrigger from "@/components/ui/FilterTrigger";
 import Paginate from "@/components/Paginate";
+import { fetcher } from "@/lib/api/fetcher";
 
 interface TvPageProps {
   searchParams: SearchParams;
 }
 
 const TvPage = async ({ searchParams }: TvPageProps) => {
-  const seriesPromise: Promise<ApiResponse<Tv>> = (
-    await fetch(generateQueryUrl(endpoints.discover.tv, searchParams), options)
-  ).json();
+  const seriesPromise = fetcher<ApiResponse<Tv>>(
+    endpoints.discover.tv,
+    generateQueryString(searchParams)
+  );
   const series = await seriesPromise;
 
   return (

@@ -12,15 +12,15 @@ import AsideLinksTrigger from "@/components/ui/AsideLinksTrigger";
 import Table from "@/components/Table";
 import TableItem from "@/components/TableItem";
 import GoBack from "@/components/GoBack";
+import { fetcher } from "@/lib/api/fetcher";
 
 export const generateMetadata = async ({
   params,
 }: AltTitlesPageProps): Promise<Metadata> => {
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}`,
-    options
+  const movieDetails = await fetcher<MovieDetails>(
+    `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  const movieDetails: MovieDetails = await response.json();
+
   return {
     title: `${movieDetails.title} - Alternative Titles`,
   };
@@ -30,18 +30,14 @@ interface AltTitlesPageProps {
 }
 
 const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
-  const response = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}`,
-    options
+  
+  const movieDetails = await fetcher<MovieDetails>(
+    `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  const altTitlesResponse = await fetch(
-    `${endpoints.movies.movieDetails}/${params.movieId}/alternative_titles`,
-    options
+  const altTitles = await fetcher<AltTilesResponse>(
+    `${endpoints.movies.movieDetails}/${params.movieId}/alternative_titles`
   );
-  const movieDetails: MovieDetails = await response.json();
-  const altTitles: AltTilesResponse = await altTitlesResponse.json();
-  const regionResponse = await fetch(`${endpoints.providers.regions}`, options);
-  const regions: CountryResponse = await regionResponse.json();
+  const regions = await fetcher<CountryResponse>(endpoints.providers.regions);
 
   return (
     <Container>
