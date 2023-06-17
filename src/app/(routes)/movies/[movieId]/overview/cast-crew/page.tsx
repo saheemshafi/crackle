@@ -7,6 +7,7 @@ import { options } from "@/lib/api/options";
 import { BiArrowBack } from "react-icons/bi";
 import Container from "@/components/Container";
 import { Metadata } from "next";
+import GoBack from "@/components/GoBack";
 
 export const generateMetadata = async ({
   params,
@@ -33,14 +34,9 @@ const CastPage = async ({ params }: CastPageProps) => {
   return (
     <>
       <Container>
-        <div>
-          <Link
-            href={`/movies/${params.movieId}/overview`}
-            className="flex w-fit items-center gap-2 rounded border border-gray-dark bg-gradient-to-r from-gray-dark to-dark px-3 py-1 font-medium transition-colors hover:border-gray-md/30 focus-visible:border-gray-md/30"
-          >
-            <BiArrowBack /> {movieDetails.original_title}
-          </Link>
-        </div>
+        <GoBack link={`/movies/${params.movieId}/overview`}>
+          {movieDetails.title}
+        </GoBack>
         <div className="mt-10 rounded-md">
           <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
             Cast & Crew

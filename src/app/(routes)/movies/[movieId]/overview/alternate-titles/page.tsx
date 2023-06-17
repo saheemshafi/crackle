@@ -1,6 +1,4 @@
 import Container from "@/components/Container";
-import Link from "next/link";
-import { BiArrowBack } from "react-icons/bi";
 import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
 import { MovieDetails } from "@/types/movie";
@@ -10,8 +8,10 @@ import { Metadata } from "next";
 import Image from "next/image";
 import { getRegion } from "@/lib/helpers/format-helpers";
 import AsideLinks from "@/components/AsideLinks";
-import { Suspense } from "react";
 import AsideLinksTrigger from "@/components/ui/AsideLinksTrigger";
+import Table from "@/components/Table";
+import TableItem from "@/components/TableItem";
+import GoBack from "@/components/GoBack";
 
 export const generateMetadata = async ({
   params,
@@ -45,14 +45,9 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
 
   return (
     <Container>
-      <div>
-        <Link
-          href={`/movies/${params.movieId}/overview`}
-          className="flex w-fit items-center gap-2 rounded border border-gray-dark bg-gradient-to-r from-gray-dark to-dark px-3 py-1 font-medium transition-colors hover:border-gray-md/30 focus-visible:border-gray-md/30"
-        >
-          <BiArrowBack /> {movieDetails.original_title}
-        </Link>
-      </div>
+      <GoBack link={`/movies/${params.movieId}/overview`}>
+        {movieDetails.original_title}
+      </GoBack>
       <div className="mt-10 flex gap-4">
         <AsideLinks
           regions={regions.results}
@@ -90,20 +85,20 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
                   </>
                 }
               >
-                <table className="w-full rounded-md">
-                  <thead className="border-b border-gray-md/30 bg-dark/20 text-gray-light">
+                <Table
+                  head={
                     <tr>
-                      <td className="w-1/2  p-1 sm:w-2/3">Title</td>
-                      <td className="p-1">Type</td>
+                      <TableItem className="w-1/2 sm:w-2/3">Title</TableItem>
+                      <TableItem>Type</TableItem>
                     </tr>
-                  </thead>
-                  <tbody className="font-work-sans">
+                  }
+                  rows={
                     <tr>
-                      <td className="p-1">{title.title}</td>
-                      <td className="p-1">{title.type}</td>
+                      <TableItem>{title.title}</TableItem>
+                      <TableItem>{title.type}</TableItem>
                     </tr>
-                  </tbody>
-                </table>
+                  }
+                />
               </InfoCard>
             ))}
           </div>
