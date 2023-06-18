@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import Paginate from "@/components/Paginate";
 import PersonCard from "@/components/PersonCard";
+import { fetcher } from "@/lib/api/fetcher";
 import { options } from "@/lib/api/options";
 import endpoints from "@/lib/constants/endpoints.json";
 import { SearchParams } from "@/lib/helpers/query-url";
@@ -12,13 +13,10 @@ interface PopularFacesPage {
 }
 
 const PopularFacesPage = async ({ searchParams }: PopularFacesPage) => {
-  const peoplePromise: Promise<ApiResponse<Person>> = (
-    await fetch(
-      `${endpoints.people}?page=${searchParams["page"] || 1}`,
-      options
-    )
-  ).json();
-  const people = await peoplePromise;
+  const people = await fetcher<ApiResponse<Person>>(
+    endpoints.people,
+    `?page=${searchParams["page"] || "1"}`
+  );
 
   return (
     <Container>
