@@ -1,6 +1,5 @@
 import Image from "next/image";
 import endpoints from "@/lib/constants/endpoints.json";
-import { options } from "@/lib/api/options";
 import { MovieDetails } from "@/types/movie";
 import { BsDot } from "react-icons/bs";
 import MediaPageActions from "@/components/MediaPageActions";

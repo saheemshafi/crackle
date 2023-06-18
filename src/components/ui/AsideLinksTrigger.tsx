@@ -4,10 +4,10 @@ import { GlobalContext } from "@/providers/GlobalProvider";
 import { AiOutlineFlag } from "react-icons/ai";
 
 interface AsideLinksTriggerProps {
-  text?: string | JSX.Element;
+  children?: React.ReactNode;
 }
 
-const AsideLinksTrigger: FC<AsideLinksTriggerProps> = ({ text }) => {
+const AsideLinksTrigger: FC<AsideLinksTriggerProps> = ({ children }) => {
   const { mobileAsideLinksOpen, setMobileAsideLinksOpen } =
     useContext(GlobalContext);
   return (
@@ -19,7 +19,13 @@ const AsideLinksTrigger: FC<AsideLinksTriggerProps> = ({ text }) => {
         setMobileAsideLinksOpen(!mobileAsideLinksOpen);
       }}
     >
-      <AiOutlineFlag /> {text || "Countries"}
+      {!children ? (
+        <>
+          <AiOutlineFlag /> Countries
+        </>
+      ) : (
+        children
+      )}
     </button>
   );
 };

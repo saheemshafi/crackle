@@ -3,6 +3,7 @@ import { Cast } from "./cast";
 import { Country } from "./country";
 import { Genre } from "./genre";
 import { Dates } from "./release-date";
+import { Translation } from "./translations";
 import { WatchProvider } from "./watch-provider";
 
 export interface ApiResponse<T> {
@@ -47,4 +48,9 @@ export interface AltTilesResponse {
 export interface ReleaseDateResponse {
   id: number;
   results: Dates[];
+}
+
+export interface TranslationsResponse {
+  id: number;
+  translations: Translation[];
 }
