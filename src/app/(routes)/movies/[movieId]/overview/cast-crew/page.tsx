@@ -1,10 +1,8 @@
-import { FC, Suspense } from "react";
+import { Suspense } from "react";
 import Cast from "@/components/Cast";
-import Link from "next/link";
 import { MovieDetails } from "@/types/movie";
 import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
-import { BiArrowBack } from "react-icons/bi";
 import Container from "@/components/Container";
 import { Metadata } from "next";
 import GoBack from "@/components/GoBack";
@@ -33,7 +31,6 @@ const CastPage = async ({ params }: CastPageProps) => {
   );
 
   return (
-    <>
       <Container>
         <GoBack link={`/movies/${params.movieId}/overview`}>
           {movieDetails.title}
@@ -48,7 +45,6 @@ const CastPage = async ({ params }: CastPageProps) => {
           </Suspense>
         </div>
       </Container>
-    </>
   );
 };
 

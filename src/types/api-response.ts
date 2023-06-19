@@ -1,4 +1,5 @@
 import { AltTitle } from "./alt-titles";
+import { Image } from "./backdrop";
 import { Cast } from "./cast";
 import { Country } from "./country";
 import { Genre } from "./genre";
@@ -53,4 +54,17 @@ export interface ReleaseDateResponse {
 export interface TranslationsResponse {
   id: number;
   translations: Translation[];
+}
+
+export interface LanguagesResponse {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
+export interface ImagesResponse {
+  backdrops: Image[];
+  id: number;
+  logos: Image[];
+  posters: Image[];
 }

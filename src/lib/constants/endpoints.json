@@ -38,5 +38,8 @@
   "actions": {
     "watchlist": "https://api.themoviedb.org/3/account/null/watchlist",
     "favourite":"https://api.themoviedb.org/3/account/null/favorite"
+  },
+  "configuration":{
+    "languages":"https://api.themoviedb.org/3/configuration/languages"
   }
 }

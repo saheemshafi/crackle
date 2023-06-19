@@ -102,19 +102,6 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`movies/${media.id}/media/logos`}>
-              Logos
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="menu-link"
-              href={`movies/${media.id}/media/posters`}
-            >
-              Posters
-            </Link>
-          </li>
-          <li>
             <Link
               className="menu-link"
               href={`movies/${media.id}/media/videos`}

@@ -13,7 +13,7 @@ interface AsideLinksProps {
   title: string | JSX.Element | null;
   link: string;
   items: Country["iso_3166_1"][];
-  regions: Country[];
+  regions?: Country[];
 }
 
 const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
@@ -30,7 +30,7 @@ const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
     >
       <div className="sticky top-0 flex items-center justify-between gap-2 rounded-lg border border-gray-md/30 bg-gray-dark px-3 py-2 font-work-sans font-medium shadow-md sm:static sm:border-none">
         <p>{title}</p>
-        <span className="hidden h-5 w-5 items-center justify-center rounded bg-gray-md/30 sm:flex">
+        <span className="hidden px-1 items-center justify-center rounded bg-gray-md/30 sm:flex">
           {items.length}
         </span>
         <Button
@@ -49,8 +49,8 @@ const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
           {links.map((item) => (
             <li key={item}>
               <Link className="menu-link" href={`${link}#${item}`}>
-                {(getRegion(regions, item) || "")?.length > 0
-                  ? getRegion(regions, item)
+                {(getRegion(regions || [], item) || "")?.length > 0
+                  ? getRegion(regions || [], item)
                   : item}
               </Link>
             </li>
