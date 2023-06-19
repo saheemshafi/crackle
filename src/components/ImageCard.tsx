@@ -1,11 +1,11 @@
 "use client";
 
-import { fetcher } from "@/lib/api/fetcher";
 import { toastOptions } from "@/lib/utlities/toast";
 import * as Backdrop from "@/types/backdrop";
 import Image from "next/image";
 import { FC, useState } from "react";
 import { toast } from "react-hot-toast";
+import { BiCheck, BiErrorAlt } from "react-icons/bi";
 import { HiOutlineDownload } from "react-icons/hi";
 
 interface ImageCardProps {
@@ -14,15 +14,47 @@ interface ImageCardProps {
 
 const ImageCard: FC<ImageCardProps> = ({ image }) => {
   const [downloading, setDownloading] = useState(false);
+
   async function downloadImage() {
     if (typeof document == "undefined") return;
     setDownloading(true);
     try {
-      const res = await fetch(
+      const request = fetch(
         `/api/og?path=${image.file_path.slice(1).split(".")[0]}&width=${
           image.width
         }&height=${image.height}`
       );
+
+      const res = await toast.promise(
+        request,
+        {
+          error: (
+            <div className="flex items-center">
+              <BiErrorAlt className="mr-3 text-brand" size={20} /> Oops!
+              Something went wrong.
+            </div>
+          ),
+          loading: (
+            <div className="flex flex-col">
+              <div className="flex items-center w-full">
+                <div className="mr-3 h-3 w-3 animate-spin rounded-full border-2 border-r-transparent "></div>{" "}
+                Downloading image...
+              </div>
+              <p className="text-sm text-gray-light mt-1 block">
+                Large images might take some time to download
+              </p>
+            </div>
+          ),
+          success: (
+            <div className="flex items-center">
+              <BiCheck size={20} className="animate-in mr-3 text-brand" />{" "}
+              Downloaded
+            </div>
+          ),
+        },
+        { ...toastOptions, icon: null }
+      );
+
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
@@ -39,7 +71,7 @@ const ImageCard: FC<ImageCardProps> = ({ image }) => {
   return (
     <figure className="relative rounded-lg bg-gray-dark p-2">
       <div className="group relative">
-        <div className="animate-in absolute inset-0 grid place-items-center transition-opacity  md:hidden group-hover:grid">
+        <div className="animate-in absolute inset-0 grid place-items-center transition-opacity  group-hover:grid md:hidden">
           <button
             onClick={downloadImage}
             className="grid h-8 w-8 transform place-items-center rounded-full border border-gray-md/30 bg-dark/80 shadow-md backdrop-blur-sm transition-transform hover:scale-105"
