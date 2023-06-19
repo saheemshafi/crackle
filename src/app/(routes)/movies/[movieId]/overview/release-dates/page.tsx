@@ -32,7 +32,6 @@ interface ReleasesPageProps {
 }
 
 const ReleasesPage = async ({ params }: ReleasesPageProps) => {
-  
   const movieDetails = await fetcher<MovieDetails>(
     `${endpoints.movies.movieDetails}/${params.movieId}`
   );
@@ -63,7 +62,7 @@ const ReleasesPage = async ({ params }: ReleasesPageProps) => {
             <AsideLinksTrigger />
           </div>
           <div className="mt-3 grid gap-3">
-            {releaseDates.results.map(async (releaseDate) => (
+            {releaseDates.results.map((releaseDate) => (
               <InfoCard
                 key={releaseDate.iso_3166_1}
                 id={releaseDate.iso_3166_1}
