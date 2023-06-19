@@ -7,9 +7,6 @@ import TableItem from "@/components/TableItem";
 import AsideLinksTrigger from "@/components/ui/AsideLinksTrigger";
 import { fetcher } from "@/lib/api/fetcher";
 import endpoints from "@/lib/constants/endpoints.json";
-import { formatter } from "@/lib/helpers/date";
-import { getRegion, getReleaseType } from "@/lib/helpers/format-helpers";
-import { generateQueryString } from "@/lib/helpers/query-url";
 import { CountryResponse, TranslationsResponse } from "@/types/api-response";
 import { MovieDetails } from "@/types/movie";
 import Image from "next/image";
@@ -46,14 +43,14 @@ const TranslationPage = async ({ params }: TranslationPageProps) => {
         <div className="flex-1">
           <div className="flex justify-between gap-2">
             <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
-              Release Dates
+              Translations
             </h1>
             <AsideLinksTrigger>
               <IoLanguageSharp /> Languages
             </AsideLinksTrigger>
           </div>
           <div className="mt-3 grid gap-3">
-            {translations.translations.map(async (translation) => (
+            {translations.translations.map((translation) => (
               <InfoCard
                 key={`${translation.english_name}-${translation.iso_639_1}`}
                 id={`${translation.english_name}-${translation.iso_639_1}`}

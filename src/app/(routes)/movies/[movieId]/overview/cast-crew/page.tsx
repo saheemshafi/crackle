@@ -9,6 +9,7 @@ import Container from "@/components/Container";
 import { Metadata } from "next";
 import GoBack from "@/components/GoBack";
 import { fetcher } from "@/lib/api/fetcher";
+import Loader from "@/components/Loader";
 
 export const generateMetadata = async ({
   params,
@@ -27,11 +28,10 @@ interface CastPageProps {
 }
 
 const CastPage = async ({ params }: CastPageProps) => {
-
   const movieDetails = await fetcher<MovieDetails>(
     `${endpoints.movies.movieDetails}/${params.movieId}`
   );
-  
+
   return (
     <>
       <Container>
@@ -42,7 +42,7 @@ const CastPage = async ({ params }: CastPageProps) => {
           <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
             Cast & Crew
           </h1>
-          <Suspense fallback="Loading Cast...">
+          <Suspense fallback={<Loader />}>
             {/* @ts-ignore-error */}
             <Cast mediaId={params.movieId} type={"movie"} />
           </Suspense>

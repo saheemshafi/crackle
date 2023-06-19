@@ -12,7 +12,6 @@ interface CastProps {
 }
 
 const Cast = async ({ mediaId, type }: CastProps) => {
-  
   const castResponse = await fetcher<CastResponse>(
     `${endpoints.movies.movieDetails}/${mediaId}/credits`
   );
