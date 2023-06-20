@@ -1,7 +1,5 @@
-import { options } from "@/lib/api/options";
 import endpoints from "@/lib/constants/endpoints.json";
 import { CastResponse } from "@/types/api-response";
-import Slider from "./Slider";
 import Image from "next/image";
 import Link from "next/link";
 import { fetcher } from "@/lib/api/fetcher";
@@ -13,7 +11,9 @@ interface CastProps {
 
 const Cast = async ({ mediaId, type }: CastProps) => {
   const castResponse = await fetcher<CastResponse>(
-    `${endpoints.movies.movieDetails}/${mediaId}/credits`
+    `${
+      type == "movie" ? endpoints.movies.movieDetails : endpoints.tv.tvDetails
+    }/${mediaId}/credits`
   );
 
   return (

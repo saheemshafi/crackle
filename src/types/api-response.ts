@@ -1,10 +1,10 @@
-import { AltTitle } from "./alt-titles";
+import { MovieAltTitle, TvAltTitle } from "./alt-titles";
 import { Image } from "./backdrop";
 import { Cast } from "./cast";
 import { Country } from "./country";
 import { Genre } from "./genre";
 import { Dates } from "./release-date";
-import { Translation } from "./translations";
+import { Translation, TvTranslation } from "./translations";
 import { WatchProvider } from "./watch-provider";
 
 export interface ApiResponse<T> {
@@ -41,9 +41,14 @@ export interface CastResponse {
   id: number;
 }
 
-export interface AltTilesResponse {
+export interface MovieAltTilesResponse {
   id: number;
-  titles: AltTitle[];
+  titles: MovieAltTitle[];
+}
+
+export interface TvAltTilesResponse {
+  id: number;
+  results: TvAltTitle[];
 }
 
 export interface ReleaseDateResponse {
@@ -54,6 +59,11 @@ export interface ReleaseDateResponse {
 export interface TranslationsResponse {
   id: number;
   translations: Translation[];
+}
+
+export interface TvTranslationResponse {
+  id: number;
+  translations: TvTranslation[];
 }
 
 export interface LanguagesResponse {
@@ -67,4 +77,23 @@ export interface ImagesResponse {
   id: number;
   logos: Image[];
   posters: Image[];
+}
+
+export interface TvAltTitles {
+  id: number;
+  results: Result[];
+}
+
+export interface Result {
+  iso_3166_1: string;
+  title: string;
+  type: Type;
+}
+
+export enum Type {
+  Empty = "",
+  S1 = "S1",
+  S2 = "S2",
+  S3 = "S3",
+  S4 = "S4",
 }
