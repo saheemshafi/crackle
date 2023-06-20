@@ -1,11 +1,12 @@
-import { FC } from 'react'
+import { redirect } from "next/navigation";
+import { FC } from "react";
 
 interface SeriesDetailPageProps {
-    params: { seriesId: string }
+  params: { seriesId: string };
 }
 
 const SeriesDetailPage: FC<SeriesDetailPageProps> = ({ params }) => {
-    return <div>Series details : {params.seriesId}</div>
-}
+  redirect(`/tv/${params.seriesId}/overview`);
+};
 
 export default SeriesDetailPage;

@@ -6,6 +6,9 @@ import { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { Genre } from "@/types/genre";
 import ChipButton from "./ui/ChipButton";
 import Skeleton from "./ui/Skeleton";
+import { BiErrorAlt } from "react-icons/bi";
+import { toastOptions } from "@/lib/utlities/toast";
+import toast from "react-hot-toast";
 
 interface GenreBoxProps {
   type?: "tv" | "movie";
@@ -30,7 +33,10 @@ const GenreBox: FC<GenreBoxProps> = ({
     genrePromise
       .then((genresResponse) => setGenres(genresResponse.genres))
       .catch((error) => {
-        console.log(error);
+        toast.error("Oops! Something Went Wrong", {
+          ...toastOptions,
+          icon: <BiErrorAlt className="text-brand" size={20} />,
+        });
       });
   }, [type, setGenres]);
   return (

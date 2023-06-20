@@ -13,7 +13,7 @@ import { BsListUl } from "react-icons/bs";
 import { twMerge } from "tailwind-merge";
 
 interface MediaPageActionsProps {
-  type: "movie";
+  type: "movie" | "tv";
   mediaId: number;
   accountState: MediaAccountState;
 }

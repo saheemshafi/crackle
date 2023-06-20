@@ -13,3 +13,11 @@ export interface Data {
   tagline: string;
   title: string;
 }
+
+export type TvTranslation = Omit<Translation, "data"> & {
+  data: Omit<Data, "title"> & { name: string };
+};
+
+type TypePrettier<T> = {
+  [Property in keyof T]: TypePrettier<T[Property]>;
+} & unknown;

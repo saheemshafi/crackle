@@ -1,9 +1,12 @@
 "use client";
 
 import { downloadImage } from "@/lib/helpers/download-image";
+import { toastOptions } from "@/lib/utlities/toast";
 import * as Backdrop from "@/types/backdrop";
 import Image from "next/image";
 import { FC, HTMLAttributes, useState } from "react";
+import toast from "react-hot-toast";
+import { BiErrorAlt } from "react-icons/bi";
 import { HiOutlineDownload } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 
@@ -22,14 +25,12 @@ const ImageCard: FC<ImageCardProps> = ({ image, className }) => {
             onClick={async () => {
               try {
                 setDownloading(true);
-                await downloadImage(
-                  image.file_path,
-                  image.file_path.includes("png") ? "png" : "jpg",
-                  image.width,
-                  image.height
-                );
+                await downloadImage(image.file_path, image.width, image.height);
               } catch (error) {
-                console.log(error);
+                toast.error("Oops! Something Went Wrong", {
+                  ...toastOptions,
+                  icon: <BiErrorAlt className="text-brand" size={20} />,
+                });
               } finally {
                 setDownloading(false);
               }

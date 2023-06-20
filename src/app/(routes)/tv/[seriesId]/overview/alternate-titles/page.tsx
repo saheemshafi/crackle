@@ -1,8 +1,10 @@
 import Container from "@/components/Container";
 import endpoints from "@/lib/constants/endpoints.json";
-import { MovieDetails } from "@/types/movie";
 import InfoCard from "@/components/InfoCard";
-import {  CountryResponse, MovieAltTilesResponse } from "@/types/api-response";
+import {
+  CountryResponse,
+  TvAltTitles,
+} from "@/types/api-response";
 import { Metadata } from "next";
 import Image from "next/image";
 import { getRegion } from "@/lib/helpers/format-helpers";
@@ -12,47 +14,47 @@ import Table from "@/components/Table";
 import TableItem from "@/components/TableItem";
 import GoBack from "@/components/GoBack";
 import { fetcher } from "@/lib/api/fetcher";
+import { SeriesDetails } from "@/types/tv";
 
 export const generateMetadata = async ({
   params,
 }: AltTitlesPageProps): Promise<Metadata> => {
-  const movieDetails = await fetcher<MovieDetails>(
-    `${endpoints.movies.movieDetails}/${params.movieId}`
+  const tvDetails = await fetcher<SeriesDetails>(
+    `${endpoints.tv.tvDetails}/${params.seriesId}`
   );
 
   return {
-    title: `${movieDetails.title} - Alternative Titles`,
-    description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+    title: `${tvDetails.name} - Alternative Titles`,
+    description: `Alternative title associated with ${tvDetails.name} in different regions and languages`,
     openGraph: {
-      title: `${movieDetails.title} - Alternative Titles`,
-      description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+      title: `${tvDetails.name} - Alternative Titles`,
+      description: `Alternative title associated with ${tvDetails.name} in different regions and languages`,
     },
   };
 };
 
 interface AltTitlesPageProps {
-  params: { movieId: string };
+  params: { seriesId: string };
 }
 
 const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
-  const movieDetails = await fetcher<MovieDetails>(
-    `${endpoints.movies.movieDetails}/${params.movieId}`
+  const tvDetails = await fetcher<SeriesDetails>(
+    `${endpoints.tv.tvDetails}/${params.seriesId}`
   );
-  const altTitles = await fetcher<MovieAltTilesResponse>(
-    `${endpoints.movies.movieDetails}/${params.movieId}/alternative_titles`
+
+  const altTitles = await fetcher<TvAltTitles>(
+    `${endpoints.tv.tvDetails}/${params.seriesId}/alternative_titles`
   );
   const regions = await fetcher<CountryResponse>(endpoints.providers.regions);
 
   return (
     <Container>
-      <GoBack link={`/movies/${params.movieId}/overview`}>
-        {movieDetails.title}
-      </GoBack>
+      <GoBack link={`/tv/${params.seriesId}/overview`}>{tvDetails.name}</GoBack>
       <div className="mt-10 flex gap-4">
         <AsideLinks
           regions={regions.results}
-          link={`/movies/${params.movieId}/overview/alternate-titles`}
-          items={altTitles.titles.map((title) => title.iso_3166_1)}
+          link={`/tv/${params.seriesId}/overview/alternate-titles`}
+          items={altTitles.results.map((title) => title.iso_3166_1)}
           title={"Countries"}
         />
         <div className="flex-1">
@@ -63,7 +65,7 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
             <AsideLinksTrigger />
           </div>
           <div className="mt-3 grid gap-3">
-            {altTitles.titles.map(async (title) => (
+            {altTitles.results.map(async (title) => (
               <InfoCard
                 key={title.iso_3166_1}
                 id={title.iso_3166_1}

@@ -10,14 +10,27 @@ import { toast } from "react-hot-toast";
 import { toastOptions } from "@/lib/utlities/toast";
 import { BiCopy } from "react-icons/bi";
 import { twMerge } from "tailwind-merge";
+import { SeriesDetails } from "@/types/tv";
 
 interface MediaPageHeaderProps {
-  media: MovieDetails;
+  media: MovieDetails | SeriesDetails;
+  type?: "movie" | "tv";
 }
 
-const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
+const MediaPageHeader: FC<MediaPageHeaderProps> = ({
+  media,
+  type = "movie",
+}) => {
   const pathname = usePathname();
   const [url, setUrl] = useState<string>();
+  function isMovieDetails(
+    media: MovieDetails | SeriesDetails
+  ): media is MovieDetails {
+    if (type == "movie") {
+      return true;
+    }
+    return false;
+  }
 
   useEffect(() => {
     setUrl(`${process.env.NEXT_PUBLIC_APP_URL}${pathname}`);
@@ -40,14 +53,25 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
       >
         <ul>
           <li>
-            <Link className="menu-link" href={`/movies/${media.id}/overview`}>
+            <Link
+              className="menu-link"
+              href={
+                type == "movie"
+                  ? `/movies/${media.id}/overview`
+                  : `/tv/${media.id}/overview`
+              }
+            >
               Main
             </Link>
           </li>
           <li>
             <Link
               className="menu-link"
-              href={`/movies/${media.id}/overview/alternate-titles`}
+              href={
+                type == "movie"
+                  ? `/movies/${media.id}/overview/alternate-titles`
+                  : `/tv/${media.id}/overview/alternate-titles`
+              }
             >
               Alternate Titles
             </Link>
@@ -55,23 +79,37 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
           <li>
             <Link
               className="menu-link"
-              href={`/movies/${media.id}/overview/cast-crew`}
+              href={
+                type == "movie"
+                  ? `/movies/${media.id}/overview/cast-crew`
+                  : `/tv/${media.id}/overview/cast-crew`
+              }
             >
               Cast & Crew
             </Link>
           </li>
+          {type == "movie" && (
+            <li>
+              <Link
+                className="menu-link"
+                href={
+                  type == "movie"
+                    ? `/movies/${media.id}/overview/release-dates`
+                    : `/tv/${media.id}/overview/release-dates`
+                }
+              >
+                Release Dates
+              </Link>
+            </li>
+          )}
           <li>
             <Link
               className="menu-link"
-              href={`/movies/${media.id}/overview/release-dates`}
-            >
-              Release Dates
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="menu-link"
-              href={`/movies/${media.id}/overview/translations`}
+              href={
+                type == "movie"
+                  ? `/movies/${media.id}/overview/translations`
+                  : `/tv/${media.id}/overview/translations`
+              }
             >
               Translations
             </Link>
@@ -96,30 +134,37 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
           <li>
             <Link
               className="menu-link"
-              href={`movies/${media.id}/media/backdrops`}
+              href={
+                type == "movie"
+                  ? `movies/${media.id}/media/backdrops`
+                  : `tv/${media.id}/media/backdrops`
+              }
             >
               Backdrops
             </Link>
           </li>
           <li>
-            <Link className="menu-link" href={`movies/${media.id}/media/logos`}>
+            <Link
+              className="menu-link"
+              href={
+                type == "movie"
+                  ? `movies/${media.id}/media/logos`
+                  : `tv/${media.id}/media/logos`
+              }
+            >
               Logos
             </Link>
           </li>
           <li>
             <Link
               className="menu-link"
-              href={`movies/${media.id}/media/posters`}
+              href={
+                type == "movie"
+                  ? `movies/${media.id}/media/posters`
+                  : `tv/${media.id}/media/posters`
+              }
             >
               Posters
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="menu-link"
-              href={`movies/${media.id}/media/videos`}
-            >
-              Videos
             </Link>
           </li>
         </ul>
@@ -163,7 +208,9 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
           <li>
             <Link
               className="menu-link"
-              href={`https://twitter.com/intent/tweet?url=${url}&text=Checkout ${media.title} on Crackle.`}
+              href={`https://twitter.com/intent/tweet?url=${url}&text=Checkout ${
+                isMovieDetails(media) ? media.title : media.name
+              } on Crackle.`}
               target="_blank"
               referrerPolicy="no-referrer"
             >
