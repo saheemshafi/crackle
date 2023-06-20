@@ -1,10 +1,10 @@
 import toast from "react-hot-toast";
 import { BiCheck, BiErrorAlt } from "react-icons/bi";
 import { toastOptions } from "../utlities/toast";
+import * as uuid from "uuid";
 
 export async function downloadImage(
   path: string,
-  type: "jpg" | "png",
   width: number,
   height: number
 ) {
@@ -12,7 +12,7 @@ export async function downloadImage(
   const request = fetch(
     `/api/og?path=${
       path.slice(1).split(".")[0]
-    }&width=${width}&height=${height}&ext=${type}`
+    }&width=${width}&height=${height}&ext=${path.split(".")[1]}`
   ).then((res) => res.blob());
 
   const blob = await toast.promise(
@@ -48,7 +48,7 @@ export async function downloadImage(
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = url;
-  anchor.download = `crackle-image.${type}`;
+  anchor.download = `crackle-${uuid.v1()}.${path.split(".")[1]}`;
   anchor.click();
   anchor.remove();
 }

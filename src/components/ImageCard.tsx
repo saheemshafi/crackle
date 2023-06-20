@@ -22,12 +22,7 @@ const ImageCard: FC<ImageCardProps> = ({ image, className }) => {
             onClick={async () => {
               try {
                 setDownloading(true);
-                await downloadImage(
-                  image.file_path,
-                  image.file_path.includes("png") ? "png" : "jpg",
-                  image.width,
-                  image.height
-                );
+                await downloadImage(image.file_path, image.width, image.height);
               } catch (error) {
                 console.log(error);
               } finally {
