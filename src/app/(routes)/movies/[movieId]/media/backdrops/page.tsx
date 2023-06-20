@@ -21,6 +21,10 @@ export const generateMetadata = async ({
   return {
     title: `4k Background Images - ${movieDetails.title}`,
     description: `Download 4k images from ${movieDetails.title}`,
+    openGraph: {
+      title: `4k Background Images - ${movieDetails.title}`,
+      description: `Download 4k images from ${movieDetails.title}`,
+    },
   };
 };
 

@@ -21,6 +21,10 @@ export const generateMetadata = async ({
   return {
     title: `${movieDetails.title} - Official Posters and Cover arts`,
     description: `${movieDetails.title} - See or Download 4k posters`,
+    openGraph: {
+      title: `${movieDetails.title} - Official Posters and Cover arts`,
+      description: `${movieDetails.title} - See or Download 4k posters`,
+    },
   };
 };
 const PostersPage = async ({ params }: PostersPageProps) => {
@@ -41,7 +45,7 @@ const PostersPage = async ({ params }: PostersPageProps) => {
         </div>
         <Suspense fallback={<Loader />}>
           {/* @ts-expect-error server component */}
-          <ImageList mediaId={params.movieId} map="posters"/>
+          <ImageList mediaId={params.movieId} map="posters" />
         </Suspense>
       </div>
     </Container>

@@ -23,14 +23,19 @@ export const generateMetadata = async ({
 
   return {
     title: `${movieDetails.title} - Alternative Titles`,
+    description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+    openGraph: {
+      title: `${movieDetails.title} - Alternative Titles`,
+      description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+    },
   };
 };
+
 interface AltTitlesPageProps {
   params: { movieId: string };
 }
 
 const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
-  
   const movieDetails = await fetcher<MovieDetails>(
     `${endpoints.movies.movieDetails}/${params.movieId}`
   );

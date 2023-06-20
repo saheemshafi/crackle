@@ -9,7 +9,6 @@ export async function GET(req: NextRequest) {
   const height = url.searchParams.get("height");
   const image = url.searchParams.get("path");
   const extension = url.searchParams.get("ext");
-  console.log(extension)
 
   if (!image || !width || !height || !extension) {
     return NextResponse.json(

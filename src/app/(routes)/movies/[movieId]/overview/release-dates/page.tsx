@@ -25,8 +25,14 @@ export const generateMetadata = async ({
   const movieDetails: MovieDetails = await response.json();
   return {
     title: `Release Dates - ${movieDetails.title}`,
+    description: `Check release dates of ${movieDetails.title} from different countries`,
+    openGraph: {
+      title: `Release Dates - ${movieDetails.title}`,
+      description: `Check release dates of ${movieDetails.title} from different countries`,
+    },
   };
 };
+
 interface ReleasesPageProps {
   params: { movieId: string };
 }

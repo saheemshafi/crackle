@@ -23,6 +23,10 @@ export const generateMetadata = async ({
   return {
     title: `${movieDetails.title} - Official Logos`,
     description: `See or download logos in png format for ${movieDetails.title}`,
+    openGraph: {
+      title: `${movieDetails.title} - Official Logos`,
+      description: `See or download logos in png format for ${movieDetails.title}`,
+    },
   };
 };
 

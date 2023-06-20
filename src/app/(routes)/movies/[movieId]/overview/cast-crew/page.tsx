@@ -19,6 +19,11 @@ export const generateMetadata = async ({
   const movieDetails: MovieDetails = await response.json();
   return {
     title: `Cast And Crew of ${movieDetails.title}`,
+    description: `People who have worked on bringing ${movieDetails.title} to life`,
+    openGraph: {
+      title: `Cast And Crew of ${movieDetails.title}`,
+      description: `People who have worked on bringing ${movieDetails.title} to life`,
+    },
   };
 };
 interface CastPageProps {
@@ -31,20 +36,20 @@ const CastPage = async ({ params }: CastPageProps) => {
   );
 
   return (
-      <Container>
-        <GoBack link={`/movies/${params.movieId}/overview`}>
-          {movieDetails.title}
-        </GoBack>
-        <div className="mt-10 rounded-md">
-          <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
-            Cast & Crew
-          </h1>
-          <Suspense fallback={<Loader />}>
-            {/* @ts-ignore-error */}
-            <Cast mediaId={params.movieId} type={"movie"} />
-          </Suspense>
-        </div>
-      </Container>
+    <Container>
+      <GoBack link={`/movies/${params.movieId}/overview`}>
+        {movieDetails.title}
+      </GoBack>
+      <div className="mt-10 rounded-md">
+        <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
+          Cast & Crew
+        </h1>
+        <Suspense fallback={<Loader />}>
+          {/* @ts-ignore-error */}
+          <Cast mediaId={params.movieId} type={"movie"} />
+        </Suspense>
+      </div>
+    </Container>
   );
 };
 
