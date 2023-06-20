@@ -122,40 +122,6 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
               Videos
             </Link>
           </li>
-          {/* <li>
-            <Link
-              className="menu-link"
-              href={`movies/${media.id}/media/trailers`}
-            >
-              Trailers
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="menu-link"
-              href={`movies/${media.id}/media/teasers`}
-            >
-              Teasers
-            </Link>
-          </li>
-          <li>
-            <Link className="menu-link" href={`movies/${media.id}/media/clips`}>
-              Clips
-            </Link>
-          </li>
-          <li>
-            <Link className="menu-link" href={`movies/${media.id}/media/bts`}>
-              Behind The Scenes
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="menu-link"
-              href={`movies/${media.id}/media/featurettes`}
-            >
-              Featurettes
-            </Link>
-          </li> */}
         </ul>
       </MenuList>
       <MenuList
@@ -197,7 +163,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({ media }) => {
           <li>
             <Link
               className="menu-link"
-              href={`https://twitter.com/intent/tweet?url=${url}&text=Checkout ${media.original_title} on Crackle.`}
+              href={`https://twitter.com/intent/tweet?url=${url}&text=Checkout ${media.title} on Crackle.`}
               target="_blank"
               referrerPolicy="no-referrer"
             >

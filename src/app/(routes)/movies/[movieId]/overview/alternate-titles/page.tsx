@@ -42,7 +42,7 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
   return (
     <Container>
       <GoBack link={`/movies/${params.movieId}/overview`}>
-        {movieDetails.original_title}
+        {movieDetails.title}
       </GoBack>
       <div className="mt-10 flex gap-4">
         <AsideLinks

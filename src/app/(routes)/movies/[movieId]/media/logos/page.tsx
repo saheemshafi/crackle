@@ -34,7 +34,7 @@ const LogosPage = async ({ params }: LogosPageProps) => {
   return (
     <Container>
       <GoBack link={`/movies/${params.movieId}/overview`}>
-        {movieDetails.original_title}
+        {movieDetails.title}
       </GoBack>
       <div className="mt-10">
         <div className="flex justify-between gap-2">
