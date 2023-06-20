@@ -8,18 +8,22 @@ export async function GET(req: NextRequest) {
   const width = url.searchParams.get("width");
   const height = url.searchParams.get("height");
   const image = url.searchParams.get("path");
-  const hello = url.searchParams.get("hello");
+  const extension = url.searchParams.get("ext");
+  console.log(extension)
 
-  if (!image || !width || !height) {
-    return NextResponse.json({
-      success: false,
-      error: "Provide a url,width and height",
-    });
+  if (!image || !width || !height || !extension) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Provide a url, width, height and image extension",
+      },
+      { status: 422 }
+    );
   }
   return new ImageResponse(
     (
       <img
-        src={`https://image.tmdb.org/t/p/original/${image}.jpg`}
+        src={`https://image.tmdb.org/t/p/original/${image}.${extension}`}
         width={width}
         height={height}
       />
@@ -28,7 +32,7 @@ export async function GET(req: NextRequest) {
       width: parseInt(width),
       height: parseInt(height),
       headers: {
-        "Content-Disposition": "attachment;filename=crackle-poster.jpg",
+        "Content-Disposition": `attachment;`,
       },
     }
   );
