@@ -7,6 +7,5 @@ export const toastOptions: ToastOptions = {
     background: "#181a1d",
     color: "white",
     fontWeight: 400,
-    border: "1px solid #181a1d",
   },
 };
