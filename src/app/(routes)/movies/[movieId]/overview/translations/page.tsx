@@ -6,15 +6,35 @@ import Table from "@/components/Table";
 import TableItem from "@/components/TableItem";
 import AsideLinksTrigger from "@/components/ui/AsideLinksTrigger";
 import { fetcher } from "@/lib/api/fetcher";
+import { options } from "@/lib/api/options";
 import endpoints from "@/lib/constants/endpoints.json";
 import { CountryResponse, TranslationsResponse } from "@/types/api-response";
 import { MovieDetails } from "@/types/movie";
+import { Metadata } from "next";
 import Image from "next/image";
 import { IoLanguageSharp } from "react-icons/io5";
 
 interface TranslationPageProps {
   params: { movieId: string };
 }
+
+export const generateMetadata = async ({
+  params,
+}: TranslationPageProps): Promise<Metadata> => {
+  const response = await fetch(
+    `${endpoints.movies.movieDetails}/${params.movieId}`,
+    options
+  );
+  const movieDetails: MovieDetails = await response.json();
+  return {
+    title: `${movieDetails.title} - Translations`,
+    description: `Check translations of ${movieDetails.title} and it's overview in different languages`,
+    openGraph: {
+      title: `${movieDetails.title} - Translations`,
+      description: `Check translations of ${movieDetails.title} and it's overview in different languages`,
+    },
+  };
+};
 
 const TranslationPage = async ({ params }: TranslationPageProps) => {
   const movieDetails = await fetcher<MovieDetails>(

@@ -23,14 +23,19 @@ export const generateMetadata = async ({
 
   return {
     title: `${movieDetails.title} - Alternative Titles`,
+    description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+    openGraph: {
+      title: `${movieDetails.title} - Alternative Titles`,
+      description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+    },
   };
 };
+
 interface AltTitlesPageProps {
   params: { movieId: string };
 }
 
 const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
-  
   const movieDetails = await fetcher<MovieDetails>(
     `${endpoints.movies.movieDetails}/${params.movieId}`
   );
@@ -42,7 +47,7 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
   return (
     <Container>
       <GoBack link={`/movies/${params.movieId}/overview`}>
-        {movieDetails.original_title}
+        {movieDetails.title}
       </GoBack>
       <div className="mt-10 flex gap-4">
         <AsideLinks
