@@ -72,6 +72,7 @@ const ImageCard: FC<ImageCardProps> = ({ image, className }) => {
       <div className="group relative rounded-md border border-gray-md/30">
         <div className="animate-in absolute inset-0 grid place-items-center transition-opacity  group-hover:grid md:hidden">
           <button
+            disabled={downloading}
             onClick={async () => {
               try {
                 setDownloading(true);
@@ -85,7 +86,7 @@ const ImageCard: FC<ImageCardProps> = ({ image, className }) => {
                 setDownloading(false);
               }
             }}
-            className="grid h-8 w-8 transform place-items-center rounded-full border border-gray-md/30 bg-dark/80 shadow-md backdrop-blur-sm transition-transform hover:scale-105"
+            className="grid disabled:opacity-90 h-8 w-8 transform place-items-center rounded-full border border-gray-md/30 bg-dark/80 shadow-md backdrop-blur-sm transition-transform hover:scale-105"
           >
             {downloading ? (
               <div className="h-5 w-5 animate-spin rounded-full border-2 border-r-transparent "></div>

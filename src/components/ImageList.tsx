@@ -7,11 +7,12 @@ import { twMerge } from "tailwind-merge";
 interface ImageListProps {
   mediaId: string;
   map?: "backdrop" | "logos" | "posters";
+  type?: 'tv' | 'movie'
 }
 
-const ImageList = async ({ mediaId, map = "backdrop" }: ImageListProps) => {
+const ImageList = async ({ mediaId, map = "backdrop", type = "movie" }: ImageListProps) => {
   const images = await fetcher<ImagesResponse>(
-    `${endpoints.movies.movieDetails}/${mediaId}/images`
+    `${type == "movie" ? endpoints.movies.movieDetails : endpoints.tv.tvDetails}/${mediaId}/images`
   );
   return (
     <section
