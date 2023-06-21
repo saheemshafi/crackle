@@ -46,7 +46,6 @@ const TranslationPage = async ({ params }: TranslationPageProps) => {
   const translations = await fetcher<TvTranslationResponse>(
     `${endpoints.tv.tvDetails}/${params.seriesId}/translations`
   );
-  console.log(translations);
   const regions = await fetcher<CountryResponse>(endpoints.providers.regions);
 
   return (
