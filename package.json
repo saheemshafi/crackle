@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prod":"next build && next start"
+    "prod":"next build && next start -p 3000"
   },
   "dependencies": {
     "@types/node": "20.1.7",
