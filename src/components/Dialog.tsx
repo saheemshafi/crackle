@@ -108,7 +108,7 @@ const Dialog: FC<DialogProps> = ({ children, height, width, url }) => {
             >
                 <div className='flex py-2'>
                     <div className='flex ml-auto gap-2'>
-                        <button aria-label='Download Image' className='border border-white w-[33px] h-[33px] text-white hover:opacity-90 p-1 rounded-full grid place-items-center ml-auto' onClick={async () => {
+                        <button aria-label='Download Image' className='hidden md:grid border border-white w-[33px] h-[33px] text-white hover:opacity-90 p-1 rounded-full place-items-center ml-auto' onClick={async () => {
                             try {
                                 setDownloading(true);
                                 await downloadImage(`/${url}`, width, height);
