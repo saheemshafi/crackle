@@ -20,6 +20,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `Cast And Crew of ${tvDetails.name}`,
       description: `People who have worked on bringing ${tvDetails.name} to life`,
+      images:[`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`]
     },
   };
 };
