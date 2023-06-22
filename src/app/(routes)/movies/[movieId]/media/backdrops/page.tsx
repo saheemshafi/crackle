@@ -24,6 +24,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `4k Background Images - ${movieDetails.title}`,
       description: `Download 4k images from ${movieDetails.title}`,
+      images:[`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`]
     },
   };
 };

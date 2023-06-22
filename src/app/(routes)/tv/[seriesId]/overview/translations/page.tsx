@@ -35,6 +35,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${tvDetails.name} - Translations`,
       description: `Check translations of ${tvDetails.name} and it's overview in different languages`,
+      images:[`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`]
     },
   };
 };
@@ -46,7 +47,6 @@ const TranslationPage = async ({ params }: TranslationPageProps) => {
   const translations = await fetcher<TvTranslationResponse>(
     `${endpoints.tv.tvDetails}/${params.seriesId}/translations`
   );
-  console.log(translations);
   const regions = await fetcher<CountryResponse>(endpoints.providers.regions);
 
   return (

@@ -26,6 +26,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${movieDetails.title} - Alternative Titles`,
       description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
+      images:[`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`]
     },
   };
 };

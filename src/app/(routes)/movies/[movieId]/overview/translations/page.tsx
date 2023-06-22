@@ -32,6 +32,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${movieDetails.title} - Translations`,
       description: `Check translations of ${movieDetails.title} and it's overview in different languages`,
+      images:[`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`]
     },
   };
 };

@@ -25,6 +25,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${tvDetails.name} - Official Logos`,
       description: `See or download logos in png format for ${tvDetails.name}`,
+      images:[`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`]
     },
   };
 };

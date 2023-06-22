@@ -29,6 +29,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `Release Dates - ${movieDetails.title}`,
       description: `Check release dates of ${movieDetails.title} from different countries`,
+      images:[`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`]
     },
   };
 };

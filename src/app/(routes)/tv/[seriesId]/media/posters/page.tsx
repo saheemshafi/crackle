@@ -24,6 +24,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${tvDetails.name} - Official Posters and Cover arts`,
       description: `${tvDetails.name} - See or Download 4k posters`,
+      images:[`https://image.tmdb.org/t/p/original${tvDetails.poster_path}`]
     },
   };
 };
