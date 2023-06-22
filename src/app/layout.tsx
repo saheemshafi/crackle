@@ -21,8 +21,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  preview
 }: {
   children: React.ReactNode;
+  preview: React.ReactNode
 }) {
   const session = await getAuthUser();
   return (
@@ -35,6 +37,7 @@ export default async function RootLayout({
               <Header />
               <main className="min-h-[calc(100vh_-_60px_-_56px)]">
                 {children}
+                {preview}
               </main>
               <Footer />
             </div>
