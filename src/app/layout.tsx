@@ -1,13 +1,13 @@
-import Header from "@/components/Header";
-import "./globals.css";
-import { Inter, Work_Sans } from "next/font/google";
-import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
-import AuthSessionProvider from "@/providers/AuthSessionProvider";
-import { Metadata } from "next";
-import { GlobalProvider } from "@/providers/GlobalProvider";
-import { Toaster } from "react-hot-toast";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import { getAuthUser } from "@/lib/api/getUser";
+import AuthSessionProvider from "@/providers/AuthSessionProvider";
+import { GlobalProvider } from "@/providers/GlobalProvider";
+import { Metadata } from "next";
+import { Inter, Work_Sans } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });

@@ -1,14 +1,13 @@
-import { options } from "@/lib/api/options";
-import { ApiResponse } from "@/types/api-response";
-import endpoints from "@/lib/constants/endpoints.json";
-import { Tv } from "@/types/tv";
 import Container from "@/components/Container";
-import MediaCard from "@/components/MediaCard";
 import Filterer from "@/components/Filterer";
-import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
-import FilterTrigger from "@/components/ui/FilterTrigger";
+import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
+import FilterTrigger from "@/components/ui/FilterTrigger";
 import { fetcher } from "@/lib/api/fetcher";
+import endpoints from "@/lib/constants/endpoints.json";
+import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
+import { ApiResponse } from "@/types/api-response";
+import { Tv } from "@/types/tv";
 
 interface TvPageProps {
   searchParams: SearchParams;

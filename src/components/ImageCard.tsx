@@ -1,16 +1,11 @@
 "use client";
 
-import { toastOptions } from "@/lib/utlities/toast";
 import * as Backdrop from "@/types/backdrop";
 import Image from "next/image";
 import Link from "next/link";
-import { FC, HTMLAttributes, useState } from "react";
-import toast from "react-hot-toast";
-import { BiCheck, BiErrorAlt } from "react-icons/bi";
+import { FC, HTMLAttributes } from "react";
 import { CgMaximizeAlt } from "react-icons/cg";
-import { HiOutlineDownload } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
-import * as uuid from "uuid"
 
 interface ImageCardProps extends HTMLAttributes<HTMLDivElement> {
   image: Backdrop.Image;

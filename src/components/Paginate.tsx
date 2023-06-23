@@ -3,10 +3,9 @@ import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import { Person } from "@/types/person";
 import { Tv } from "@/types/tv";
-import { strict } from "assert";
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { Component, useEffect, useRef, useState } from "react";
-import ReactPaginate, { ReactPaginateProps } from "react-paginate";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
 
 interface PaginateProps<T> {
   items: ApiResponse<T>;

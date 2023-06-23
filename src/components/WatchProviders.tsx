@@ -1,22 +1,20 @@
 "use client";
+import { fetcher } from "@/lib/api/fetcher";
+import { clientOptions } from "@/lib/api/options";
+import endpoints from "@/lib/constants/endpoints.json";
+import { ProviderResponse } from "@/types/api-response";
+import { Country } from "@/types/country";
+import { WatchProvider } from "@/types/watch-provider";
+import Image from "next/image";
 import {
-  MouseEventHandler,
-  useState,
-  MouseEvent,
-  useEffect,
+  Dispatch,
   FC,
   SetStateAction,
-  Dispatch,
+  useEffect,
+  useState
 } from "react";
-import { Country } from "@/types/country";
-import endpoints from "@/lib/constants/endpoints.json";
-import { clientOptions, options } from "@/lib/api/options";
-import { ProviderResponse } from "@/types/api-response";
-import Image from "next/image";
-import { WatchProvider } from "@/types/watch-provider";
 import { twMerge } from "tailwind-merge";
 import Skeleton from "./ui/Skeleton";
-import { fetcher } from "@/lib/api/fetcher";
 
 interface WatchProvidersProps {
   region: Country["iso_3166_1"];

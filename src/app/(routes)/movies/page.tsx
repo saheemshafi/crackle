@@ -1,13 +1,13 @@
-import MediaCard from "@/components/MediaCard";
-import { ApiResponse } from "@/types/api-response";
-import { Movie } from "@/types/movie";
-import endpoints from "@/lib/constants/endpoints.json";
 import Container from "@/components/Container";
 import Filterer from "@/components/Filterer";
-import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
-import FilterTrigger from "@/components/ui/FilterTrigger";
+import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
+import FilterTrigger from "@/components/ui/FilterTrigger";
 import { fetcher } from "@/lib/api/fetcher";
+import endpoints from "@/lib/constants/endpoints.json";
+import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
+import { ApiResponse } from "@/types/api-response";
+import { Movie } from "@/types/movie";
 
 interface MoviesPageProps {
   searchParams: SearchParams;

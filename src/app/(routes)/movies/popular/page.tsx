@@ -1,12 +1,11 @@
 import Container from "@/components/Container";
-import endpoints from "@/lib/constants/endpoints.json";
-import { options } from "@/lib/api/options";
-import { ApiResponse } from "@/types/api-response";
-import { Movie } from "@/types/movie";
 import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
-import { SearchParams } from "@/lib/helpers/query-url";
 import { fetcher } from "@/lib/api/fetcher";
+import endpoints from "@/lib/constants/endpoints.json";
+import { SearchParams } from "@/lib/helpers/query-url";
+import { ApiResponse } from "@/types/api-response";
+import { Movie } from "@/types/movie";
 
 interface PopularMoviesProps {
   searchParams: { page: SearchParams["page"] };

@@ -1,13 +1,12 @@
 import Container from "@/components/Container";
 import MediaCard from "@/components/MediaCard";
 import Slider from "@/components/Slider";
+import { fetcher } from "@/lib/api/fetcher";
 import endpoints from "@/lib/constants/endpoints.json";
-import { options } from "@/lib/api/options";
-import { ApiResponse, GenreResponse } from "@/types/api-response";
 import { sortByGenre } from "@/lib/utlities/sorting";
+import { ApiResponse, GenreResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import { Tv } from "@/types/tv";
-import { fetcher } from "@/lib/api/fetcher";
 
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
