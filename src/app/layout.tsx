@@ -21,10 +21,12 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  preview
+  preview,
+  videoPreview,
 }: {
   children: React.ReactNode;
-  preview: React.ReactNode
+  preview: React.ReactNode;
+  videoPreview: React.ReactNode;
 }) {
   const session = await getAuthUser();
   return (
@@ -38,6 +40,7 @@ export default async function RootLayout({
               <main className="min-h-[calc(100vh_-_60px_-_56px)]">
                 {children}
                 {preview}
+                {videoPreview}
               </main>
               <Footer />
             </div>

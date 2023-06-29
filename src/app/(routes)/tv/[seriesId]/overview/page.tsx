@@ -11,6 +11,7 @@ import { MediaAccountState, VideosResponse } from "@/types/api-response";
 import Link from "next/link";
 import { Type as VideoType } from "@/types/videos";
 import { formatter } from "@/lib/helpers/date";
+import { AppendProps, Pretty } from "@/types/type-helpers";
 
 interface TvOverviewPageProps {
   params: { seriesId: string };
@@ -20,10 +21,12 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
   const session = await getAuthUser();
   const user = session?.user as UserProfile;
 
-  const seriesDetails = await fetcher<SeriesDetails & { videos: VideosResponse }>(
-    `${endpoints.tv.tvDetails}/${params.seriesId}?append_to_response=videos`
-  );
+  const seriesDetails = await fetcher<
+    AppendProps<SeriesDetails, { videos: VideosResponse }>
+  >(`${endpoints.tv.tvDetails}/${params.seriesId}?append_to_response=videos`);
+
   const videos = seriesDetails.videos.results;
+
   const accountState = await fetcher<MediaAccountState>(
     `${endpoints.tv.tvDetails}/${params.seriesId}/account_states?session_id=${user?.session_id}`,
     "",
@@ -53,8 +56,9 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
         </div>
         <div className="mt-4">
           <Link
-            href={`/videos?videoId=${videos.find((video) => video.type == VideoType.Trailer)?.key
-              }`}
+            href={`/videos?videoId=${
+              videos.find((video) => video.type == VideoType.Trailer)?.key
+            }`}
             className="button tmdb"
           >
             <BsPlayCircle size={16} /> <span>Play Trailer</span>

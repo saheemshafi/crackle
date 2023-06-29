@@ -11,6 +11,7 @@ import { fetcher } from "@/lib/api/fetcher";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Type as VideoType } from "@/types/videos";
+import { AppendProps } from "@/types/type-helpers";
 
 export const revalidate = 0;
 
@@ -23,9 +24,12 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
   try {
     session = await getAuthUser();
     user = session?.user as UserProfile;
-    movieDetails = await fetcher<MovieDetails & { videos: VideosResponse }>(
+    movieDetails = await fetcher<
+      AppendProps<MovieDetails, { videos: VideosResponse }>
+    >(
       `${endpoints.movies.movieDetails}/${params.movieId}?append_to_response=videos`
     );
+    
     videos = movieDetails.videos.results;
     accountState = await fetcher<MediaAccountState>(
       `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
