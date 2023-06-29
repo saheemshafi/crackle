@@ -29,11 +29,12 @@ const MediaCardMenu: FC<MediaCardMenuProps> = ({ type, id }) => {
       icon={<AiOutlineEllipsis size={20} />}
     >
       <ul>
-        <li>
+        {/* TODO: Add to list feature*/}
+        {/* <li>
           <button className="menu-link">
             <BsListUl size={15} className="hidden sm:inline" /> Add To List
           </button>
-        </li>
+        </li> */}
         <li>
           <button
             onClick={async () => {

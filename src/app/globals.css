@@ -29,19 +29,19 @@ button[tabIndex="-1"] {
   @apply cursor-default;
 }
 
-button.button {
+.button {
   @apply flex w-full place-items-center justify-center gap-2 rounded-sm border-transparent bg-transparent px-3 py-2 text-sm font-medium text-white outline-none placeholder:font-work-sans autofill:font-work-sans focus-visible:ring-2 focus-visible:ring-brand/50;
 }
 
-button.primary {
+.button.primary {
   @apply bg-brand/95 tracking-wide transition-colors hover:bg-brand focus-visible:bg-brand;
 }
 
-button.secondary {
+.button.secondary {
   @apply border border-gray-dark bg-transparent tracking-wide transition-colors hover:bg-gray-dark focus-visible:bg-gray-dark;
 }
 
-button.tmdb {
+.button.tmdb {
   @apply bg-tmdb-teal font-semibold uppercase tracking-wide text-gray-dark shadow-sm transition-all hover:bg-tmdb-blue hover:shadow-tmdb-blue/20;
 }
 

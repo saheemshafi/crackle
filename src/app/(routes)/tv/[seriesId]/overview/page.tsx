@@ -5,10 +5,11 @@ import endpoints from "@/lib/constants/endpoints.json";
 import { SeriesDetails } from "@/types/tv";
 import Container from "@/components/Container";
 import Image from "next/image";
-import { BsDot } from "react-icons/bs";
+import { BsDot, BsPlayCircle } from "react-icons/bs";
 import MediaPageActions from "@/components/MediaPageActions";
-import { MediaAccountState } from "@/types/api-response";
+import { MediaAccountState, VideosResponse } from "@/types/api-response";
 import Link from "next/link";
+import { Type as VideoType } from "@/types/videos";
 import { formatter } from "@/lib/helpers/date";
 
 interface TvOverviewPageProps {
@@ -19,10 +20,10 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
   const session = await getAuthUser();
   const user = session?.user as UserProfile;
 
-  const seriesDetails = await fetcher<SeriesDetails>(
-    `${endpoints.tv.tvDetails}/${params.seriesId}`
+  const seriesDetails = await fetcher<SeriesDetails & { videos: VideosResponse }>(
+    `${endpoints.tv.tvDetails}/${params.seriesId}?append_to_response=videos`
   );
-
+  const videos = seriesDetails.videos.results;
   const accountState = await fetcher<MediaAccountState>(
     `${endpoints.tv.tvDetails}/${params.seriesId}/account_states?session_id=${user?.session_id}`,
     "",
@@ -31,23 +32,34 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
 
   return (
     <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">
-      <div
-        className="w-full shrink rounded-lg sm:w-auto sm:min-w-[250px]"
-        style={{
-          background: `linear-gradient(to bottom left,#0e0f10f7,#121416),url(https://image.tmdb.org/t/p/w780${seriesDetails.backdrop_path})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <Image
-          src={`https://image.tmdb.org/t/p/w500${seriesDetails.poster_path}`}
-          alt={seriesDetails.name}
-          width={342}
-          blurDataURL="/images/image-placeholder.jpeg"
-          placeholder="blur"
-          height={600}
-          className="aspect-[2/3] w-full rounded-lg object-cover shadow-md sm:max-w-[250px]"
-        />
+      <div>
+        <div
+          className="w-full shrink rounded-lg sm:w-auto sm:min-w-[250px]"
+          style={{
+            background: `linear-gradient(to bottom left,#0e0f10f7,#121416),url(https://image.tmdb.org/t/p/w780${seriesDetails.backdrop_path})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${seriesDetails.poster_path}`}
+            alt={seriesDetails.name}
+            width={342}
+            blurDataURL="/images/image-placeholder.jpeg"
+            placeholder="blur"
+            height={600}
+            className="aspect-[2/3] w-full rounded-lg object-cover shadow-md sm:max-w-[250px]"
+          />
+        </div>
+        <div className="mt-4">
+          <Link
+            href={`/videos?videoId=${videos.find((video) => video.type == VideoType.Trailer)?.key
+              }`}
+            className="button tmdb"
+          >
+            <BsPlayCircle size={16} /> <span>Play Trailer</span>
+          </Link>
+        </div>
       </div>
       <div className="flex-1">
         <div className="rounded-md border border-gray-dark bg-dark p-3">

@@ -5,6 +5,7 @@ import { Country } from "./country";
 import { Genre } from "./genre";
 import { Dates } from "./release-date";
 import { Translation, TvTranslation } from "./translations";
+import { Video } from "./videos";
 import { WatchProvider } from "./watch-provider";
 
 export interface ApiResponse<T> {
@@ -96,4 +97,9 @@ export enum Type {
   S2 = "S2",
   S3 = "S3",
   S4 = "S4",
+}
+
+
+export interface VideosResponse {
+  results: Video[];
 }

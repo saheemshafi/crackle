@@ -27,10 +27,10 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
   const router = useRouter();
   return (
     <div className="mt-3 flex items-center gap-2">
-      {/* Pending feature */}
-      <button className="focus:text-whtie flex items-center gap-2 rounded-full border border-gray-dark p-2 text-sm text-gray-light shadow outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30">
+      {/* TODO:Add to list feature */}
+      {/* <button className="focus:text-whtie flex items-center gap-2 rounded-full border border-gray-dark p-2 text-sm text-gray-light shadow outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30">
         <BsListUl size={18} /> <span>Add To List</span>
-      </button>
+      </button> */}
 
       <button
         aria-label={
