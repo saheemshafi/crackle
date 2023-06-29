@@ -2,7 +2,6 @@ import Container from "@/components/Container";
 import Paginate from "@/components/Paginate";
 import PersonCard from "@/components/PersonCard";
 import { fetcher } from "@/lib/api/fetcher";
-import { options } from "@/lib/api/options";
 import endpoints from "@/lib/constants/endpoints.json";
 import { SearchParams } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";

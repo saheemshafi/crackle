@@ -1,12 +1,11 @@
 import Container from "@/components/Container";
 import MediaCard from "@/components/MediaCard";
-import { options } from "@/lib/api/options";
+import Paginate from "@/components/Paginate";
+import { fetcher } from "@/lib/api/fetcher";
+import endpoints from "@/lib/constants/endpoints.json";
+import { SearchParams } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
-import endpoints from "@/lib/constants/endpoints.json";
-import Paginate from "@/components/Paginate";
-import { SearchParams } from "@/lib/helpers/query-url";
-import { fetcher } from "@/lib/api/fetcher";
 
 interface TopRatedMoviesProps {
   searchParams: { page: SearchParams["page"] };

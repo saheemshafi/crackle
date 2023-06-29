@@ -1,11 +1,9 @@
 import "@/app/globals.css";
-import { Metadata } from "next";
 import MediaPageHeader from "@/components/MediaPageHeader";
-import endpoints from "@/lib/constants/endpoints.json";
 import { options } from "@/lib/api/options";
-import { MovieDetails } from "@/types/movie";
+import endpoints from "@/lib/constants/endpoints.json";
 import { SeriesDetails } from "@/types/tv";
-import { serialize } from "v8";
+import { Metadata } from "next";
 
 export const generateMetadata = async ({
   params,

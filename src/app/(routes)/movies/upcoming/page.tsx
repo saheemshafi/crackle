@@ -1,11 +1,11 @@
 import Container from "@/components/Container";
 import MediaCard from "@/components/MediaCard";
+import Paginate from "@/components/Paginate";
 import { options } from "@/lib/api/options";
+import endpoints from "@/lib/constants/endpoints.json";
+import { SearchParams } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
-import endpoints from "@/lib/constants/endpoints.json";
-import Paginate from "@/components/Paginate";
-import { SearchParams } from "@/lib/helpers/query-url";
 
 interface UpcomingMoviesProps {
   searchParams: { page: SearchParams["page"] };
