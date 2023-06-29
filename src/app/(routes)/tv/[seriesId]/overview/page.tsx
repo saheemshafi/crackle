@@ -11,7 +11,7 @@ import { MediaAccountState, VideosResponse } from "@/types/api-response";
 import Link from "next/link";
 import { Type as VideoType } from "@/types/videos";
 import { formatter } from "@/lib/helpers/date";
-import { AppendProps, Pretty } from "@/types/type-helpers";
+import { AppendProps } from "@/types/type-helpers";
 
 interface TvOverviewPageProps {
   params: { seriesId: string };

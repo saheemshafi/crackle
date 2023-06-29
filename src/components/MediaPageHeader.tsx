@@ -167,6 +167,18 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({
               Posters
             </Link>
           </li>
+          <li>
+            <Link
+              className="menu-link"
+              href={
+                type == "movie"
+                  ? `movies/${media.id}/media/videos`
+                  : `tv/${media.id}/media/videos`
+              }
+            >
+              Videos
+            </Link>
+          </li>
         </ul>
       </MenuList>
       <MenuList
