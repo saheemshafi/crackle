@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth !important;
   scroll-padding-top: 3rem;
+  scroll-margin-top: 3rem;
 }
 
 .scroll-design {
