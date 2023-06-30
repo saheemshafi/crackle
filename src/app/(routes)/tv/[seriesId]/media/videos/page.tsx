@@ -31,7 +31,6 @@ export const generateMetadata = async ({
 };
 
 const VideosPage = async ({ params }: VideosPageProps) => {
-
   const tvDetails = await fetcher<SeriesDetails>(
     `${endpoints.tv.tvDetails}/${params.seriesId}`
   );
@@ -39,10 +38,17 @@ const VideosPage = async ({ params }: VideosPageProps) => {
   return (
     <Container>
       <GoBack link={`/tv/${params.seriesId}/overview`}>{tvDetails.name}</GoBack>
-      <Suspense fallback={<Loader />}>
-        {/* @ts-expect-error */}
-        <VideoList mediaId={tvDetails.id} type="tv" />
-      </Suspense>
+      <div className="mt-10">
+        <div>
+          <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
+            Videos
+          </h1>
+        </div>
+        <Suspense fallback={<Loader />}>
+          {/* @ts-expect-error */}
+          <VideoList mediaId={tvDetails.id} type="tv" />
+        </Suspense>
+      </div>
     </Container>
   );
 };
