@@ -25,7 +25,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `4k Background Images - ${tvDetails.name}`,
       description: `Download 4k images from ${tvDetails.name}`,
-      images:[`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`]
+      images: [`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`],
     },
   };
 };
@@ -37,9 +37,7 @@ const BackdropsPage = async ({ params }: BackdropsPageProps) => {
 
   return (
     <Container>
-      <GoBack link={`/tv/${params.seriesId}/overview`}>
-        {tvDetails.name}
-      </GoBack>
+      <GoBack link={`/tv/${params.seriesId}/overview`}>{tvDetails.name}</GoBack>
       <div className="mt-10">
         <div className="flex justify-between gap-2">
           <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
@@ -48,7 +46,7 @@ const BackdropsPage = async ({ params }: BackdropsPageProps) => {
         </div>
         <Suspense fallback={<Loader />}>
           {/* @ts-expect-error server component */}
-          <ImageList mediaId={params.seriesId} type='tv'/>
+          <ImageList mediaId={params.seriesId} type="tv" />
         </Suspense>
       </div>
     </Container>

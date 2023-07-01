@@ -46,7 +46,7 @@ export default async function MoviePageLayout({
 
   return (
     <>
-      <MediaPageHeader media={tvDetails} type="tv"/>
+      <MediaPageHeader media={tvDetails} type="tv" />
       {children}
     </>
   );
