@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Type as VideoType } from "@/types/videos";
 import { formatter } from "@/lib/helpers/date";
 import { AppendProps } from "@/types/type-helpers";
+import MediaDetail from "@/components/MediaDetail";
 
 interface TvOverviewPageProps {
   params: { seriesId: string };
@@ -66,41 +67,19 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
         </div>
       </div>
       <div className="flex-1">
-        <div className="rounded-md border border-gray-dark bg-dark p-3">
-          <h1 className="font-work-sans text-xl font-semibold">
-            {seriesDetails.name}
-            <span className="font-normal text-gray-light">
-              ({new Date(seriesDetails.first_air_date).getFullYear()})
-            </span>
-          </h1>
-          <p className="mb-2 font-work-sans text-sm italic text-gray-light">
-            {seriesDetails.tagline}
-          </p>
-          <div className="flex flex-col flex-wrap items-start gap-y-2 text-sm sm:flex-row sm:items-center">
-            <span className="rounded border border-gray-md px-1 font-semibold uppercase text-gray-md">
-              {seriesDetails.original_language}
-            </span>
-            {seriesDetails.genres.map((genre) => (
-              <span
-                key={genre.id}
-                className="ml-2 flex items-center font-normal text-white"
-              >
-                <BsDot />
-                {genre.name}
-              </span>
-            ))}
-            <span className="flex items-center text-gray-light">
-              <BsDot />
-              {Math.round(seriesDetails.episode_run_time[0] / 60)}h{" "}
-              {seriesDetails.episode_run_time[0] % 60}m
-            </span>
-          </div>
-          <MediaPageActions
-            accountState={accountState}
-            type={"tv"}
-            mediaId={seriesDetails.id}
-          />
-        </div>
+        {/* @ts-expect-error */}
+        <MediaDetail
+          media={{
+            id: seriesDetails.id,
+            title: seriesDetails.name,
+            tagline: seriesDetails.tagline,
+            genres: seriesDetails.genres,
+            original_language: seriesDetails.original_language,
+            release_date: seriesDetails.first_air_date,
+            runtime: seriesDetails.episode_run_time[0],
+            media_type: "tv",
+          }}
+        />
         <div className="mt-3 rounded-md border border-gray-dark bg-dark p-3">
           <div>
             <h2 className="mb-2 font-work-sans text-lg font-medium">

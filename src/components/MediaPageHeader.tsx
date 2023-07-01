@@ -26,10 +26,7 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({
   function isMovieDetails(
     media: MovieDetails | SeriesDetails
   ): media is MovieDetails {
-    if (type == "movie") {
-      return true;
-    }
-    return false;
+    return type === "movie";
   }
 
   useEffect(() => {

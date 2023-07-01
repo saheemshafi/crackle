@@ -25,6 +25,7 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
   const session = useSession();
   const user = session.data?.user as UserProfile;
   const router = useRouter();
+  console.log(accountState);
   return (
     <div className="mt-3 flex items-center gap-2">
       {/* TODO:Add to list feature */}
