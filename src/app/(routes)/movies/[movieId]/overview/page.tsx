@@ -12,6 +12,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Type as VideoType } from "@/types/videos";
 import { AppendProps } from "@/types/type-helpers";
+import MediaDetail from "@/components/MediaDetail";
 
 export const revalidate = 0;
 
@@ -20,10 +21,8 @@ interface MovieDetailPageProps {
 }
 
 const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
-  let session, user, movieDetails, accountState, videos;
+  let movieDetails, videos;
   try {
-    session = await getAuthUser();
-    user = session?.user as UserProfile;
     movieDetails = await fetcher<
       AppendProps<MovieDetails, { videos: VideosResponse }>
     >(
@@ -31,11 +30,6 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
     );
 
     videos = movieDetails.videos.results;
-    accountState = await fetcher<MediaAccountState>(
-      `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
-      "",
-      { next: { revalidate: 0 } }
-    );
   } catch (err) {
     notFound();
   }
@@ -73,43 +67,19 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
         </div>
       </div>
       <div className="flex-1">
-        <div className="rounded-md border border-gray-dark bg-dark p-3">
-          <h1 className="font-work-sans text-xl font-semibold">
-            {movieDetails.title}
-            <span className="font-normal text-gray-light">
-              {" "}
-              ({new Date(movieDetails.release_date).getFullYear()})
-            </span>
-          </h1>
-          <p className="mb-2 font-work-sans text-sm italic text-gray-light">
-            {movieDetails.tagline}
-          </p>
-          <div className="flex flex-col flex-wrap items-start gap-y-2 text-sm sm:flex-row sm:items-center">
-            <span className="rounded border border-gray-md px-1 font-semibold uppercase text-gray-md">
-              {movieDetails.original_language}
-            </span>
-            {movieDetails.genres.map((genre) => (
-              <span
-                key={genre.id}
-                className="ml-2 flex items-center font-normal text-white"
-              >
-                <BsDot />
-                {genre.name}
-              </span>
-            ))}
-            <span className="flex items-center text-gray-light">
-              <BsDot />
-              {Math.round(movieDetails.runtime / 60)}h{" "}
-              {movieDetails.runtime % 60}m
-            </span>
-          </div>
-
-          <MediaPageActions
-            accountState={accountState}
-            type={"movie"}
-            mediaId={movieDetails.id}
-          />
-        </div>
+        {/* @ts-expect-error */}
+        <MediaDetail
+          media={{
+            id: movieDetails.id,
+            title: movieDetails.title,
+            tagline: movieDetails.tagline,
+            genres: movieDetails.genres,
+            original_language: movieDetails.original_language,
+            release_date: movieDetails.release_date,
+            runtime: movieDetails.runtime,
+            media_type: "movie",
+          }}
+        />
         <div className="mt-3 rounded-md border border-gray-dark bg-dark p-3">
           <div>
             <h2 className="mb-2 font-work-sans text-lg font-medium">
