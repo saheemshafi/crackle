@@ -1,5 +1,3 @@
-import { MovieDetails } from "@/types/movie";
-import { SeriesDetails } from "@/types/tv";
 import { HTMLAttributes } from "react";
 import { BsDot } from "react-icons/bs";
 import MediaPageActions from "./MediaPageActions";
@@ -23,14 +21,14 @@ interface MediaDetailProps {
     media_type: "tv" | "movie";
   };
   useSecondLevel?: boolean;
-  className: HTMLAttributes<HTMLDivElement>["className"];
-  children: React.ReactNode;
+  className?: HTMLAttributes<HTMLDivElement>["className"];
+  children?: React.ReactNode;
 }
 
 const MediaDetail = async ({
   media,
   useSecondLevel,
-  className,
+  className = "",
   children,
 }: MediaDetailProps) => {
   const session = await getAuthUser();

@@ -28,12 +28,6 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
 
   const videos = seriesDetails.videos.results;
 
-  const accountState = await fetcher<MediaAccountState>(
-    `${endpoints.tv.tvDetails}/${params.seriesId}/account_states?session_id=${user?.session_id}`,
-    "",
-    { next: { revalidate: 0 } }
-  );
-
   return (
     <Container classes="flex flex-col items-start gap-6 bg-gradient-to-t from-gray-dark to-dark sm:flex-row">
       <div>
