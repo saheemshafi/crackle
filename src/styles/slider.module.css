@@ -1,10 +1,6 @@
 .slider-track {
-  /* --items-on-screen: 5; */
   --gap: 0.5rem;
-  --current-slide: 0;
   gap: var(--gap);
-  transform: translateX(calc(-100% * var(--current-slide)));
-  transition: transform 1s ease-in-out;
 }
 
 @media screen and (min-width: 600px) and (max-width: 969px) {
@@ -24,7 +20,7 @@
     --items-on-screen: 5 !important;
   }
 }
-.slider-track div[data-slider-item="true"] {
+.slider-track > div {
   flex-basis: calc(100% / var(--items-on-screen) - var(--gap));
   flex-shrink: 0;
   flex-grow: 0;

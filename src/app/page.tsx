@@ -41,7 +41,7 @@ const Home = async ({}: HomeProps) => {
               }
             >
               {sortedMovies[genre.name]?.map((movie) => (
-                <MediaCard key={movie.id} sliderItem media={movie} />
+                <MediaCard key={movie.id} media={movie} />
               ))}
             </Slider>
           </Container>
@@ -61,7 +61,7 @@ const Home = async ({}: HomeProps) => {
               }
             >
               {sortedSeries[genre.name]?.map((series) => (
-                <MediaCard key={series.id} sliderItem media={series} />
+                <MediaCard key={series.id} media={series} />
               ))}
             </Slider>
           </Container>

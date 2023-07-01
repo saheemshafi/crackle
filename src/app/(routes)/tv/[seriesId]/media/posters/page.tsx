@@ -24,7 +24,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${tvDetails.name} - Official Posters and Cover arts`,
       description: `${tvDetails.name} - See or Download 4k posters`,
-      images:[`https://image.tmdb.org/t/p/original${tvDetails.poster_path}`]
+      images: [`https://image.tmdb.org/t/p/original${tvDetails.poster_path}`],
     },
   };
 };
@@ -35,9 +35,7 @@ const PostersPage = async ({ params }: PostersPageProps) => {
 
   return (
     <Container>
-      <GoBack link={`/tv/${params.seriesId}/overview`}>
-        {tvDetails.name}
-      </GoBack>
+      <GoBack link={`/tv/${params.seriesId}/overview`}>{tvDetails.name}</GoBack>
       <div className="mt-10">
         <div className="flex justify-between gap-2">
           <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">

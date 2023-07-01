@@ -18,7 +18,6 @@ const loading: FC<loadingProps> = ({}) => {
             {sliderItems.map((_, index) => (
               <div
                 key={index}
-                data-slider-item="true"
                 className="min-h-[300px] overflow-hidden rounded-md bg-gray-dark"
               >
                 <Skeleton className="h-[80%] rounded-sm" />

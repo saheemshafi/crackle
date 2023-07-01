@@ -7,13 +7,11 @@ import { SearchParams } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 
-
 interface NowPlayingPageProps {
   searchParams: { page: SearchParams["page"] };
 }
 
 const NowPlayingPage = async ({ searchParams }: NowPlayingPageProps) => {
-  
   const moviesPromise = fetcher<ApiResponse<Movie>>(
     endpoints.movies.nowPlaying,
     `?page=${searchParams["page"] || "1"}`

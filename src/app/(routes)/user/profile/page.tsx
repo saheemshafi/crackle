@@ -1,11 +1,9 @@
-import { FC } from 'react'
+import { FC } from "react";
 
-interface ProfilePageProps {
+interface ProfilePageProps {}
 
-}
+const ProfilePage: FC<ProfilePageProps> = ({}) => {
+  return <div>Profile</div>;
+};
 
-const ProfilePage: FC<ProfilePageProps> = ({ }) => {
-    return <div>Profile</div>
-}
-
-export default ProfilePage
+export default ProfilePage;

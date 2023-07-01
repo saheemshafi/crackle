@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 import endpoints from "@/lib/constants/endpoints.json";
 import { MovieDetails } from "@/types/movie";
 import InfoCard from "@/components/InfoCard";
-import {  CountryResponse, MovieAltTilesResponse } from "@/types/api-response";
+import { CountryResponse, MovieAltTilesResponse } from "@/types/api-response";
 import { Metadata } from "next";
 import Image from "next/image";
 import { getRegion } from "@/lib/helpers/format-helpers";
@@ -26,7 +26,9 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${movieDetails.title} - Alternative Titles`,
       description: `Alternative title associated with ${movieDetails.title} in different regions and languages`,
-      images:[`https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`]
+      images: [
+        `https://image.tmdb.org/t/p/original${movieDetails.backdrop_path}`,
+      ],
     },
   };
 };

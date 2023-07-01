@@ -8,18 +8,14 @@ import MediaCardMenu from "./MediaCardMenu";
 import { formatter } from "@/lib/helpers/date";
 
 interface MediaCardProps {
-  sliderItem?: boolean;
   media: Movie | Tv;
 }
 export const revalidate = 86400;
 
-const MediaCard: FC<MediaCardProps> = ({ sliderItem, media }) => {
+const MediaCard: FC<MediaCardProps> = ({ media }) => {
   return (
     <div
-      data-slider-item={sliderItem}
-      className={`${
-        sliderItem ? "" : "card"
-      } group relative isolate overflow-hidden rounded-lg shadow-md`}
+      className={`card group relative isolate overflow-hidden rounded-lg shadow-md`}
     >
       <div className="absolute right-1 top-1 z-[1] sm:right-2 sm:top-2">
         <MediaCardMenu type={isMovie(media) ? "movie" : "tv"} id={media.id} />

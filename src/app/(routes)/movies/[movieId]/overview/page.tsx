@@ -29,7 +29,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
     >(
       `${endpoints.movies.movieDetails}/${params.movieId}?append_to_response=videos`
     );
-    
+
     videos = movieDetails.videos.results;
     accountState = await fetcher<MediaAccountState>(
       `${endpoints.movies.movieDetails}/${params.movieId}/account_states?session_id=${user?.session_id}`,
