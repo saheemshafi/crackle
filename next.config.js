@@ -2,7 +2,7 @@
 const nextConfig = {
   images: {
     domains: ["image.tmdb.org"],
-    unoptimized: process.env.NODE_ENV !== "production",
+    unoptimized: true,
   },
   modularizeImports: {
     "react-icons": {
