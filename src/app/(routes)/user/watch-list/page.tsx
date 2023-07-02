@@ -26,7 +26,7 @@ const WatchlistPage = async ({}: WatchlistPageProps) => {
         // @ts-expect-error
         <MediaDetail
           key={movie.id}
-          useSecondLevel
+          useHref
           media={{
             id: movie.id,
             original_language: movie.original_language,

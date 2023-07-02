@@ -8,6 +8,7 @@ import { UserProfile } from "@/types/user";
 import endpoints from "@/lib/constants/endpoints.json";
 import { Genre } from "@/types/genre";
 import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 interface MediaDetailProps {
   media: {
@@ -20,14 +21,14 @@ interface MediaDetailProps {
     genres: Genre[];
     media_type: "tv" | "movie";
   };
-  useSecondLevel?: boolean;
+  useHref?: boolean;
   className?: HTMLAttributes<HTMLDivElement>["className"];
   children?: React.ReactNode;
 }
 
 const MediaDetail = async ({
   media,
-  useSecondLevel,
+  useHref,
   className = "",
   children,
 }: MediaDetailProps) => {
@@ -52,15 +53,22 @@ const MediaDetail = async ({
       {children}
       <div>
         {" "}
-        {useSecondLevel ? (
-          <h2 className="font-work-sans text-xl font-semibold">
+        {useHref ? (
+          <Link
+            href={
+              media.media_type == "movie"
+                ? `/movies/${media.id}/overview`
+                : `/tv/${media.id}/overview`
+            }
+            className="font-work-sans text-xl font-semibold underline decoration-gray-md/30 hover:decoration-white"
+          >
             {" "}
             {media.title}
             <span className="font-normal text-gray-light">
               {" "}
               ({new Date(media.release_date).getFullYear()})
             </span>
-          </h2>
+          </Link>
         ) : (
           <h1 className="font-work-sans text-xl font-semibold">
             {media.title}
