@@ -38,7 +38,7 @@ const VideosPage = async ({ params }: VideosPageProps) => {
 
   return (
     <Container>
-      <GoBack link={`/movie/${params.movieId}/overview`}>
+      <GoBack link={`/movies/${params.movieId}/overview`}>
         {movieDetails.title}
       </GoBack>
       <div className="mt-10">

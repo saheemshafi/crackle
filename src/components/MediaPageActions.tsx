@@ -51,7 +51,7 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
           router.refresh();
         }}
         className={twMerge(
-          "focus:text-whtie relative flex items-center gap-2 rounded-full border border-gray-dark p-2 text-sm text-gray-light shadow outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30",
+          "focus:text-whtie relative font-work-sans flex items-center gap-2 rounded-full border border-gray-dark p-2 text-sm text-gray-light shadow-sm outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30",
           accountState.watchlist && "bg-gray-dark text-brand hover:text-brand"
         )}
       >

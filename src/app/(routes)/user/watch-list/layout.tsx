@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import Container from "@/components/Container";
+import Tablist from "@/components/Tablist";
 import { getAuthUser } from "@/lib/api/getUser";
 import { UserProfile } from "@/types/user";
 import { Metadata } from "next";
@@ -27,9 +28,17 @@ export default async function WatchlistLayout({
   }
   return (
     <Container classes="sm:bg-gradient-to-t sm:from-gray-dark sm:to-dark">
-      <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
-        My Watchlist
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
+          My Watchlist
+        </h1>
+        <Tablist
+          links={[
+            { name: "Movies", path: "/user/watch-list" },
+            { name: "Series", path: "/user/watch-list/tv" },
+          ]}
+        />
+      </div>
       {children}
     </Container>
   );
