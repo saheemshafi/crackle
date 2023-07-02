@@ -27,7 +27,7 @@ export default async function WatchlistLayout({
     redirect("/auth?callbackUrl=/user/watch-list");
   }
   return (
-    <Container classes="sm:bg-gradient-to-t sm:from-gray-dark sm:to-dark">
+    <Container classes="min-h-[calc(100vh_-_56px)]">
       <div className="flex items-center justify-between">
         <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
           My Watchlist
