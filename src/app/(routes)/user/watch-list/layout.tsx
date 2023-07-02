@@ -4,7 +4,6 @@ import Tablist from "@/components/Tablist";
 import { getAuthUser } from "@/lib/api/getUser";
 import { UserProfile } from "@/types/user";
 import { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {

@@ -1,18 +1,15 @@
-import Image from "next/image";
-import endpoints from "@/lib/constants/endpoints.json";
-import { MovieDetails } from "@/types/movie";
-import { BsDot, BsPlayCircle } from "react-icons/bs";
-import MediaPageActions from "@/components/MediaPageActions";
-import { UserProfile } from "@/types/user";
-import { MediaAccountState, VideosResponse } from "@/types/api-response";
 import Container from "@/components/Container";
-import { getAuthUser } from "@/lib/api/getUser";
+import MediaDetail from "@/components/MediaDetail";
 import { fetcher } from "@/lib/api/fetcher";
+import endpoints from "@/lib/constants/endpoints.json";
+import { VideosResponse } from "@/types/api-response";
+import { MovieDetails } from "@/types/movie";
+import { AppendProps } from "@/types/type-helpers";
+import { Type as VideoType } from "@/types/videos";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Type as VideoType } from "@/types/videos";
-import { AppendProps } from "@/types/type-helpers";
-import MediaDetail from "@/components/MediaDetail";
+import { BsPlayCircle } from "react-icons/bs";
 
 export const revalidate = 0;
 

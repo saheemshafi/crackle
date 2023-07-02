@@ -1,18 +1,17 @@
+import Container from "@/components/Container";
+import MediaDetail from "@/components/MediaDetail";
 import { fetcher } from "@/lib/api/fetcher";
 import { getAuthUser } from "@/lib/api/getUser";
-import { UserProfile } from "@/types/user";
 import endpoints from "@/lib/constants/endpoints.json";
-import { SeriesDetails } from "@/types/tv";
-import Container from "@/components/Container";
-import Image from "next/image";
-import { BsDot, BsPlayCircle } from "react-icons/bs";
-import MediaPageActions from "@/components/MediaPageActions";
-import { MediaAccountState, VideosResponse } from "@/types/api-response";
-import Link from "next/link";
-import { Type as VideoType } from "@/types/videos";
 import { formatter } from "@/lib/helpers/date";
+import { VideosResponse } from "@/types/api-response";
+import { SeriesDetails } from "@/types/tv";
 import { AppendProps } from "@/types/type-helpers";
-import MediaDetail from "@/components/MediaDetail";
+import { UserProfile } from "@/types/user";
+import { Type as VideoType } from "@/types/videos";
+import Image from "next/image";
+import Link from "next/link";
+import { BsPlayCircle } from "react-icons/bs";
 
 interface TvOverviewPageProps {
   params: { seriesId: string };
