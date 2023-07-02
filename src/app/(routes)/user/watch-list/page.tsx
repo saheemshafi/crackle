@@ -8,15 +8,15 @@ import { ApiResponse, GenreResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
 import MediaDetail from "@/components/MediaDetail";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 interface WatchlistPageProps {}
 
 const WatchlistPage = async ({}: WatchlistPageProps) => {
   const session = await getAuthUser();
   const user = session?.user as UserProfile;
-  if (!user) {
-    signIn();
-    return;
+  if (!session && !user) {
+    redirect("/auth?callbackUrl=/user/watch-list");
   }
   const genres = await fetcher<GenreResponse>(endpoints.genres.movie);
   const movies = await fetcher<ApiResponse<Movie>>(
@@ -43,15 +43,15 @@ const WatchlistPage = async ({}: WatchlistPageProps) => {
               ),
               media_type: "movie",
             }}
-            className="my-4 sm:flex gap-4 relative isolate overflow-hidden"
+            className="relative isolate my-4 gap-4 overflow-hidden sm:flex"
           >
-            <div className="-my-3 -ml-3 shrink-0 absolute inset-0 sm:relative -z-[1]">
-              <div className="absolute sm:hidden inset-0 bg-gradient-to-r from-gray-dark to-dark/95  z-1"></div>
+            <div className="absolute inset-0 -z-[1] -my-3 -ml-3 shrink-0 sm:relative">
+              <div className="z-1 absolute inset-0 bg-gradient-to-r from-gray-dark to-dark/95  sm:hidden"></div>
               <Image
                 src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
                 width={300}
                 height={300}
-                className="aspect-[2/3] hidden sm:block sm:w-[100px]"
+                className="hidden aspect-[2/3] sm:block sm:w-[100px]"
                 alt={movie.title}
               />
               <Image
