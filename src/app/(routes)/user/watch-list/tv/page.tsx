@@ -1,59 +1,60 @@
 import { fetcher } from "@/lib/api/fetcher";
 import { getAuthUser } from "@/lib/api/getUser";
+import { GenreResponse, ApiResponse } from "@/types/api-response";
 import { UserProfile } from "@/types/user";
 import endpoints from "@/lib/constants/endpoints.json";
-import { ApiResponse, GenreResponse } from "@/types/api-response";
-import { Movie } from "@/types/movie";
-import MediaDetail from "@/components/MediaDetail";
+import { Tv } from "@/types/tv";
 import Image from "next/image";
+import MediaDetail from "@/components/MediaDetail";
 import { Metadata } from "next";
 
-export const metadata:Metadata={
-  title:'Your Watchlist - Movies'
-}
-interface WatchlistPageProps {}
+export const metadata: Metadata = {
+  title: "Your Watchlist - Tv Series",
+};
 
-const WatchlistPage = async ({}: WatchlistPageProps) => {
+interface TvWatchlistPageProps {}
+
+const TvWatchlistPage = async ({}: TvWatchlistPageProps) => {
   const session = await getAuthUser();
   const user = session?.user as UserProfile;
-  const genres = await fetcher<GenreResponse>(endpoints.genres.movie);
-  const movies = await fetcher<ApiResponse<Movie>>(
-    `${endpoints.actions.watchlist}/movies?session_id=${user.session_id}`
+  const genres = await fetcher<GenreResponse>(endpoints.genres.tv);
+  const series = await fetcher<ApiResponse<Tv>>(
+    `${endpoints.actions.watchlist}/tv?session_id=${user.session_id}`
   );
   return (
     <div>
-      {movies.results.map((movie) => (
+      {series.results.map((series) => (
         // @ts-expect-error
         <MediaDetail
-          key={movie.id}
+          key={series.id}
           useSecondLevel
           media={{
-            id: movie.id,
-            original_language: movie.original_language,
-            release_date: movie.release_date,
-            title: movie.title,
+            id: series.id,
+            original_language: series.original_language,
+            release_date: series.first_air_date,
+            title: series.name,
             genres: genres.genres.filter((genre) =>
-              movie.genre_ids.includes(genre.id)
+              series.genre_ids.includes(genre.id)
             ),
-            media_type: "movie",
+            media_type: "tv",
           }}
           className="relative isolate my-4 gap-4 overflow-hidden sm:flex"
         >
           <div className="absolute inset-0 -z-[1] -my-3 -ml-3 shrink-0 sm:relative">
             <div className="z-1 absolute inset-0 bg-gradient-to-r from-gray-dark to-dark/95  sm:hidden"></div>
             <Image
-              src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w342/${series.poster_path}`}
               width={300}
               height={300}
               className="hidden aspect-[2/3] sm:block sm:w-[100px]"
-              alt={movie.title}
+              alt={series.name}
             />
             <Image
-              src={`https://image.tmdb.org/t/p/w342/${movie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w342/${series.backdrop_path}`}
               width={300}
               height={300}
               className="aspect-video h-full w-full object-cover sm:hidden"
-              alt={movie.title}
+              alt={series.name}
             />
           </div>
         </MediaDetail>
@@ -62,4 +63,4 @@ const WatchlistPage = async ({}: WatchlistPageProps) => {
   );
 };
 
-export default WatchlistPage;
+export default TvWatchlistPage;
