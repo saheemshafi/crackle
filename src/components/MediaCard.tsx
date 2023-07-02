@@ -14,9 +14,7 @@ export const revalidate = 86400;
 
 const MediaCard: FC<MediaCardProps> = ({ media }) => {
   return (
-    <div
-      className={`card group relative isolate overflow-hidden rounded-lg shadow-md`}
-    >
+    <div className={`card group relative isolate overflow-hidden rounded-lg`}>
       <div className="absolute right-1 top-1 z-[1] sm:right-2 sm:top-2">
         <MediaCardMenu type={isMovie(media) ? "movie" : "tv"} id={media.id} />
       </div>
@@ -48,7 +46,10 @@ const MediaCard: FC<MediaCardProps> = ({ media }) => {
           }
           className="block outline-none focus-visible:rounded-sm focus-visible:ring-2 focus-visible:ring-brand/50"
         >
-          <p className="font-work-sans text-sm font-semibold leading-snug hover:text-gray-200">
+          <p
+            title={isMovie(media) ? media.title : media.name}
+            className="line-clamp-3 font-work-sans text-sm font-semibold leading-snug hover:text-gray-200"
+          >
             {isMovie(media) ? media.title : media.name}
           </p>
         </Link>

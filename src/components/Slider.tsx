@@ -18,7 +18,7 @@ const Slider: FC<SliderProps> = ({ children, title }) => {
           </h2>
         )}
       </div>
-      <div className={`scroll-design w-full overflow-auto`}>
+      <div className={`scroll-design w-full overflow-auto pb-2`}>
         <div className={`${styles["slider-track"]} flex w-full`}>
           {children}
         </div>

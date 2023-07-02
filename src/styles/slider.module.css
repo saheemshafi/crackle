@@ -22,6 +22,7 @@
 }
 .slider-track > div {
   flex-basis: calc(100% / var(--items-on-screen) - var(--gap));
+  max-width: calc(100% / var(--items-on-screen) - var(--gap));
   flex-shrink: 0;
   flex-grow: 0;
 }

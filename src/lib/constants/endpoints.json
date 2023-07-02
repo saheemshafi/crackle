@@ -40,6 +40,12 @@
     "watchlist": "https://api.themoviedb.org/3/account/null/watchlist",
     "favourite": "https://api.themoviedb.org/3/account/null/favorite"
   },
+  "trending": {
+    "all": "https://api.themoviedb.org/3/trending/all",
+    "movies": "https://api.themoviedb.org/3/trending/movie",
+    "people": "https://api.themoviedb.org/3/trending/person",
+    "tv": "https://api.themoviedb.org/3/trending/tv"
+  },
   "configuration": {
     "languages": "https://api.themoviedb.org/3/configuration/languages"
   }

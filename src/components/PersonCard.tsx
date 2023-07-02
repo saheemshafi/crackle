@@ -3,17 +3,27 @@ import { KnownFor, Person } from "@/types/person";
 import { Tv } from "@/types/tv";
 import Image from "next/image";
 import Link from "next/link";
-import { FC, AllHTMLAttributes } from "react";
+import { FC, HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface PersonCardProps {
   person: Person;
-  classes?: AllHTMLAttributes<HTMLDivElement>["className"];
+  className?: HTMLAttributes<HTMLDivElement>["className"];
 }
 
-const PersonCard: FC<PersonCardProps> = ({ person, classes }) => {
+const PersonCard: FC<PersonCardProps> = ({ person, className }) => {
   return (
-    <div className="rounded-md border border-gray-dark p-2 transition-colors bg-gradient-to-t hover:from-zinc-900 hover:to-transparent md:p-3">
-      <Link title={person.name} href={`/people/${person.id}`} className="-m-2 mb-1 overflow-hidden rounded-sm md:m-0 md:mb-0 block">
+    <div
+      className={twMerge(
+        "rounded-md border border-gray-dark bg-gradient-to-t p-2 transition-colors hover:from-zinc-900 hover:to-transparent md:p-3",
+        className
+      )}
+    >
+      <Link
+        title={person.name}
+        href={`/people/${person.id}`}
+        className="-m-2 mb-1 block overflow-hidden rounded-sm md:m-0 md:mb-0"
+      >
         <Image
           src={`https://image.tmdb.org/t/p/w300/${person.profile_path}`}
           width={300}
@@ -23,8 +33,10 @@ const PersonCard: FC<PersonCardProps> = ({ person, classes }) => {
         />
       </Link>
       <div className="mt-3">
-        <Link href={`/people/${person.id}`}><p className="font-work-sans font-medium leading-5">{person.name}</p></Link>
-        <div className="truncate text-xs sm:text-sm text-gray-light">
+        <Link href={`/people/${person.id}`}>
+          <p className="font-work-sans font-medium leading-5">{person.name}</p>
+        </Link>
+        <div className="truncate text-xs text-gray-light sm:text-sm">
           <span className="hidden font-medium lg:inline">Known For:</span>{" "}
           {person.known_for.map((known_for) => (
             <span
