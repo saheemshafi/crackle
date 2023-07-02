@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { toast } from "react-hot-toast";
 import { BiInfoCircle, BiTagAlt } from "react-icons/bi";
-import { BsListUl } from "react-icons/bs";
 import { RxCross1 } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 

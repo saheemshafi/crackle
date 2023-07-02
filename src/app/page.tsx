@@ -1,72 +1,119 @@
 import Container from "@/components/Container";
 import MediaCard from "@/components/MediaCard";
+import PersonCard from "@/components/PersonCard";
 import Slider from "@/components/Slider";
 import { fetcher } from "@/lib/api/fetcher";
 import endpoints from "@/lib/constants/endpoints.json";
-import { sortByGenre } from "@/lib/utlities/sorting";
-import { ApiResponse, GenreResponse } from "@/types/api-response";
+import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
+import { Person } from "@/types/person";
 import { Tv } from "@/types/tv";
+import { AppendProps } from "@/types/type-helpers";
 
 interface HomeProps {}
 const Home = async ({}: HomeProps) => {
-  const moviesPromise = fetcher<ApiResponse<Movie>>(endpoints.discover.movies);
-  const seriesPromise = fetcher<ApiResponse<Tv>>(endpoints.discover.tv);
-  const moviesGenrePromise = fetcher<GenreResponse>(endpoints.genres.movie);
-  const seriesGenrePromise = fetcher<GenreResponse>(endpoints.genres.tv);
+  const trendingPromise = fetcher<
+    ApiResponse<
+      | AppendProps<Movie, { media_type: "movie" | "tv" | "person" }>
+      | AppendProps<Tv, { media_type: "movie" | "tv" | "person" }>
+      | AppendProps<Person, { media_type: "movie" | "tv" | "person" }>
+    >
+  >(`${endpoints.trending.all}/week`);
+  const trendingMoviesPromise = fetcher<ApiResponse<Movie>>(
+    `${endpoints.trending.movies}/day`
+  );
+  const trendingSeriesPromise = fetcher<ApiResponse<Movie>>(
+    `${endpoints.trending.tv}/day`
+  );
 
-  const [movies, series, genres, seriesGenres] = await Promise.all([
-    moviesPromise,
-    seriesPromise,
-    moviesGenrePromise,
-    seriesGenrePromise,
+  const trendingPeoplePromise = fetcher<ApiResponse<Person>>(
+    `${endpoints.trending.people}/day`
+  );
+
+  const [all, movies, series, people] = await Promise.all([
+    trendingPromise,
+    trendingMoviesPromise,
+    trendingSeriesPromise,
+    trendingPeoplePromise,
   ]);
-
-  const sortedMovies = sortByGenre(movies.results, genres);
-  const sortedSeries = sortByGenre(series.results, seriesGenres);
 
   return (
     <>
-      {genres.genres.map((genre) =>
-        sortedMovies[genre.name]?.length > 0 ? (
-          <Container key={genre.id} id={`movie-${genre.name.toLowerCase()}`}>
-            <Slider
-              title={
-                <>
-                  <span>{genre.name}</span>
-                  <span className="ml-2 inline-block rounded border border-gray-md/50 px-1.5 py-0.5 font-work-sans text-xs uppercase text-gray-light">
-                    Movies
-                  </span>
-                </>
-              }
-            >
-              {sortedMovies[genre.name]?.map((movie) => (
-                <MediaCard key={movie.id} media={movie} />
-              ))}
-            </Slider>
-          </Container>
-        ) : null
-      )}
-      {seriesGenres.genres.map((genre) =>
-        sortedSeries[genre.name]?.length > 0 ? (
-          <Container key={genre.id} id={`series-${genre.name.toLowerCase()}`}>
-            <Slider
-              title={
-                <>
-                  <span>{genre.name}</span>
-                  <span className="ml-2 inline-block rounded border border-gray-md/50 px-1.5 py-0.5 font-work-sans text-xs uppercase text-gray-light">
-                    Series
-                  </span>
-                </>
-              }
-            >
-              {sortedSeries[genre.name]?.map((series) => (
-                <MediaCard key={series.id} media={series} />
-              ))}
-            </Slider>
-          </Container>
-        ) : null
-      )}
+      <Container id="trending-all">
+        <Slider
+          title={
+            <>
+              <span>Trending</span>
+              <span className="ml-2 inline-block rounded border border-gray-md/50 px-1.5 py-0.5 font-work-sans text-xs uppercase text-gray-light">
+                All
+              </span>
+            </>
+          }
+        >
+          {all.results.map((item) =>
+            item.media_type == "movie" ? (
+              <MediaCard media={item as Movie} key={item.id} />
+            ) : item.media_type == "tv" ? (
+              <MediaCard media={item as Tv} key={item.id} />
+            ) : (
+              <PersonCard person={item as Person} key={item.id} />
+            )
+          )}
+        </Slider>
+      </Container>
+
+      <Container id="trending-movies">
+        <Slider
+          title={
+            <>
+              <span>Trending</span>
+              <span className="ml-2 inline-block rounded border border-gray-md/50 px-1.5 py-0.5 font-work-sans text-xs uppercase text-gray-light">
+                Movies
+              </span>
+            </>
+          }
+        >
+          {movies.results.map((movie) => (
+            <MediaCard key={movie.id} media={movie} />
+          ))}
+        </Slider>
+      </Container>
+
+      <Container id="trending-series">
+        <Slider
+          title={
+            <>
+              <span>Trending</span>
+              <span className="ml-2 inline-block rounded border border-gray-md/50 px-1.5 py-0.5 font-work-sans text-xs uppercase text-gray-light">
+                Series
+              </span>
+            </>
+          }
+        >
+          {series.results.map((series) => (
+            <MediaCard key={series.id} media={series} />
+          ))}
+        </Slider>
+      </Container>
+
+      <Container id="trending-people">
+        <Slider
+          title={
+            <>
+              <span>Trending</span>
+              <span className="ml-2 inline-block rounded border border-gray-md/50 px-1.5 py-0.5 font-work-sans text-xs uppercase text-gray-light">
+                People
+              </span>
+            </>
+          }
+        >
+          {people.results.map((person) => (
+            <div key={person.id} className="shrink-0 grow-0">
+              <PersonCard key={person.id} person={person} />
+            </div>
+          ))}
+        </Slider>
+      </Container>
     </>
   );
 };
