@@ -10,6 +10,7 @@ import { FC } from "react";
 import { toast } from "react-hot-toast";
 import { BiInfoCircle, BiTagAlt } from "react-icons/bi";
 import { BsListUl } from "react-icons/bs";
+import { RxCross1 } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 
 interface MediaPageActionsProps {
@@ -55,7 +56,12 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
           accountState.watchlist && "bg-gray-dark text-brand hover:text-brand"
         )}
       >
-        <BiTagAlt size={18} />
+        {accountState.watchlist ? (
+          <RxCross1 size={18} className="animate-in" />
+        ) : (
+          <BiTagAlt className="animate-in" size={18} />
+        )}{" "}
+        <span>Watchlist</span>
       </button>
     </div>
   );
