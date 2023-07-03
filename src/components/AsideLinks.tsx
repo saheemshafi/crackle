@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { BiX } from "react-icons/bi";
 import { twMerge } from "tailwind-merge";
 import Button from "./ui/Button";
+import EmptyState from "./EmptyState";
 
 interface AsideLinksProps {
   title: string | JSX.Element | null;
@@ -21,16 +22,17 @@ const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
   const links = Array.from(uniqueLinks);
   const { mobileAsideLinksOpen, setMobileAsideLinksOpen } =
     useContext(GlobalContext);
+
   return (
     <aside
       className={twMerge(
-        "scroll-design fixed inset-0 top-[56px] z-[21] shrink-0 grow-0 self-start overflow-y-auto rounded-md bg-dark/[98%] p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto sm:z-0  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-none sm:bg-gray-dark/30 sm:p-0",
+        "scroll-design fixed inset-0 top-[56px] z-[21] shrink-0 grow-0 self-start overflow-y-auto bg-dark/[98%] p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto sm:z-0  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-lg sm:bg-gray-dark/30 sm:p-0",
         mobileAsideLinksOpen ? "animate-in block shadow-lg" : "hidden"
       )}
     >
       <div className="sticky top-0 flex items-center justify-between gap-2 rounded-lg border border-gray-md/30 bg-gray-dark px-3 py-2 font-work-sans font-medium shadow-md sm:static sm:border-none">
         <p>{title}</p>
-        <span className="hidden px-1 items-center justify-center rounded bg-gray-md/30 sm:flex">
+        <span className="hidden items-center justify-center rounded bg-gray-md/30 px-1 sm:flex">
           {items.length}
         </span>
         <Button
@@ -45,17 +47,25 @@ const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
         />
       </div>
       <div onClick={(e) => setMobileAsideLinksOpen(false)}>
-        <ul className="scroll-design p-2 sm:max-h-[600px] sm:overflow-y-auto">
-          {links.map((item) => (
-            <li key={item}>
-              <Link className="menu-link" href={`${link}#${item}`}>
-                {(getRegion(regions || [], item) || "")?.length > 0
-                  ? getRegion(regions || [], item)
-                  : item}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {
+          <ul className="scroll-design p-2 sm:max-h-[600px] sm:overflow-y-auto">
+            {links.length > 0 ? (
+              links.map((item) => (
+                <li key={item}>
+                  <Link className="menu-link" href={`${link}#${item}`}>
+                    {(getRegion(regions || [], item) || "")?.length > 0
+                      ? getRegion(regions || [], item)
+                      : item}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li className="py-2 font-work-sans text-sm text-gray-light">
+                No {title} found
+              </li>
+            )}
+          </ul>
+        }
       </div>
     </aside>
   );

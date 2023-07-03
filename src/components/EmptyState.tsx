@@ -12,7 +12,7 @@ const EmptyState: FC<EmptyStateProps> = ({ actions, title, description }) => {
   return (
     <div className="grid place-items-center py-24 text-gray-light">
       <div className="mb-6 text-center font-work-sans ">
-        <div className="mb-2 text-3xl font-semibold">{title}</div>
+        <div className="mb-2 text-2xl sm:text-3xl font-semibold">{title}</div>
         <p className="max-w-lg">{description}</p>
       </div>
       {actions && (

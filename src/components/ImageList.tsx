@@ -3,17 +3,35 @@ import endpoints from "@/lib/constants/endpoints.json";
 import ImageCard from "./ImageCard";
 import { ImagesResponse } from "@/types/api-response";
 import { twMerge } from "tailwind-merge";
+import EmptyState from "./EmptyState";
+import { Pretty } from "@/types/type-helpers";
 
 interface ImageListProps {
   mediaId: string;
-  map?: "backdrop" | "logos" | "posters";
-  type?: 'tv' | 'movie'
+  map?: Exclude<keyof ImagesResponse, "id">;
+  type?: "tv" | "movie";
 }
 
-const ImageList = async ({ mediaId, map = "backdrop", type = "movie" }: ImageListProps) => {
+const ImageList = async ({
+  mediaId,
+  map = "backdrops",
+  type = "movie",
+}: ImageListProps) => {
   const images = await fetcher<ImagesResponse>(
-    `${type == "movie" ? endpoints.movies.movieDetails : endpoints.tv.tvDetails}/${mediaId}/images`
+    `${
+      type == "movie" ? endpoints.movies.movieDetails : endpoints.tv.tvDetails
+    }/${mediaId}/images`
   );
+
+  if (images[map].length == 0) {
+    return (
+      <EmptyState
+        title={`Oops!`}
+        description={`There are no ${map} present for this media`}
+      />
+    );
+  }
+
   return (
     <section
       className={twMerge(
@@ -23,7 +41,7 @@ const ImageList = async ({ mediaId, map = "backdrop", type = "movie" }: ImageLis
           : ""
       )}
     >
-      {map == "backdrop" &&
+      {map == "backdrops" &&
         images.backdrops.map((backdrop) => (
           <ImageCard key={backdrop.file_path} image={backdrop} />
         ))}
