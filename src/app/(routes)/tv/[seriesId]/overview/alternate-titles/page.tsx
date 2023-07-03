@@ -1,10 +1,7 @@
 import Container from "@/components/Container";
 import endpoints from "@/lib/constants/endpoints.json";
 import InfoCard from "@/components/InfoCard";
-import {
-  CountryResponse,
-  TvAltTitles,
-} from "@/types/api-response";
+import { CountryResponse, TvAltTitles } from "@/types/api-response";
 import { Metadata } from "next";
 import Image from "next/image";
 import { getRegion } from "@/lib/helpers/format-helpers";
@@ -15,6 +12,7 @@ import TableItem from "@/components/TableItem";
 import GoBack from "@/components/GoBack";
 import { fetcher } from "@/lib/api/fetcher";
 import { SeriesDetails } from "@/types/tv";
+import EmptyState from "@/components/EmptyState";
 
 export const generateMetadata = async ({
   params,
@@ -29,7 +27,7 @@ export const generateMetadata = async ({
     openGraph: {
       title: `${tvDetails.name} - Alternative Titles`,
       description: `Alternative title associated with ${tvDetails.name} in different regions and languages`,
-      images:[`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`]
+      images: [`https://image.tmdb.org/t/p/original${tvDetails.backdrop_path}`],
     },
   };
 };
@@ -65,46 +63,53 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
             </h1>
             <AsideLinksTrigger />
           </div>
-          <div className="mt-3 grid gap-3">
-            {altTitles.results.map(async (title) => (
-              <InfoCard
-                key={title.iso_3166_1}
-                id={title.iso_3166_1}
-                title={
-                  <>
-                    <Image
-                      src={`https://flagcdn.com/80x60/${title.iso_3166_1.toLowerCase()}.png`}
-                      width={100}
-                      height={100}
-                      alt="Release Date"
-                      className="inline aspect-video h-5 w-5 object-contain"
-                    />{" "}
-                    <span>
-                      {(getRegion(regions.results, title.iso_3166_1) || "")
-                        .length > 0
-                        ? getRegion(regions.results, title.iso_3166_1)
-                        : title.iso_3166_1}
-                    </span>
-                  </>
-                }
-              >
-                <Table
-                  head={
-                    <tr>
-                      <TableItem className="w-1/2 sm:w-2/3">Title</TableItem>
-                      <TableItem>Type</TableItem>
-                    </tr>
+          {altTitles.results.length > 0 ? (
+            <div className="mt-3 grid gap-3">
+              {altTitles.results.map(async (title) => (
+                <InfoCard
+                  key={title.iso_3166_1}
+                  id={title.iso_3166_1}
+                  title={
+                    <>
+                      <Image
+                        src={`https://flagcdn.com/80x60/${title.iso_3166_1.toLowerCase()}.png`}
+                        width={100}
+                        height={100}
+                        alt="Release Date"
+                        className="inline aspect-video h-5 w-5 object-contain"
+                      />{" "}
+                      <span>
+                        {(getRegion(regions.results, title.iso_3166_1) || "")
+                          .length > 0
+                          ? getRegion(regions.results, title.iso_3166_1)
+                          : title.iso_3166_1}
+                      </span>
+                    </>
                   }
-                  rows={
-                    <tr>
-                      <TableItem>{title.title}</TableItem>
-                      <TableItem>{title.type}</TableItem>
-                    </tr>
-                  }
-                />
-              </InfoCard>
-            ))}
-          </div>
+                >
+                  <Table
+                    head={
+                      <tr>
+                        <TableItem className="w-1/2 sm:w-2/3">Title</TableItem>
+                        <TableItem>Type</TableItem>
+                      </tr>
+                    }
+                    rows={
+                      <tr>
+                        <TableItem>{title.title}</TableItem>
+                        <TableItem>{title.type}</TableItem>
+                      </tr>
+                    }
+                  />
+                </InfoCard>
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title="No Alternate Titles!"
+              description="There are no alternate titles present for this media"
+            />
+          )}
         </div>
       </div>
     </Container>

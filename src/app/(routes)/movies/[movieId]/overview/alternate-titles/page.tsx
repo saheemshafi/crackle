@@ -12,6 +12,7 @@ import Table from "@/components/Table";
 import TableItem from "@/components/TableItem";
 import GoBack from "@/components/GoBack";
 import { fetcher } from "@/lib/api/fetcher";
+import EmptyState from "@/components/EmptyState";
 
 export const generateMetadata = async ({
   params,
@@ -66,44 +67,51 @@ const AltTitlesPage = async ({ params }: AltTitlesPageProps) => {
             <AsideLinksTrigger />
           </div>
           <div className="mt-3 grid gap-3">
-            {altTitles.titles.map(async (title) => (
-              <InfoCard
-                key={title.iso_3166_1}
-                id={title.iso_3166_1}
-                title={
-                  <>
-                    <Image
-                      src={`https://flagcdn.com/80x60/${title.iso_3166_1.toLowerCase()}.png`}
-                      width={100}
-                      height={100}
-                      alt="Release Date"
-                      className="inline aspect-video h-5 w-5 object-contain"
-                    />{" "}
-                    <span>
-                      {(getRegion(regions.results, title.iso_3166_1) || "")
-                        .length > 0
-                        ? getRegion(regions.results, title.iso_3166_1)
-                        : title.iso_3166_1}
-                    </span>
-                  </>
-                }
-              >
-                <Table
-                  head={
-                    <tr>
-                      <TableItem className="w-1/2 sm:w-2/3">Title</TableItem>
-                      <TableItem>Type</TableItem>
-                    </tr>
+            {altTitles.titles.length > 0 ? (
+              altTitles.titles.map(async (title) => (
+                <InfoCard
+                  key={title.iso_3166_1}
+                  id={title.iso_3166_1}
+                  title={
+                    <>
+                      <Image
+                        src={`https://flagcdn.com/80x60/${title.iso_3166_1.toLowerCase()}.png`}
+                        width={100}
+                        height={100}
+                        alt="Release Date"
+                        className="inline aspect-video h-5 w-5 object-contain"
+                      />{" "}
+                      <span>
+                        {(getRegion(regions.results, title.iso_3166_1) || "")
+                          .length > 0
+                          ? getRegion(regions.results, title.iso_3166_1)
+                          : title.iso_3166_1}
+                      </span>
+                    </>
                   }
-                  rows={
-                    <tr>
-                      <TableItem>{title.title}</TableItem>
-                      <TableItem>{title.type}</TableItem>
-                    </tr>
-                  }
-                />
-              </InfoCard>
-            ))}
+                >
+                  <Table
+                    head={
+                      <tr>
+                        <TableItem className="w-1/2 sm:w-2/3">Title</TableItem>
+                        <TableItem>Type</TableItem>
+                      </tr>
+                    }
+                    rows={
+                      <tr>
+                        <TableItem>{title.title}</TableItem>
+                        <TableItem>{title.type}</TableItem>
+                      </tr>
+                    }
+                  />
+                </InfoCard>
+              ))
+            ) : (
+              <EmptyState
+                title="No Alternate Titles!"
+                description="There are no alternate titles present for this media"
+              />
+            )}
           </div>
         </div>
       </div>

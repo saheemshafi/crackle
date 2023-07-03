@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import EmptyState from "@/components/EmptyState";
 import Filterer from "@/components/Filterer";
 import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
@@ -30,15 +31,26 @@ const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
             </h1>
             <FilterTrigger />
           </div>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
-            {movies.results.map((movie) => (
-              <MediaCard key={movie.id} media={movie} />
-            ))}
-          </div>
+          {movies.results.length > 0 ? (
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
+              {movies.results.map((movie) => (
+                <MediaCard key={movie.id} media={movie} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title="Oops!"
+              description="Seems we can't find any movies"
+              actions={[
+                { title: "Home", path: "/" },
+                { title: "Discover Series", path: "/tv" },
+              ]}
+            />
+          )}
         </div>
         <Filterer type="movie" />
       </div>
-      <Paginate items={movies} />
+      {movies.results.length > 0 && <Paginate items={movies} />}
     </Container>
   );
 };

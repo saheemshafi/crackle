@@ -133,8 +133,8 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({
               className="menu-link"
               href={
                 type == "movie"
-                  ? `movies/${media.id}/media/backdrops`
-                  : `tv/${media.id}/media/backdrops`
+                  ? `/movies/${media.id}/media/backdrops`
+                  : `/tv/${media.id}/media/backdrops`
               }
             >
               Backdrops
@@ -145,8 +145,8 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({
               className="menu-link"
               href={
                 type == "movie"
-                  ? `movies/${media.id}/media/logos`
-                  : `tv/${media.id}/media/logos`
+                  ? `/movies/${media.id}/media/logos`
+                  : `/tv/${media.id}/media/logos`
               }
             >
               Logos
@@ -157,8 +157,8 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({
               className="menu-link"
               href={
                 type == "movie"
-                  ? `movies/${media.id}/media/posters`
-                  : `tv/${media.id}/media/posters`
+                  ? `/movies/${media.id}/media/posters`
+                  : `/tv/${media.id}/media/posters`
               }
             >
               Posters
@@ -169,8 +169,8 @@ const MediaPageHeader: FC<MediaPageHeaderProps> = ({
               className="menu-link"
               href={
                 type == "movie"
-                  ? `movies/${media.id}/media/videos`
-                  : `tv/${media.id}/media/videos`
+                  ? `/movies/${media.id}/media/videos`
+                  : `/tv/${media.id}/media/videos`
               }
             >
               Videos

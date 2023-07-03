@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import EmptyState from "@/components/EmptyState";
 import MediaCard from "@/components/MediaCard";
 import Paginate from "@/components/Paginate";
 import { fetcher } from "@/lib/api/fetcher";
@@ -23,12 +24,22 @@ const NowPlayingPage = async ({ searchParams }: NowPlayingPageProps) => {
       <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
         Now Playing
       </h1>
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-5">
-        {movies.results.map((movie) => (
-          <MediaCard key={movie.id} media={movie} />
-        ))}
-      </div>
-      <Paginate items={movies} />
+      {movies.results.length > 0 ? (
+        <>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-4 lg:grid-cols-5">
+            {movies.results.map((movie) => (
+              <MediaCard key={movie.id} media={movie} />
+            ))}
+          </div>
+          <Paginate items={movies} />
+        </>
+      ) : (
+        <EmptyState
+          title="Oops!"
+          description="Seems we can't find any movies currenly playing"
+          actions={[{ title: "Discover Movies", path: "/movies" }]}
+        />
+      )}
     </Container>
   );
 };

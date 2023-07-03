@@ -14,6 +14,7 @@ import Table from "@/components/Table";
 import TableItem from "@/components/TableItem";
 import GoBack from "@/components/GoBack";
 import { fetcher } from "@/lib/api/fetcher";
+import EmptyState from "@/components/EmptyState";
 
 export const generateMetadata = async ({
   params,
@@ -71,55 +72,63 @@ const ReleasesPage = async ({ params }: ReleasesPageProps) => {
             <AsideLinksTrigger />
           </div>
           <div className="mt-3 grid gap-3">
-            {releaseDates.results.map((releaseDate) => (
-              <InfoCard
-                key={releaseDate.iso_3166_1}
-                id={releaseDate.iso_3166_1}
-                title={
-                  <>
-                    <Image
-                      src={`https://flagcdn.com/80x60/${releaseDate.iso_3166_1.toLowerCase()}.png`}
-                      width={100}
-                      height={100}
-                      alt="Release Date"
-                      className="inline aspect-video h-5 w-5 object-contain"
-                    />{" "}
-                    <span>
-                      {(
-                        getRegion(regions.results, releaseDate.iso_3166_1) || ""
-                      )?.length > 0
-                        ? getRegion(regions.results, releaseDate.iso_3166_1)
-                        : releaseDate.iso_3166_1}
-                    </span>
-                  </>
-                }
-              >
-                <Table
-                  head={
-                    <tr>
-                      <TableItem>Date</TableItem>
-                      <TableItem>Certification</TableItem>
-                      <TableItem>Type</TableItem>
-                    </tr>
+            {releaseDates.results.length > 0 ? (
+              releaseDates.results.map((releaseDate) => (
+                <InfoCard
+                  key={releaseDate.iso_3166_1}
+                  id={releaseDate.iso_3166_1}
+                  title={
+                    <>
+                      <Image
+                        src={`https://flagcdn.com/80x60/${releaseDate.iso_3166_1.toLowerCase()}.png`}
+                        width={100}
+                        height={100}
+                        alt="Release Date"
+                        className="inline aspect-video h-5 w-5 object-contain"
+                      />{" "}
+                      <span>
+                        {(
+                          getRegion(regions.results, releaseDate.iso_3166_1) ||
+                          ""
+                        )?.length > 0
+                          ? getRegion(regions.results, releaseDate.iso_3166_1)
+                          : releaseDate.iso_3166_1}
+                      </span>
+                    </>
                   }
-                  rows={
-                    <tr>
-                      <TableItem>
-                        {formatter.format(
-                          new Date(releaseDate.release_dates[0].release_date)
-                        )}
-                      </TableItem>
-                      <TableItem>
-                        {releaseDate.release_dates[0].certification}
-                      </TableItem>
-                      <TableItem>
-                        {getReleaseType(releaseDate.release_dates[0].type)}
-                      </TableItem>
-                    </tr>
-                  }
-                ></Table>
-              </InfoCard>
-            ))}
+                >
+                  <Table
+                    head={
+                      <tr>
+                        <TableItem>Date</TableItem>
+                        <TableItem>Certification</TableItem>
+                        <TableItem>Type</TableItem>
+                      </tr>
+                    }
+                    rows={
+                      <tr>
+                        <TableItem>
+                          {formatter.format(
+                            new Date(releaseDate.release_dates[0].release_date)
+                          )}
+                        </TableItem>
+                        <TableItem>
+                          {releaseDate.release_dates[0].certification}
+                        </TableItem>
+                        <TableItem>
+                          {getReleaseType(releaseDate.release_dates[0].type)}
+                        </TableItem>
+                      </tr>
+                    }
+                  ></Table>
+                </InfoCard>
+              ))
+            ) : (
+              <EmptyState
+                title="Oops!"
+                description="We can't find any release dates at this moment"
+              />
+            )}
           </div>
         </div>
       </div>
