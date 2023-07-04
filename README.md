@@ -12,4 +12,6 @@ Crackle Media is a online movie and tv series exploration site with features of 
 - Railway(Deployment)
 - Docker
 
-![image](https://github.com/saheemshafi/crackle/assets/100963202/b8b5ce50-606b-4ced-8c0b-ae4005dbf5f0)
+## Preview Image
+![image](https://github.com/saheemshafi/crackle/assets/100963202/b868647f-d9ff-43b7-b993-732165656ea5)
+
