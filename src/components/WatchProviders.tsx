@@ -6,13 +6,7 @@ import { ProviderResponse } from "@/types/api-response";
 import { Country } from "@/types/country";
 import { WatchProvider } from "@/types/watch-provider";
 import Image from "next/image";
-import {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useEffect,
-  useState
-} from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Skeleton from "./ui/Skeleton";
 
@@ -34,7 +28,7 @@ const WatchProviders: FC<WatchProvidersProps> = ({
   useEffect(() => {
     fetcher<ProviderResponse>(
       type == "movie" ? endpoints.providers.movie : endpoints.providers.tv,
-      "",
+      `?watch_region=${region}`,
       clientOptions
     ).then((provider: ProviderResponse) => {
       setProviders(provider.results);

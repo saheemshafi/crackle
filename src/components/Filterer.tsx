@@ -50,8 +50,7 @@ const Filterer: FC<FiltererProps> = ({ type = "movie" }) => {
       "",
       clientOptions
     );
-
-    Promise.all([countriesPromise]).then(([countries]) => {
+    countriesPromise.then((countries) => {
       setCountries(countries.results);
     });
   }, [type]);

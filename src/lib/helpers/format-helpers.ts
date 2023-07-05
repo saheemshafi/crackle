@@ -1,8 +1,5 @@
-import { CountryResponse } from "@/types/api-response";
 import { Country } from "@/types/country";
 import { ReleaseType } from "@/types/release-date";
-import { options } from "../api/options";
-import endpoints from "@/lib/constants/endpoints.json";
 
 export const getRegion = (
   countries: Country[],

@@ -1,4 +1,3 @@
-import { notFound } from "next/navigation";
 import { options } from "./options";
 
 export const fetcher = <T>(
