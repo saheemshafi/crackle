@@ -9,5 +9,10 @@ export const fetcher = <T>(
     ...options,
     next: { revalidate: 2592000 },
     ...fetchOptions,
-  }).then((res: Response) => res.json() as Promise<T>);
+  }).then((res: Response) => {
+    if (res.ok) {
+      return res.json() as T;
+    }
+    throw res.statusText;
+  });
 };
