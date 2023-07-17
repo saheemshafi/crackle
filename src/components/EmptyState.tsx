@@ -5,7 +5,7 @@ import Button from "./ui/Button";
 
 type Action =
   | { title: string; path: string }
-  | { title: string; action: () => any };
+  | { title: string; action: () => void };
 
 interface EmptyStateProps {
   title: string;

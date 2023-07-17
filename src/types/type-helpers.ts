@@ -1,2 +1,2 @@
-export type AppendProps<T, U extends object> = T & U;
+export type AppendProps<T, U> = T & U;
 export type Pretty<T> = { [P in keyof T]: T[P] } & unknown;

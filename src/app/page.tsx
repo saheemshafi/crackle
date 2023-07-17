@@ -11,12 +11,15 @@ import { Tv } from "@/types/tv";
 import { AppendProps } from "@/types/type-helpers";
 
 interface HomeProps {}
+interface MediaType {
+  media_type: "movie" | "tv" | "person";
+}
 const Home = async ({}: HomeProps) => {
   const trendingPromise = fetcher<
     ApiResponse<
-      | AppendProps<Movie, { media_type: "movie" | "tv" | "person" }>
-      | AppendProps<Tv, { media_type: "movie" | "tv" | "person" }>
-      | AppendProps<Person, { media_type: "movie" | "tv" | "person" }>
+      | AppendProps<Movie, MediaType>
+      | AppendProps<Tv, MediaType>
+      | AppendProps<Person, MediaType>
     >
   >(`${endpoints.trending.all}/week`);
   const trendingMoviesPromise = fetcher<ApiResponse<Movie>>(
