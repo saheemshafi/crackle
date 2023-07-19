@@ -5,6 +5,7 @@ import { Country } from "./country";
 import { Genre } from "./genre";
 import { Dates } from "./release-date";
 import { Translation, TvTranslation } from "./translations";
+import { Episode } from "./tv";
 import { Video } from "./videos";
 import { WatchProvider } from "./watch-provider";
 
@@ -99,7 +100,18 @@ export enum Type {
   S4 = "S4",
 }
 
-
 export interface VideosResponse {
   results: Video[];
+}
+
+export interface SeasonResponse {
+  _id: string;
+  air_date: Date;
+  episodes: Episode[];
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
 }
