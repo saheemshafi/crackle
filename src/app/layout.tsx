@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { Inter, Work_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -32,6 +33,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="scroll-design isolate flex items-start bg-dark font-inter">
+        <NextTopLoader color="#eb4f2d" shadow={false}/>
         <AuthSessionProvider session={session}>
           <GlobalProvider>
             <Sidebar />

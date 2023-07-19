@@ -1,4 +1,6 @@
+import { Cast, Job } from "./cast";
 import { Genre } from "./genre";
+import { AppendProps } from "./type-helpers";
 
 export interface Tv {
   backdrop_path: null | string;
@@ -91,4 +93,22 @@ export interface SpokenLanguage {
   english_name: string;
   iso_639_1: string;
   name: string;
+}
+
+// EPISODE
+export interface Episode {
+  air_date: Date;
+  crew: AppendProps<Omit<Cast, "cast_id" | "job">, { job?: Job }>;
+  episode_number: number;
+  guest_stars: AppendProps<Omit<Cast, "cast_id" | "job">, { job?: Job }>;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
 }

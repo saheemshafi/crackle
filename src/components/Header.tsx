@@ -88,11 +88,11 @@ const Header = ({}: HeaderProps) => {
                   <IoMdStopwatch size={20} /> Watch List
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link className="menu-link" href={`/user/ratings`}>
                   <AiOutlineStar size={20} /> Ratings
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <SignOutBtn icon attrs={{ className: "menu-link" }} />
               </li>

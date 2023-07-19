@@ -1,13 +1,11 @@
 import Container from "@/components/Container";
 import MediaDetail from "@/components/MediaDetail";
 import { fetcher } from "@/lib/api/fetcher";
-import { getAuthUser } from "@/lib/api/getUser";
 import endpoints from "@/lib/constants/endpoints.json";
 import { formatter } from "@/lib/helpers/date";
 import { VideosResponse } from "@/types/api-response";
 import { SeriesDetails } from "@/types/tv";
 import { AppendProps } from "@/types/type-helpers";
-import { UserProfile } from "@/types/user";
 import { Type as VideoType } from "@/types/videos";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,8 +16,6 @@ interface TvOverviewPageProps {
 }
 
 const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
-  const session = await getAuthUser();
-  const user = session?.user as UserProfile;
 
   const seriesDetails = await fetcher<
     AppendProps<SeriesDetails, { videos: VideosResponse }>
