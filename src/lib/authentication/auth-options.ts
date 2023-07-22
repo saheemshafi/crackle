@@ -1,9 +1,22 @@
-import { AuthOptions } from "next-auth";
+import { AuthOptions, DefaultSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { getSessionId } from "./auth";
 import endpoints from "@/lib/constants/endpoints.json";
-import { TMDBUser } from "@/types/user";
+import { TMDBUser, UserProfile } from "@/types/user";
 import { options } from "../api/options";
+import { Pretty } from "@/types/type-helpers";
+
+type User = Pretty<Omit<DefaultSession["user"] & UserProfile, "image">>;
+
+declare module "next-auth" {
+  interface Session extends DefaultSession {
+    user: User;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT extends User {}
+}
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -39,25 +52,21 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          ...token,
-        },
-      };
+      if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name || "";
+        session.user.email = token.email;
+        session.user.username = token.username;
+        session.user.session_id = token.session_id;
+        session.user.avatar = token.avatar;
+      }
+      return session;
     },
     jwt: ({ token, user }) => {
-      if (user) {
-        return {
-          ...token,
-          ...user,
-        };
-      }
-      return { ...token, ...(user as object) };
+      return { ...token, ...user };
     },
   },
-  secret: process.env.NEXTAUTH_SECRET as string,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/auth",
   },
