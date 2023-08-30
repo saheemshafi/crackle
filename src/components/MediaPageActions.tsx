@@ -15,7 +15,7 @@ import { twMerge } from "tailwind-merge";
 interface MediaPageActionsProps {
   type: "movie" | "tv";
   mediaId: number;
-  accountState: MediaAccountState;
+  accountState: MediaAccountState | undefined;
 }
 const MediaPageActions: FC<MediaPageActionsProps> = ({
   mediaId,
@@ -25,19 +25,19 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
   const session = useSession();
   const user = session.data?.user as UserProfile;
   const router = useRouter();
+
   return (
     <div className="mt-3 flex items-center gap-2">
-      {/* TODO:Add to list feature */}
-      {/* <button className="focus:text-whtie flex items-center gap-2 rounded-full border border-gray-dark p-2 text-sm text-gray-light shadow outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30">
-        <BsListUl size={18} /> <span>Add To List</span>
-      </button> */}
-
       <button
         aria-label={
-          !accountState.watchlist ? "Add To Watchlist" : "Remove From Watchlist"
+          !accountState?.watchlist
+            ? "Add To Watchlist"
+            : "Remove From Watchlist"
         }
         title={
-          !accountState.watchlist ? "Add To Watchlist" : "Remove From Watchlist"
+          !accountState?.watchlist
+            ? "Add To Watchlist"
+            : "Remove From Watchlist"
         }
         onClick={async (e) => {
           if (!user) {
@@ -51,11 +51,11 @@ const MediaPageActions: FC<MediaPageActionsProps> = ({
           router.refresh();
         }}
         className={twMerge(
-          "focus:text-whtie relative font-work-sans flex items-center gap-2 rounded-full border border-gray-dark p-2 text-sm text-gray-light shadow-sm outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30",
-          accountState.watchlist && "bg-gray-dark text-brand hover:text-brand"
+          "focus:text-whtie relative flex items-center gap-2 rounded-full border border-gray-dark p-2 font-work-sans text-sm text-gray-light shadow-sm outline-none transition-colors hover:bg-gray-dark hover:text-white focus-visible:border-brand/50 focus-visible:bg-gray-dark focus-visible:text-white focus-visible:ring-2 focus-visible:ring-brand/30",
+          accountState?.watchlist && "bg-gray-dark text-brand hover:text-brand"
         )}
       >
-        {accountState.watchlist ? (
+        {accountState?.watchlist ? (
           <RxCross1 size={18} className="animate-in" />
         ) : (
           <BiTagAlt className="animate-in" size={18} />
