@@ -34,15 +34,20 @@ const MediaDetail = async ({
 }: MediaDetailProps) => {
   const session = await getAuthUser();
   const user = session?.user as UserProfile;
-  const accountState = await fetcher<MediaAccountState>(
-    `${
-      media.media_type == "movie"
-        ? endpoints.movies.movieDetails
-        : endpoints.tv.tvDetails
-    }/${media.id}/account_states?session_id=${user?.session_id}`,
-    "",
-    { next: { revalidate: 0 } }
-  );
+  let accountState;
+
+  if (user?.session_id) {
+    accountState = await fetcher<MediaAccountState>(
+      `${
+        media.media_type == "movie"
+          ? endpoints.movies.movieDetails
+          : endpoints.tv.tvDetails
+      }/${media.id}/account_states?session_id=${user?.session_id}`,
+      "",
+      { next: { revalidate: 0 } }
+    );
+  }
+
   return (
     <div
       className={twMerge(
