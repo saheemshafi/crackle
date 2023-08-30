@@ -1,11 +1,12 @@
 import Container from "@/components/Container";
 import { getAuthUser } from "@/lib/api/getUser";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { BiVideo } from "react-icons/bi";
 import { BsDot } from "react-icons/bs";
 import { RiTv2Line } from "react-icons/ri";
-import { RxCaretRight } from "react-icons/rx";
 
 interface ProfilePageProps {}
 
@@ -13,6 +14,9 @@ const ProfilePage = async ({}: ProfilePageProps) => {
   const session = await getAuthUser();
   const user = session?.user;
 
+  if (!user) {
+    redirect("/auth")
+  }
   return (
     <Container>
       <h1 className="relative mb-6 pb-3 text-2xl font-medium after:absolute after:bottom-0 after:left-0 after:h-1 after:w-12 after:rounded-md after:bg-brand">
@@ -36,7 +40,7 @@ const ProfilePage = async ({}: ProfilePageProps) => {
             <h4 className="font-work-sans text-2xl font-semibold leading-tight">
               {user?.name}
             </h4>
-            <small className="flex justify-center sm:justify-start items-center font-normal text-white">
+            <small className="flex items-center justify-center font-normal text-white sm:justify-start">
               <BsDot />
               {user?.username}
             </small>
