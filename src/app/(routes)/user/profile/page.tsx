@@ -61,7 +61,7 @@ const ProfilePage = async ({}: ProfilePageProps) => {
           </Link>
           <Link
             className="group flex items-center justify-center gap-4 rounded border border-gray-md/30 bg-gray-dark px-3 py-2 transition-colors hover:text-brand"
-            href="/user/watch-list"
+            href="/user/watch-list/tv"
           >
             <RiTv2Line size={40} />
             Series
