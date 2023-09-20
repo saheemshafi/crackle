@@ -9,6 +9,7 @@ import { Inter, Work_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import { CSSProperties } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
@@ -31,9 +32,17 @@ export default async function RootLayout({
 }) {
   const session = await getAuthUser();
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      style={
+        {
+          "--font-inter": inter.style.fontFamily,
+          "--font-worksans": workSans.style.fontFamily,
+        } as CSSProperties
+      }
+    >
       <body className="scroll-design isolate flex items-start bg-dark font-inter">
-        <NextTopLoader color="#eb4f2d" shadow={false}/>
+        <NextTopLoader color="#eb4f2d" shadow={false} />
         <AuthSessionProvider session={session}>
           <GlobalProvider>
             <Sidebar />
