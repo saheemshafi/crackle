@@ -1,0 +1,3 @@
+User-Agent: *
+Allow: /
+Sitemap: https://crackle-media.vercel.app/sitemap.xml
