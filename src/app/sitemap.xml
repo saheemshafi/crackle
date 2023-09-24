@@ -1,6 +1,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://crackle-media.vercel.app/auth</loc>
+<loc>https://crackle-media.vercel.app</loc>
 <lastmod>2023-09-21T15:37:29.713Z</lastmod>
 <changefreq>yearly</changefreq>
 <priority>1</priority>
@@ -42,12 +42,6 @@
 <priority>1</priority>
 </url>
 <url>
-<loc>https://crackle-media.vercel.app/search</loc>
-<lastmod>2023-09-21T15:37:29.713Z</lastmod>
-<changefreq>yearly</changefreq>
-<priority>1</priority>
-</url>
-<url>
 <loc>https://crackle-media.vercel.app/tv/airing-today</loc>
 <lastmod>2023-09-21T15:37:29.713Z</lastmod>
 <changefreq>yearly</changefreq>
@@ -73,24 +67,6 @@
 </url>
 <url>
 <loc>https://crackle-media.vercel.app/tv/top-rated</loc>
-<lastmod>2023-09-21T15:37:29.713Z</lastmod>
-<changefreq>yearly</changefreq>
-<priority>1</priority>
-</url>
-<url>
-<loc>https://crackle-media.vercel.app/user/profile</loc>
-<lastmod>2023-09-21T15:37:29.713Z</lastmod>
-<changefreq>yearly</changefreq>
-<priority>1</priority>
-</url>
-<url>
-<loc>https://crackle-media.vercel.app/user/watch-list</loc>
-<lastmod>2023-09-21T15:37:29.713Z</lastmod>
-<changefreq>yearly</changefreq>
-<priority>1</priority>
-</url>
-<url>
-<loc>https://crackle-media.vercel.app/user/watch-list/tv</loc>
 <lastmod>2023-09-21T15:37:29.713Z</lastmod>
 <changefreq>yearly</changefreq>
 <priority>1</priority>
