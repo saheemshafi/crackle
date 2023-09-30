@@ -5,6 +5,7 @@ interface PersonDetailsPageProps {
 }
 
 const PersonDetailsPage: FC<PersonDetailsPageProps> = ({ params }) => {
+  // TODO:Complete this route.
   return <div>Person with id {params.id}</div>;
 };
 

@@ -30,7 +30,7 @@ button[tabIndex="-1"] {
 }
 
 .button {
-  @apply flex w-full place-items-center justify-center gap-2 rounded-sm border-transparent bg-transparent px-3 py-2 text-sm font-medium text-white outline-none placeholder:font-work-sans autofill:font-work-sans focus-visible:ring-2 focus-visible:ring-brand/50;
+  @apply flex place-items-center justify-center gap-2 rounded-sm border-transparent bg-transparent px-3 py-2 text-sm font-medium text-white outline-none placeholder:font-work-sans autofill:font-work-sans focus-visible:ring-2 focus-visible:ring-brand/50;
 }
 
 .button.primary {

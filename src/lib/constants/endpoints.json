@@ -16,6 +16,7 @@
     "movies": "https://api.themoviedb.org/3/discover/movie?",
     "tv": "https://api.themoviedb.org/3/discover/tv?"
   },
+  "search": "https://api.themoviedb.org/3/search/multi",
   "people": "https://api.themoviedb.org/3/person/popular",
   "movies": {
     "popular": "https://api.themoviedb.org/3/movie/popular",
