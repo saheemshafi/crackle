@@ -38,6 +38,7 @@ const PersonCard: FC<PersonCardProps> = ({ person, className }) => {
         </Link>
         <div className="truncate text-xs text-gray-light sm:text-sm">
           <span className="hidden font-medium lg:inline">Known For:</span>{" "}
+          {person.known_for.length === 0 && <span>N/A</span>}
           {person.known_for.map((known_for) => (
             <span
               key={known_for.id}
