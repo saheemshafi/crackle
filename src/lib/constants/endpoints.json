@@ -18,6 +18,7 @@
   },
   "search": "https://api.themoviedb.org/3/search/multi",
   "people": "https://api.themoviedb.org/3/person/popular",
+  "person": "https://api.themoviedb.org/3/person",
   "movies": {
     "popular": "https://api.themoviedb.org/3/movie/popular",
     "upcoming": "https://api.themoviedb.org/3/movie/upcoming",
