@@ -6,7 +6,7 @@ const nextConfig = {
   },
   modularizeImports: {
     "react-icons": {
-      transform: "react-bootstrap/{{member}}",
+      transform: "react-icons/{{member}}",
     },
   },
 };

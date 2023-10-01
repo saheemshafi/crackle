@@ -17,9 +17,10 @@ const PersonDetailsPage = async ({ params }: PersonDetailsPageProps) => {
   );
 
   return (
-    <Container classes="flex items-start gap-5">
+    <Container classes="flex flex-col lg:flex-row items-start gap-5">
       <PersonCard
-        className="pointer-events-none"
+        className="pointer-events-none mx-auto w-full max-w-[350px] lg:w-fit"
+        aria-hidden={true}
         person={{ ...personDetails, known_for: [] }}
       />
       <div className="flex-1">
@@ -48,16 +49,18 @@ const PersonDetailsPage = async ({ params }: PersonDetailsPageProps) => {
             </span>
           ))}
         </div>
-        <div className="mt-3 rounded-md border border-gray-dark bg-dark p-3">
-          <div>
-            <h2 className="mb-4 border-b border-gray-dark pb-1 font-work-sans text-lg font-medium">
-              Biography
-            </h2>
-            <p className="scroll-design max-h-[400px] overflow-y-scroll pr-4 font-work-sans text-gray-light">
-              {personDetails.biography}
-            </p>
+        {personDetails.biography && (
+          <div className="mt-3 rounded-md border border-gray-dark bg-dark p-3">
+            <div>
+              <h2 className="mb-4 border-b border-gray-dark pb-1 font-work-sans text-lg font-medium">
+                Biography
+              </h2>
+              <p className="scroll-design max-h-[400px] overflow-y-scroll pr-4 font-work-sans text-gray-light">
+                {personDetails.biography}
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </Container>
   );
