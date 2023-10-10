@@ -9,10 +9,23 @@ import endpoints from "@/lib/constants/endpoints.json";
 import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";
 import { Tv } from "@/types/tv";
+import { Metadata } from "next";
 
 interface TvPageProps {
   searchParams: SearchParams;
 }
+
+const { title, description } = {
+  title: "Tv Shows, Series and Seasons",
+  description:
+    "Discover tv shows, series and seasons, filter, select and start enjoying.",
+};
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: { title, description },
+};
 
 const TvPage = async ({ searchParams }: TvPageProps) => {
   const seriesPromise = fetcher<ApiResponse<Tv>>(

@@ -12,7 +12,7 @@ export const generateMetadata = ({
   searchParams,
 }: SearchPageProps): Metadata => {
   return {
-    title: `Search Crackle | ${searchParams?.query || ""}`,
+    title: `Search Crackle ${searchParams?.query ? `| ${searchParams.query}` : ""}`,
     description: "Search for movies, tv shows and people on Crackle",
   };
 };
