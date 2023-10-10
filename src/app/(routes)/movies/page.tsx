@@ -9,10 +9,23 @@ import endpoints from "@/lib/constants/endpoints.json";
 import { SearchParams, generateQueryString } from "@/lib/helpers/query-url";
 import { ApiResponse } from "@/types/api-response";
 import { Movie } from "@/types/movie";
+import { Metadata } from "next";
 
 interface MoviesPageProps {
   searchParams: SearchParams;
 }
+
+const { title, description } = {
+  title: "Discover Movies | Action, Adventure, Fiction, Mystery",
+  description:
+    "Discover top movies from action, adventure and more. Filter, select and start enjoying",
+};
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: { title, description },
+};
 
 const MoviesPage = async ({ searchParams }: MoviesPageProps) => {
   const moviesPromise = fetcher<ApiResponse<Movie>>(
