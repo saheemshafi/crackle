@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     "Crackle : Your Gateway to Movie Marvels - Explore, Discover, and Immerse in the World of Films",
   description:
     "Crackle: Your Movie Information Hub - Explore, Discover, and Dive into the World of Films. Get the latest updates, reviews, and insights on your favorite movies. Uncover hidden gems, browse genres, and find personalized recommendations.",
+  icons: { apple: "/icon-512x512.png" },
+  manifest: "/manifest.json",
+  themeColor: "rgb(235,79,45)",
 };
 
 export default async function RootLayout({
