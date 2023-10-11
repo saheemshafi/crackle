@@ -1,3 +1,4 @@
+const withPwa = require("next-pwa");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -9,6 +10,11 @@ const nextConfig = {
       transform: "react-icons/{{member}}",
     },
   },
+  ...withPwa({
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+  }),
 };
 
 module.exports = nextConfig;
