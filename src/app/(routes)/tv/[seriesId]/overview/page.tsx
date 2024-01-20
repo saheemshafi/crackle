@@ -16,7 +16,6 @@ interface TvOverviewPageProps {
 }
 
 const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
-
   const seriesDetails = await fetcher<
     AppendProps<SeriesDetails, { videos: VideosResponse }>
   >(`${endpoints.tv.tvDetails}/${params.seriesId}?append_to_response=videos`);
@@ -44,16 +43,18 @@ const TvOverviewPage = async ({ params }: TvOverviewPageProps) => {
             className="aspect-[2/3] w-full rounded-lg object-cover shadow-md sm:max-w-[250px]"
           />
         </div>
-        <div className="mt-4">
-          <Link
-            href={`/videos?videoId=${
-              videos.find((video) => video.type == VideoType.Trailer)?.key
-            }`}
-            className="button tmdb"
-          >
-            <BsPlayCircle size={16} /> <span>Play Trailer</span>
-          </Link>
-        </div>
+        {videos.find((video) => video.type == VideoType.Trailer)?.key ? (
+          <div className="mt-4">
+            <Link
+              href={`/videos?videoId=${
+                videos.find((video) => video.type == VideoType.Trailer)?.key
+              }`}
+              className="button tmdb"
+            >
+              <BsPlayCircle size={16} /> <span>Play Trailer</span>
+            </Link>
+          </div>
+        ) : null}
       </div>
       <div className="flex-1">
         {/* @ts-expect-error */}

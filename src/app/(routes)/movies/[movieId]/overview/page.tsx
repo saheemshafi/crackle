@@ -52,7 +52,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
             className="aspect-[2/3] w-full rounded-lg object-cover shadow-md sm:max-w-[250px]"
           />
         </div>
-        <div className="mt-4">
+       {videos.find((video) => video.type == VideoType.Trailer)?.key ? <div className="mt-4">
           <Link
             href={`/videos?videoId=${
               videos.find((video) => video.type == VideoType.Trailer)?.key
@@ -61,7 +61,7 @@ const MovieDetailPage = async ({ params }: MovieDetailPageProps) => {
           >
             <BsPlayCircle size={16} /> <span>Play Trailer</span>
           </Link>
-        </div>
+        </div> : null}
       </div>
       <div className="flex-1">
         {/* @ts-expect-error */}
