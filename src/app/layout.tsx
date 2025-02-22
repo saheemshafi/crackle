@@ -4,7 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import { getAuthUser } from "@/lib/api/getUser";
 import AuthSessionProvider from "@/providers/AuthSessionProvider";
 import { GlobalProvider } from "@/providers/GlobalProvider";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import { Inter, Work_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
@@ -14,6 +14,10 @@ import { CSSProperties } from "react";
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
 
+
+export const viewport: Viewport = {
+  themeColor: "rgb(235,79,45)",
+};
 export const metadata: Metadata = {
   title:
     "Crackle : Your Gateway to Movie Marvels - Explore, Discover, and Immerse in the World of Films",

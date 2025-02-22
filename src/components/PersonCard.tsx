@@ -1,5 +1,5 @@
 import { Movie } from "@/types/movie";
-import { KnownFor, Person } from "@/types/person";
+import { KnownFor, KnownForDepartment, Person } from "@/types/person";
 import { Tv } from "@/types/tv";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,23 +37,22 @@ const PersonCard: FC<PersonCardProps> = ({ person, className }) => {
           <p className="font-work-sans font-medium leading-5">{person.name}</p>
         </Link>
         <div className="truncate text-xs text-gray-light sm:text-sm">
-          <span className="hidden font-medium lg:inline">Known For:</span>{" "}
-          {person.known_for.length === 0 && <span>N/A</span>}
-          {person.known_for.map((known_for) => (
-            <span
-              key={known_for.id}
-              title={
-                isKnownForMovie(known_for)
-                  ? known_for.title
-                  : known_for.original_name
-              }
-            >
-              {isKnownForMovie(known_for)
-                ? known_for.title
-                : known_for.original_name}
-              {", "}
-            </span>
-          ))}
+          <span className="hidden font-medium lg:inline">Known For:{" "}</span>
+          {person.known_for?.length > 0
+            ? person.known_for.map((known_for) =>
+                isKnownForMovie(known_for) ? (
+                  <span key={known_for.id} title={known_for.title}>
+                    {known_for.title}
+                    {","}
+                  </span>
+                ) : (
+                  <span key={known_for.id} title={known_for.original_name}>
+                    {known_for.original_name}
+                    {","}
+                  </span>
+                )
+              )
+            : person.known_for_department || "NA"}
         </div>
       </div>
     </div>

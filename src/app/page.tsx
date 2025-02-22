@@ -40,6 +40,8 @@ const Home = async ({}: HomeProps) => {
     trendingPeoplePromise,
   ]);
 
+  console.log(people)
+
   return (
     <>
       <Container id="trending-all">
@@ -112,7 +114,7 @@ const Home = async ({}: HomeProps) => {
         >
           {people.results.map((person) => (
             <div key={person.id} className="shrink-0 grow-0">
-              <PersonCard key={person.id} person={person} />
+              <PersonCard key={person.id} person={person} />{""}
             </div>
           ))}
         </Slider>
