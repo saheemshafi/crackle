@@ -38,6 +38,7 @@ export enum OriginalLanguage {
 export enum KnownForDepartment {
   Acting = "Acting",
   Directing = "Directing",
+  Sound = "Sound"
 }
 
 export interface PersonDetails extends Person {
