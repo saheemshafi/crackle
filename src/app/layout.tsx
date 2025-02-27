@@ -10,10 +10,10 @@ import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
 import { CSSProperties } from "react";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 const workSans = Work_Sans({ subsets: ["latin"] });
-
 
 export const viewport: Viewport = {
   themeColor: "rgb(235,79,45)",
@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     "Crackle: Your Movie Information Hub - Explore, Discover, and Dive into the World of Films. Get the latest updates, reviews, and insights on your favorite movies. Uncover hidden gems, browse genres, and find personalized recommendations.",
   icons: { apple: "/icon-512x512.png" },
   manifest: "/manifest.json",
-  themeColor: "rgb(235,79,45)",
 };
 
 export default async function RootLayout({
@@ -65,6 +64,8 @@ export default async function RootLayout({
             <Toaster />
           </GlobalProvider>
         </AuthSessionProvider>
+
+        <GoogleAnalytics gaId="G-PB39YVQL84" />
       </body>
     </html>
   );
