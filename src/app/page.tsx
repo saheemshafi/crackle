@@ -40,8 +40,6 @@ const Home = async ({}: HomeProps) => {
     trendingPeoplePromise,
   ]);
 
-  console.log(people)
-
   return (
     <>
       <Container id="trending-all">
