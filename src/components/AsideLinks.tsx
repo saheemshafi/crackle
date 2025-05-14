@@ -25,7 +25,7 @@ const AsideLinks = ({ title, link, items, regions }: AsideLinksProps) => {
   return (
     <aside
       className={twMerge(
-        "scroll-design fixed inset-0 top-[56px] z-[21] shrink-0 grow-0 self-start overflow-y-auto bg-dark/[98%] p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto sm:z-0  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-lg sm:bg-gray-dark/30 sm:p-0",
+        "scroll-design fixed max-h-[100dvh] inset-0 top-[56px] z-[21] shrink-0 grow-0 self-start overflow-y-auto bg-dark/[98%] p-3 pr-1 backdrop-blur-sm sm:relative sm:inset-auto sm:right-0 sm:top-auto sm:z-0  sm:block sm:w-64 sm:overflow-y-visible sm:rounded-lg sm:bg-gray-dark/30 sm:p-0",
         mobileAsideLinksOpen ? "animate-in block shadow-lg" : "hidden"
       )}
     >
